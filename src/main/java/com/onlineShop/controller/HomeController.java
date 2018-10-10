@@ -25,7 +25,7 @@ public class HomeController {
         }
 
         if(logout!=null) {
-            model.addAttribute("msg", "You have been logged out correctly!!!");
+            model.addAttribute("msg", "You have been logged out correctly!!!!!!!!!!!");
         }
 
         return "login";
