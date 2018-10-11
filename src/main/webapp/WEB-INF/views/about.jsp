@@ -1,4 +1,4 @@
-<%@include file="/WEB-INF/views/template/header.jsp" %>
+<%@include file="/WEB-INF/views/template/shop/header.jsp" %>
 
 <div class="container-wrapper">
     <div class="container">
@@ -12,4 +12,4 @@
         <img src="<c:url value="/resources/images/showroom.jpg" />" alt="showroom" >
 
 
-<%@include file="/WEB-INF/views/template/footer.jsp" %>
+<%@include file="/WEB-INF/views/template/shop/footer.jsp" %>

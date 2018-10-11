@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@include file="/WEB-INF/views/template/header.jsp"%>
+<%@include file="/WEB-INF/views/template/shop/header.jsp"%>
 
 
 <div class="container-wrapper">
@@ -39,5 +39,5 @@
         <p>Here you can view the customer information!</p>
 
 
-        <%@include file="/WEB-INF/views/template/footer.jsp" %>
+        <%@include file="/WEB-INF/views/template/shop/footer.jsp" %>
 

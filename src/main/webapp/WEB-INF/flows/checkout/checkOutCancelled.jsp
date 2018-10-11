@@ -1,6 +1,6 @@
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@include file="/WEB-INF/views/template/header.jsp" %>
+<%@include file="/WEB-INF/views/template/shop/header.jsp" %>
 
 <div class="container-wrapper">
     <div class="container">
@@ -23,4 +23,4 @@
     </div>
 </div>
 
-<%@include file="/WEB-INF/views/template/footer.jsp" %>
+<%@include file="/WEB-INF/views/template/shop/footer.jsp" %>
