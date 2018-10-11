@@ -12,7 +12,7 @@
 <div class="container-wrapper">
     <div class="container">
         <div class="page-header">
-            <h1>Administrator page</h1>
+            <h1>Administrator page 12333333</h1>
 
             <p class="lead">This is the administrator page!</p>
         </div>
