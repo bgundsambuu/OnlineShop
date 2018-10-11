@@ -54,7 +54,6 @@
         </element>
       </element>
       <element id="javaee-facet-resources" facet="OnlineShop/web/Web" />
-      <element id="javaee-facet-resources" facet="OnlineShop/web/Web2" />
     </root>
   </artifact>
 </component>
