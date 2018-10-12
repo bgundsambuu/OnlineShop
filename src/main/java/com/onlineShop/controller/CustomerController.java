@@ -29,14 +29,14 @@ public class CustomerController {
     public String viewProduct(@Valid @ModelAttribute("customer") Customer customer, Model model) {
 
         Users user = usersService.getUserByUsername(customer.getUsername());
-        // existing validation TODO Hello
-        if(user == null) return "editCustomer";
+        // existing validation TODO
+        if(user == null) return "template/shop/editCustomer";
         if(!StringUtils.isEmpty(customer.getPassword()))
             user.setPassword(customer.getPassword());
         else user = null;
         customerService.editCustomer(customer, user);
         model.addAttribute("customer", customer);
-        return "editCustomer";
+        return "template/shop/editCustomer";
     }
 
 }

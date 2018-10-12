@@ -28,7 +28,7 @@ public class ProductController {
         List<Product> products = productService.getProductList();
         model.addAttribute("products", products);
 
-        return "productList";
+        return "template/shop/productList";
     }
 
     @RequestMapping("/viewProduct/{productId}")
@@ -36,7 +36,7 @@ public class ProductController {
         Product product=productService.getProductById(productId);
         model.addAttribute("product", product);
 
-        return "viewProduct";
+        return "template/shop/viewProduct";
     }
 
     @RequestMapping("/productList")
@@ -45,6 +45,6 @@ public class ProductController {
         model.addAttribute("products", products);
         model.addAttribute("searchCondition", searchCondition);
 
-        return "productList";
+        return "template/shop/productList";
     }
 }

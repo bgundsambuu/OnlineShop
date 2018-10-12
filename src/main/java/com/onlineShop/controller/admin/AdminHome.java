@@ -27,7 +27,7 @@ public class AdminHome {
 
     @RequestMapping
     public String adminPage() {
-        return "admin";
+        return "template/dashboard/home";
     }
 
     @RequestMapping("/productInventory")
@@ -35,7 +35,7 @@ public class AdminHome {
         List<Product> products = productService.getProductList();
         model.addAttribute("products", products);
 
-        return "productInventory";
+        return "template/shop/productInventory";
     }
 
     @RequestMapping("/customer")
@@ -44,6 +44,6 @@ public class AdminHome {
         List<Customer> customerList = customerService.getAllCustomers();
         model.addAttribute("customerList", customerList);
 
-        return "customerManagement";
+        return "template/shop/customerManagement";
     }
 }
