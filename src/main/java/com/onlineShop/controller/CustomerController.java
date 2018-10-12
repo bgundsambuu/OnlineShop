@@ -29,7 +29,7 @@ public class CustomerController {
     public String viewProduct(@Valid @ModelAttribute("customer") Customer customer, Model model) {
 
         Users user = usersService.getUserByUsername(customer.getUsername());
-        // existing validation TODO
+        // existing validation TODO Hello
         if(user == null) return "editCustomer";
         if(!StringUtils.isEmpty(customer.getPassword()))
             user.setPassword(customer.getPassword());
