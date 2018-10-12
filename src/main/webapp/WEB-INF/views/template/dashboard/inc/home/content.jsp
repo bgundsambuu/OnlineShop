@@ -359,7 +359,7 @@
                                 twitter
                             </th>
                             <td>
-                                2,645
+                                2,6412333
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
