@@ -20,7 +20,7 @@ public class CartController {
 
     @Autowired
     private CustomerService customerService;
-
+//hello
     @RequestMapping
     public String getCart(@AuthenticationPrincipal User activeUser){
         Customer customer = customerService.getCustomerByUsername (activeUser.getUsername());
