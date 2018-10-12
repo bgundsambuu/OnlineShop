@@ -1,7 +1,6 @@
 package com.onlineShop.dao;
 
 import com.onlineShop.model.Customer;
-
 import java.util.List;
 
 /**
@@ -10,6 +9,14 @@ import java.util.List;
 public interface CustomerDao {
 
     void addCustomer (Customer customer);
+
+    /**
+     * Edit customer
+     *
+     * @author Mingwei He
+     * @param customer
+     */
+    void editCustomer (Customer customer);
 
     Customer getCustomerById (int customerId);
 

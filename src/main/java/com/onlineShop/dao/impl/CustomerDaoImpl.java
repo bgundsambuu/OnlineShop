@@ -1,25 +1,21 @@
 package com.onlineShop.dao.impl;
 
 import com.onlineShop.dao.CustomerDao;
-import com.onlineShop.model.Authorities;
-import com.onlineShop.model.Cart;
-import com.onlineShop.model.Customer;
-import com.onlineShop.model.Users;
+import com.onlineShop.model.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by Le on 1/25/2016.
  */
-
 @Repository
-@Transactional
+@DynamicUpdate
 public class CustomerDaoImpl implements CustomerDao{
 
     @Autowired
@@ -53,6 +49,19 @@ public class CustomerDaoImpl implements CustomerDao{
         session.saveOrUpdate(customer);
         session.saveOrUpdate(newCart);
 
+        session.flush();
+    }
+
+    /**
+     * Edit customer
+     *
+     * @author Mingwei He
+     * @param customer
+     *
+     */
+    public void editCustomer(Customer customer) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(customer);
         session.flush();
     }
 

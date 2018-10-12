@@ -1,6 +1,7 @@
 package com.onlineShop.service;
 
 import com.onlineShop.model.Customer;
+import com.onlineShop.model.Users;
 
 import java.util.List;
 
@@ -10,6 +11,16 @@ import java.util.List;
 public interface CustomerService {
 
     void addCustomer (Customer customer);
+
+    /**
+     * Edit customer, user,
+     * billing address and shipping address
+     *
+     * @author Mingwei He
+     * @param customer
+     * @param user
+     */
+    void editCustomer(Customer customer, Users user);
 
     Customer getCustomerById (int customerId);
 
