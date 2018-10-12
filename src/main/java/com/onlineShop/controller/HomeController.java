@@ -14,7 +14,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        return "home";
+        return "template/shop/home";
     }
 
     @RequestMapping("/login")
@@ -28,11 +28,11 @@ public class HomeController {
             model.addAttribute("msg", "You have been logged out successfully.");
         }
 
-        return "login";
+        return "template/shop/login";
     }
 
     @RequestMapping("/about")
     public String about() {
-        return "about";
+        return "template/shop/about";
     }
 }

@@ -42,14 +42,14 @@ public class AdminProduct {
 
         model.addAttribute("product", product);
 
-        return "addProduct";
+        return "template/shop/addProduct";
     }
 
     @RequestMapping(value="/product/addProduct", method = RequestMethod.POST)
     public String addProductPost(@Valid @ModelAttribute("product") Product product, BindingResult result,
                                  HttpServletRequest request) {
         if(result.hasErrors()) {
-            return "addProduct";
+            return "template/shop/addProduct";
         }
 
         productService.addProduct(product);
@@ -78,14 +78,14 @@ public class AdminProduct {
 
         model.addAttribute("product", product);
 
-        return "editProduct";
+        return "template/shop/editProduct";
     }
 
     @RequestMapping(value="/product/editProduct", method = RequestMethod.POST)
     public String editProductPost(@Valid @ModelAttribute("product") Product product, BindingResult result,
                                  HttpServletRequest request) {
         if(result.hasErrors()) {
-            return "editProduct";
+            return "template/shop/editProduct";
         }
 
         MultipartFile productImage = product.getProductImage();

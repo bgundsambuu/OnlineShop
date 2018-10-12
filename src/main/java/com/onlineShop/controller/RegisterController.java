@@ -36,7 +36,7 @@ public class RegisterController {
 
         model.addAttribute("customer", customer);
 
-        return "registerCustomer";
+        return "template/shop/registerCustomer";
 
     }
 
@@ -45,7 +45,7 @@ public class RegisterController {
                                        Model model) {
 
         if (result.hasErrors()) {
-            return "registerCustomer";
+            return "template/shop/registerCustomer";
         }
 
         List<Customer> customerList=customerService.getAllCustomers();
@@ -54,20 +54,20 @@ public class RegisterController {
             if(customer.getCustomerEmail().equals(customerList.get(i).getCustomerEmail())) {
                 model.addAttribute("emailMsg", "Email already exists");
 
-                return "registerCustomer";
+                return "template/shop/registerCustomer";
             }
 
             if(customer.getUsername().equals(customerList.get(i).getUsername())) {
                 model.addAttribute("usernameMsg", "Username already exists");
 
-                return "registerCustomer";
+                return "template/shop/registerCustomer";
             }
         }
 
         customer.setEnabled(true);
         customerService.addCustomer(customer);
 
-        return "registerCustomerSuccess";
+        return "template/shop/registerCustomerSuccess";
 
     }
 

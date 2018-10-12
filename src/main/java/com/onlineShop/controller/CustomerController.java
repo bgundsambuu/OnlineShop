@@ -30,13 +30,13 @@ public class CustomerController {
 
         Users user = usersService.getUserByUsername(customer.getUsername());
         // existing validation TODO
-        if(user == null) return "editCustomer";
+        if(user == null) return "template/shop/editCustomer";
         if(!StringUtils.isEmpty(customer.getPassword()))
             user.setPassword(customer.getPassword());
         else user = null;
         customerService.editCustomer(customer, user);
         model.addAttribute("customer", customer);
-        return "editCustomer";
+        return "template/shop/editCustomer";
     }
 
 }
