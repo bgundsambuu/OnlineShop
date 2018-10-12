@@ -15,6 +15,5 @@ public class Vendor {
     @NotEmpty(message = "name should not be empty")
     String name;
 
-
-//jhgjh
+    //new one
 }
