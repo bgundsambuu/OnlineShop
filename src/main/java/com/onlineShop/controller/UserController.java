@@ -17,26 +17,43 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/customer")
-public class CustomerController {
+@RequestMapping("/user")
+public class UserController {
 
     @Autowired
     private CustomerService customerService;
     @Autowired
     private UsersService usersService;
 
-    @RequestMapping(value = "/edit", method = RequestMethod.PUT)
-    public String viewProduct(@Valid @ModelAttribute("customer") Customer customer, Model model) {
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
+    public String getUser(@PathVariable String userId, Model model) {
+        Users u = usersService.getUserByUserId(userId);
+        model.addAttribute("user", u);
+        return "template/shop/user";
+    }
 
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String addUser(@Valid @ModelAttribute("customer") Customer customer, Model model) {
+        return "template/shop/user";
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    public String editUser(@Valid @ModelAttribute("customer") Customer customer, Model model) {
         Users user = usersService.getUserByUsername(customer.getUsername());
         // existing validation TODO
-        if(user == null) return "template/shop/editCustomer";
+        if(user == null) return "template/shop/user";
         if(!StringUtils.isEmpty(customer.getPassword()))
             user.setPassword(customer.getPassword());
         else user = null;
         customerService.editCustomer(customer, user);
         model.addAttribute("customer", customer);
-        return "template/shop/editCustomer";
+        return "template/shop/user";
+    }
+
+    @RequestMapping(value = "/{userId}", method = RequestMethod.DELETE)
+    public String deleteUser(@PathVariable String userId, Model model) {
+        usersService.delete(userId);
+        return "template/shop/user";
     }
 
 }
