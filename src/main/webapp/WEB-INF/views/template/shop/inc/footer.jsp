@@ -42,6 +42,7 @@
 <script src="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js" />"></script>
 <script src="<c:url value="/resources/plugins/easing/easing.js" />"></script>
 <script src="<c:url value="/resources/js/custom.js" />"></script>
+<script src="<c:url value="/resources/js/single_custom.js" />"></script>
 
 </body>
 </html>

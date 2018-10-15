@@ -39,6 +39,11 @@ public class ProductController {
         return "template/shop/viewProduct";
     }
 
+    @RequestMapping("/view")
+    public String view() {
+        return "template/shop/productview";
+    }
+
     @RequestMapping("/productList")
     public String getProductByCategory(@RequestParam("searchCondition") String searchCondition, Model model) {
         List<Product> products = productService.getProductList();
