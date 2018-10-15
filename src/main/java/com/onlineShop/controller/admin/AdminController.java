@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminHome {
+public class AdminController {
 
     @Autowired
     private ProductService productService;
@@ -45,5 +45,10 @@ public class AdminHome {
         model.addAttribute("customerList", customerList);
 
         return "template/shop/customerManagement";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "template/dashboard/login";
     }
 }
