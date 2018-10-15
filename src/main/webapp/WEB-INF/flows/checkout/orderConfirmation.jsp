@@ -27,13 +27,13 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <address>
                                     <strong>Shipping Address</strong><br>
-                                        ${order.cart.customer.shippingAddress.streetName}
+                                        ${order.cart.customerBackup.shippingAddress.streetName}
                                     <br>
-                                        ${order.cart.customer.shippingAddress.apartmentNumber}
+                                        ${order.cart.customerBackup.shippingAddress.apartmentNumber}
                                     <br>
-                                        ${order.cart.customer.shippingAddress.city}, ${order.cart.customer.shippingAddress.state}
+                                        ${order.cart.customerBackup.shippingAddress.city}, ${order.cart.customerBackup.shippingAddress.state}
                                     <br>
-                                        ${order.cart.customer.shippingAddress.country}, ${order.cart.customer.shippingAddress.zipCode}
+                                        ${order.cart.customerBackup.shippingAddress.country}, ${order.cart.customerBackup.shippingAddress.zipCode}
                                     <br>
                                 </address>
                             </div>
@@ -46,13 +46,13 @@
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <address>
                                     <strong>Billing Address</strong><br>
-                                        ${order.cart.customer.billingAddress.streetName}
+                                        ${order.cart.customerBackup.billingAddress.streetName}
                                     <br>
-                                        ${order.cart.customer.billingAddress.apartmentNumber}
+                                        ${order.cart.customerBackup.billingAddress.apartmentNumber}
                                     <br>
-                                        ${order.cart.customer.billingAddress.city}, ${order.cart.customer.billingAddress.state}
+                                        ${order.cart.customerBackup.billingAddress.city}, ${order.cart.customerBackup.billingAddress.state}
                                     <br>
-                                        ${order.cart.customer.billingAddress.country}, ${order.cart.customer.billingAddress.zipCode}
+                                        ${order.cart.customerBackup.billingAddress.country}, ${order.cart.customerBackup.billingAddress.zipCode}
                                     <br>
                                 </address>
                             </div>
