@@ -51,4 +51,14 @@ public class AdminController {
     public String login() {
         return "template/dashboard/login";
     }
+
+    @RequestMapping("/profile")
+    public String profile() {
+        return "template/dashboard/profile";
+    }
+
+    @RequestMapping("/list")
+    public String list() {
+        return "template/dashboard/list";
+    }
 }
