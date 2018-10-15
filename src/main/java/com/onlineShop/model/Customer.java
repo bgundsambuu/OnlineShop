@@ -1,129 +1,70 @@
 package com.onlineShop.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
- * Created by Le on 1/24/2016.
+ * Created by Mingwei on 10/14/2018.
  */
-
 @Entity
-public class Customer implements Serializable{
-
-    private static final long serialVersionUID = 5140900014886997914L;
+@DynamicUpdate
+public class Customer {
 
     @Id
-    @GeneratedValue
-    private int customerId;
+    private String customerId;
+    private String userId;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String orderId;
 
-    @NotEmpty (message = "The customer name must not be null.")
-    private String customerName;
-
-    @NotEmpty (message = "The customer email must not be null.")
-    private String customerEmail;
-    private String customerPhone;
-
-    @NotEmpty (message = "The customer username must not be null.")
-    private String username;
-
-    @NotEmpty (message = "The customer password must not be null.")
-    private String password;
-
-    private boolean enabled;
-
-    @OneToOne
-    @JoinColumn(name="billingAddressId")
-    private BillingAddress billingAddress;
-
-    @OneToOne
-    @JoinColumn(name="shippingAddressId")
-    private ShippingAddress shippingAddress;
-
-    @OneToOne
-    @JoinColumn(name = "cartId")
-    @JsonIgnore
-    private Cart cart;
-
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getPassword() {
-        return password;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public BillingAddress getBillingAddress() {
-        return billingAddress;
-    }
-
-    public void setBillingAddress(BillingAddress billingAddress) {
-        this.billingAddress = billingAddress;
-    }
-
-    public ShippingAddress getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(ShippingAddress shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

@@ -11,7 +11,7 @@
         </div>
 
         <form:form action="${pageContext.request.contextPath}/register" method="post"
-                   commandName="customer">
+                   commandName="customerBackup">
 
         <h3>Basic Info</h3>
 

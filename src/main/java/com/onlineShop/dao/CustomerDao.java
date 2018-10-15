@@ -1,6 +1,7 @@
 package com.onlineShop.dao;
 
 import com.onlineShop.model.Customer;
+
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface CustomerDao {
      */
     void editCustomer (Customer customer);
 
-    Customer getCustomerById (int customerId);
+    Customer getCustomerByUserId (String userId);
 
     List<Customer> getAllCustomers();
 

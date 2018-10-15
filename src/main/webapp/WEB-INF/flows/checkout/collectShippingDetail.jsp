@@ -16,32 +16,32 @@
 
         <div class="form-group">
             <label for="shippingStreet">Street Name</label>
-            <form:input path="cart.customer.shippingAddress.streetName" id="shippingStreet" class="form-Control"/>
+            <form:input path="cart.customerBackup.shippingAddress.streetName" id="shippingStreet" class="form-Control"/>
         </div>
 
         <div class="form-group">
             <label for="shippingApartmentNumber">Apartment Number</label>
-            <form:input path="cart.customer.shippingAddress.apartmentNumber" id="shippingApartmentNumber" class="form-Control"/>
+            <form:input path="cart.customerBackup.shippingAddress.apartmentNumber" id="shippingApartmentNumber" class="form-Control"/>
         </div>
 
         <div class="form-group">
             <label for="shippingCity">City</label>
-            <form:input path="cart.customer.shippingAddress.city" id="shippingCity" class="form-Control"/>
+            <form:input path="cart.customerBackup.shippingAddress.city" id="shippingCity" class="form-Control"/>
         </div>
 
         <div class="form-group">
             <label for="shippingState">State</label>
-            <form:input path="cart.customer.shippingAddress.state" id="shippingState" class="form-Control"/>
+            <form:input path="cart.customerBackup.shippingAddress.state" id="shippingState" class="form-Control"/>
         </div>
 
         <div class="form-group">
             <label for="shippingCountry">Country</label>
-            <form:input path="cart.customer.shippingAddress.country" id="shippingCountry" class="form-Control"/>
+            <form:input path="cart.customerBackup.shippingAddress.country" id="shippingCountry" class="form-Control"/>
         </div>
 
         <div class="form-group">
             <label for="shippingZip">Zipcode</label>
-            <form:input path="cart.customer.shippingAddress.zipCode" id="shippingZip" class="form-Control"/>
+            <form:input path="cart.customerBackup.shippingAddress.zipCode" id="shippingZip" class="form-Control"/>
         </div>
 
         <input type="hidden" name="_flowExecutionKey" />

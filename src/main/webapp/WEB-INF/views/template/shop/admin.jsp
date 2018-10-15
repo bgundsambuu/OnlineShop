@@ -33,10 +33,10 @@
         <br><br>
 
         <h3>
-            <a href="<c:url value="/admin/customer" />" >Customer Managementy</a>
+            <a href="<c:url value="/admin/customerBackup" />" >Customer Managementy</a>
         </h3>
 
-        <p>Here you can view the customer information!</p>
+        <p>Here you can view the customerBackup information!</p>
 
 
         <%@include file="/WEB-INF/views/template/shop/inc/footer.jsp" %>

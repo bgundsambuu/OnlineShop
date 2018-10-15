@@ -1,32 +1,39 @@
 package com.onlineShop.model;
 
 import org.hibernate.annotations.DynamicUpdate;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * Created by Mingwei on 10/14/2018.
  */
 @Entity
 @DynamicUpdate
-public class Vendor {
+public class Administrator {
 
     @Id
-    private String vendorId;
+    private String adminId;
+    private String userId;
     private String firstName;
     private String lastName;
-    private String name;
     private String phoneNumber;
-    private String userId;
-    private String status;
 
-    public String getVendorId() {
-        return vendorId;
+    public String getAdminId() {
+        return adminId;
     }
 
-    public void setVendorId(String vendorId) {
-        this.vendorId = vendorId;
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -45,35 +52,11 @@ public class Vendor {
         this.lastName = lastName;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 }

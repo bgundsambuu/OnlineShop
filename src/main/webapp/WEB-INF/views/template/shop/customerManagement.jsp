@@ -8,7 +8,7 @@
         <div class="page-header">
             <h1>Customer Management Page</h1>
 
-            <p class="lead">This is the customer management page.</p>
+            <p class="lead">This is the customerBackup management page.</p>
         </div>
 
         <table class="table table-striped table-hover">
@@ -22,13 +22,13 @@
 
             </tr>
             </thead>
-            <c:forEach items="${customerList}" var="customer">
+            <c:forEach items="${customerBackupList}" var="customerBackup">
                 <tr>
-                    <td>${customer.customerName}</td>
-                    <td>${customer.customerEmail}</td>
-                    <td>${customer.customerPhone}</td>
-                    <td>${customer.username}</td>
-                    <td>${customer.enabled}</td>
+                    <td>${customerBackup.customerName}</td>
+                    <td>${customerBackup.customerEmail}</td>
+                    <td>${customerBackup.customerPhone}</td>
+                    <td>${customerBackup.username}</td>
+                    <td>${customerBackup.enabled}</td>
                 </tr>
             </c:forEach>
         </table>
