@@ -5,12 +5,12 @@ import com.onlineShop.dao.*;
 import com.onlineShop.model.User;
 import com.onlineShop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Mingwei on 10/12/2018
  */
-@Repository
+@Service
 public class UserServiceImpl implements UserService {
 
     @Autowired

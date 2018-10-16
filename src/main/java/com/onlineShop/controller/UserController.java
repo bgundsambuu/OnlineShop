@@ -23,7 +23,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    UserService userService;
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public String getUser(@PathVariable String userId, Model model, HttpServletRequest request) {
