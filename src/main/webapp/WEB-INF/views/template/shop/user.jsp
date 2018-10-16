@@ -19,6 +19,9 @@
 </style>
 <body>
 <form:form action="${pageContext.request.contextPath}/user/edit" method="post" modelAttribute="user">
+    <c:if test="${not empty msg}">
+        <h2>Message:${msg}</h2>
+    </c:if>
     <c:if test="${not empty user}">
         <c:set var="ADMIN" value="<%=Constant.Role.ADMIN%>"/>
         <c:set var="VENDOR" value="<%=Constant.Role.VENDOR%>"/>

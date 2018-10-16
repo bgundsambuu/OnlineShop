@@ -12,8 +12,10 @@ public class Constant {
         public static final String NO = "0";
     }
 
+    public static final String MSG = "msg";
     public static final class Message{
         public static final String SUCCESS = "succeed";
         public static final String FAILURE = "failure";
     }
+
 }
