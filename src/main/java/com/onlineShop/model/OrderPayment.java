@@ -21,10 +21,10 @@ public class OrderPayment {
     @JoinColumn
     private List<OrderDetail> orderDetailList;
     @ManyToOne
-    @JoinColumn
-    private CardDetail card;
+    @JoinColumn(name = "cardId")
+    private CardDetail cardId;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "customerId")
     private Customer customer;
     @OneToOne
     @JoinColumn
@@ -112,11 +112,11 @@ public class OrderPayment {
     }
 
     public CardDetail getCard() {
-        return card;
+        return cardId;
     }
 
     public void setCard(CardDetail card) {
-        this.card = card;
+        this.cardId = card;
     }
 
     public Customer getCustomer() {
