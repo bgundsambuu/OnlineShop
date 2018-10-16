@@ -23,8 +23,11 @@ public class Customer {
     @JoinColumn
     private Address address;
     @OneToMany
-    @JoinColumn
+    @JoinColumn(name = "cardDetail")
     private List<CardDetail> cardDetailList;
+    @OneToMany
+    @JoinColumn(name = "orderPayment")
+    private List<OrderPayment> orderPaymentList;
 
     public String getCustomerId() {
         return customerId;
@@ -88,5 +91,13 @@ public class Customer {
 
     public void setCardDetailList(List<CardDetail> cardDetailList) {
         this.cardDetailList = cardDetailList;
+    }
+
+    public List<OrderPayment> getOrderPaymentList() {
+        return orderPaymentList;
+    }
+
+    public void setOrderPaymentList(List<OrderPayment> orderPaymentList) {
+        this.orderPaymentList = orderPaymentList;
     }
 }

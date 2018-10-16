@@ -21,6 +21,9 @@ public class CardDetail {
     private String cardNumber;
     private Date cardExp;
     private String securityNumber;
+    @ManyToOne
+    @JoinColumn
+    private Customer customer;
 
     @OneToMany
     @JoinColumn

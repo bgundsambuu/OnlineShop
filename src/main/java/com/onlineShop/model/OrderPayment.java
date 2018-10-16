@@ -20,6 +20,12 @@ public class OrderPayment {
     @OneToMany
     @JoinColumn
     private List<OrderDetail> orderDetailList;
+    @ManyToOne
+    @JoinColumn
+    private CardDetail card;
+    @ManyToOne
+    @JoinColumn
+    private Customer customer;
     @OneToOne
     @JoinColumn
     private Address address;
@@ -103,5 +109,21 @@ public class OrderPayment {
 
     public void setOrderDetailList(List<OrderDetail> orderDetailList) {
         this.orderDetailList = orderDetailList;
+    }
+
+    public CardDetail getCard() {
+        return card;
+    }
+
+    public void setCard(CardDetail card) {
+        this.card = card;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
