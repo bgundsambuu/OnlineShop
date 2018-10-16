@@ -84,4 +84,12 @@ public class CardDetail {
     public void setOrderPaymentList(List<OrderPayment> orderPaymentList) {
         this.orderPaymentList = orderPaymentList;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
