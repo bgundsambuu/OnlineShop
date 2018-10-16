@@ -22,12 +22,8 @@ public class CardDetail {
     private Date cardExp;
     private String securityNumber;
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "customerId")
     private Customer customer;
-
-    @OneToMany
-    @JoinColumn
-    private List<OrderPayment> orderPaymentList;
 
     public int getCardId() {
         return cardId;
@@ -75,18 +71,6 @@ public class CardDetail {
 
     public void setSecurityNumber(String securityNumber) {
         this.securityNumber = securityNumber;
-    }
-
-    public List<OrderPayment> getOrderPaymentList() {
-        return orderPaymentList;
-    }
-
-    public void setOrderPaymentList(List<OrderPayment> orderPaymentList) {
-        this.orderPaymentList = orderPaymentList;
-    }
-
-    public Customer getCustomer() {
-        return customer;
     }
 
     public void setCustomer(Customer customer) {
