@@ -1,4 +1,4 @@
-<%@include file="/WEB-INF/views/template/shop/inc/header.jsp" %>
+<%@include file="/WEB-INF/views/template/shop/header.jsp" %>
 
 
 <div class="container-wrapper">
@@ -33,4 +33,4 @@
     </div>
 </div>
 
-<%@include file="/WEB-INF/views/template/shop/inc/footer.jsp" %>
+<%@include file="/WEB-INF/views/template/shop/footer.jsp" %>
