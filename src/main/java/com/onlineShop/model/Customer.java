@@ -15,12 +15,12 @@ public class Customer {
     @Id
     @GeneratedValue
     private int customerId;
-    private int userId;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String orderId;
-    @Transient
+    @OneToOne
+    @JoinColumn(name = "userId")
     private Address address;
 
     public int getCustomerId() {
@@ -29,14 +29,6 @@ public class Customer {
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getFirstName() {

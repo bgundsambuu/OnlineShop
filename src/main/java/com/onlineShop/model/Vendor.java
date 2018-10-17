@@ -19,9 +19,9 @@ public class Vendor {
     private String lastName;
     private String name;
     private String phoneNumber;
-    private int userId;
     private String status;
-    @Transient
+    @OneToOne
+    @JoinColumn(name = "userId")
     private Address address;
     @ManyToOne
     @JoinColumn(name = "vendorCategoryID", nullable = false)
@@ -68,14 +68,6 @@ public class Vendor {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getStatus() {
