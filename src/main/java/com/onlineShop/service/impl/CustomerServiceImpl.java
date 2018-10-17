@@ -55,7 +55,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     }
 
-    public Customer getCustomerById(String userId) {
+    public Customer getCustomerById(int userId) {
         return customerDao.getCustomerByUserId(userId);
     }
 

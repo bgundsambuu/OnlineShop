@@ -2,10 +2,7 @@ package com.onlineShop.model;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 
 /**
@@ -16,25 +13,28 @@ import javax.persistence.OneToOne;
 public class Vendor {
 
     @Id
-    private String vendorId;
+    @GeneratedValue
+    private int vendorId;
     private String firstName;
     private String lastName;
     private String name;
     private String phoneNumber;
-    private String userId;
+    private int userId;
     private String status;
-    @OneToOne
-    @JoinColumn
+    @Transient
     private Address address;
+    @ManyToOne
+    @JoinColumn(name = "vendorCategoryID", nullable = false)
+    private VendorCategory vendorCategory;
 //    @OneToMany
 //    @JoinColumn
 //    private List<Product> productList;
 
-    public String getVendorId() {
+    public int getVendorId() {
         return vendorId;
     }
 
-    public void setVendorId(String vendorId) {
+    public void setVendorId(int vendorId) {
         this.vendorId = vendorId;
     }
 
@@ -70,11 +70,11 @@ public class Vendor {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

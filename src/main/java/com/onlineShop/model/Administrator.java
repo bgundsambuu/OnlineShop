@@ -14,25 +14,26 @@ import javax.persistence.Id;
 public class Administrator {
 
     @Id
-    private String adminId;
-    private String userId;
+    @GeneratedValue
+    private int adminId;
+    private int userId;
     private String firstName;
     private String lastName;
     private String phoneNumber;
 
-    public String getAdminId() {
+    public int getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(String adminId) {
+    public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

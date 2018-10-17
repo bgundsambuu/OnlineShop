@@ -6,5 +6,5 @@ import com.onlineShop.model.User;
  */
 public interface UserDao {
     void editUser(User user);
-    User getUserByUserId(String userId);
+    User getUserByUserId(int userId);
 }

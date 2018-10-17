@@ -30,7 +30,7 @@ public class UserController {
         try{
             String msg = request.getParameter(Constant.MSG);
             if(!StringUtils.isEmpty(msg)) model.addAttribute(Constant.MSG, msg);
-            User user = userService.getUserByUserId(userId);
+            User user = userService.getUserByUserId(Integer.parseInt(userId));
             model.addAttribute("user", user);
         }catch(Exception e){
             model.addAttribute(Constant.MSG, Constant.Message.FAILURE);
@@ -62,7 +62,7 @@ public class UserController {
     @RequestMapping(value = "/delete/{userId}", method = RequestMethod.GET)
     public String deleteUser(@PathVariable String userId, Model model ) {
         try{
-            userService.delete(userId);
+            userService.delete(Integer.parseInt(userId));
             model.addAttribute(Constant.MSG, Constant.Message.SUCCESS);
         }catch (Exception e){
             model.addAttribute(Constant.MSG, Constant.Message.FAILURE);

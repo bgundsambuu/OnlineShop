@@ -13,14 +13,14 @@ import java.util.List;
 public class Customer {
 
     @Id
-    private String customerId;
-    private String userId;
+    @GeneratedValue
+    private int customerId;
+    private int userId;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private String orderId;
-    @OneToOne
-    @JoinColumn
+    @Transient
     private Address address;
     @OneToMany
     @JoinColumn(name = "cardDetail")
@@ -29,19 +29,19 @@ public class Customer {
     @JoinColumn(name = "orderPayment")
     private List<OrderPayment> orderPaymentList;
 
-    public String getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

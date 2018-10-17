@@ -12,7 +12,8 @@ import javax.persistence.*;
 @DynamicUpdate
 public class User {
     @Id
-    private String userId;
+    @GeneratedValue
+    private int userId;
     private String userName;
     private String password;
     private String role;
@@ -59,11 +60,11 @@ public class User {
         this.vendor = vendor;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

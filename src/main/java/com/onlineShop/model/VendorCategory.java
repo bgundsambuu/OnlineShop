@@ -11,8 +11,7 @@ public class VendorCategory {
     @Id
     @GeneratedValue
     private int vendorCategoryID;
-    @OneToMany
-    @JoinColumn(name="vendorId")
+    @OneToMany(mappedBy="vendorCategory")
     private List<Vendor> vendor;
     @OneToMany
     @JoinColumn(name="categoryID")

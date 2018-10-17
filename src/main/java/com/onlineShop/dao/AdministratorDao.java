@@ -4,5 +4,5 @@ import com.onlineShop.model.Administrator;
 
 public interface AdministratorDao {
     void editAdmin(Administrator administrator);
-    Administrator getAdminByUserId(String userId);
+    Administrator getAdminByUserId(int userId);
 }

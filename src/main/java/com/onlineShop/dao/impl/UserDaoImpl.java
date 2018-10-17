@@ -28,10 +28,10 @@ public class UserDaoImpl implements UserDao {
         session.flush();
     }
 
-    public User getUserByUserId(String userId){
+    public User getUserByUserId(int userId){
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from User where userId = ? and isActive = ?");
-        query.setString(0, userId);
+        query.setInteger(0, userId);
         query.setString(1, Constant.Active.YES);
         return (User) query.uniqueResult();
     }

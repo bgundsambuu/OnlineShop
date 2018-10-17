@@ -19,7 +19,7 @@ public interface CustomerDao {
      */
     void editCustomer(Customer customer);
 
-    Customer getCustomerByUserId(String userId);
+    Customer getCustomerByUserId(int userId);
 
     List<Customer> getAllCustomers();
 

@@ -4,5 +4,5 @@ import com.onlineShop.model.Vendor;
 
 public interface VendorDao {
     void editVendor(Vendor vendor);
-    Vendor getVendorByUserId(String userId);
+    Vendor getVendorByUserId(int userId);
 }

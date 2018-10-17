@@ -8,6 +8,6 @@ import com.onlineShop.model.Address;
  */
 public interface AddressDao {
     void editAddress(Address address);
-    Address getAddressByUserId(String userId);
+    Address getAddressByUserId(int userId);
 
 }

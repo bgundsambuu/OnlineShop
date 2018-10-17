@@ -22,7 +22,7 @@ public interface CustomerService {
      */
     void editCustomer(Customer customer, User user);
 
-    Customer getCustomerById(String customerId);
+    Customer getCustomerById(int customerId);
 
     List<Customer> getAllCustomers();
 

@@ -67,10 +67,10 @@ public class CustomerDaoImpl implements CustomerDao{
         session.flush();
     }
 
-    public Customer getCustomerByUserId (String userId) {
+    public Customer getCustomerByUserId (int userId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Customer where userId = ?");
-        query.setString(0, userId);
+        query.setInteger(0, userId);
         return (Customer) query.uniqueResult();
     }
 

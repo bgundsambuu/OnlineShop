@@ -14,19 +14,20 @@ import javax.persistence.Id;
 public class Address {
 
     @Id
-    private String addressId;
+    @GeneratedValue
+    private int addressId;
     private String street;
     private String city;
     private String state;
     private String zipCode;
     private String country;
-    private String userId;
+    private int userId;
 
-    public String getAddressId() {
+    public int getAddressId() {
         return addressId;
     }
 
-    public void setAddressId(String addressId) {
+    public void setAddressId(int addressId) {
         this.addressId = addressId;
     }
 
@@ -70,11 +71,11 @@ public class Address {
         this.country = country;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 }

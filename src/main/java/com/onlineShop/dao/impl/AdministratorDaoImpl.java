@@ -27,10 +27,10 @@ public class AdministratorDaoImpl implements AdministratorDao {
         session.flush();
     }
 
-    public Administrator getAdminByUserId(String userId) {
+    public Administrator getAdminByUserId(int userId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Administrator where userId = ?");
-        query.setString(0, userId);
+        query.setInteger(0, userId);
         return (Administrator) query.uniqueResult();
     }
 }

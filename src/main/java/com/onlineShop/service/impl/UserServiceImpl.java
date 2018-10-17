@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
      * @param userId
      * @return
      */
-    public User getUserByUserId(String userId) {
+    public User getUserByUserId(int userId) {
         User user = userDao.getUserByUserId(userId);
         if (user != null) {
             user.setAddress(addressDao.getAddressByUserId(userId));
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
      * @param userId
      * @return
      */
-    public String delete(String userId) {
+    public String delete(int userId) {
         User user = userDao.getUserByUserId(userId);
         user.setIsActive(Constant.Active.NO);
         userDao.editUser(user);
