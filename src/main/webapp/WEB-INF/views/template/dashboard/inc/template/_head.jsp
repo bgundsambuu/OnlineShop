@@ -14,11 +14,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <meta name="author" content="Creative Tim">
-    <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ONSHOP - Admin dashboard</title>
     <!-- Favicon -->
-    <link href="<c:url value="/resources/_admin/img/brand/favicon.png" />" rel="icon" type="image/png">
+    <link href="<c:url value="/resources/images/favicon.png" />" rel="icon" type="image/png">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">

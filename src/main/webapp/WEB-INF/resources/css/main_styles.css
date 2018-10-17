@@ -6,7 +6,7 @@
 COLOR PALETTE
 
 
-
+logo_container
 
 [Table of Contents]
 
@@ -794,6 +794,8 @@ section
 
 .logo_container
 {
+	background: url(../images/logo.jpg) no-repeat left center;
+	background-size: auto 100%;
 	position: absolute;
 	top: 50%;
 	-webkit-transform: translateY(-50%);
@@ -805,14 +807,9 @@ section
 }
 .logo_container a
 {
-	font-size: 24px;
-	color: #1e1e27;
-	font-weight: 700;
-	text-transform: uppercase;
-}
-.logo_container a span
-{
-	color: #fe4c50;
+	display: block;
+	height: 56px;
+	width: 110px;
 }
 
 /*********************************
@@ -826,7 +823,7 @@ section
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
-	margin-top: 150px;
+	margin-top: 100px;
 }
 .main_slider_content
 {

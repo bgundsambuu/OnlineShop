@@ -15,7 +15,6 @@
 <div class="super_container">
 
     <header class="header trans_300">
-        <%@include file="/WEB-INF/views/template/shop/inc/_navtop.jsp" %>
         <%@include file="/WEB-INF/views/template/shop/inc/_navmain.jsp" %>
     </header>
 

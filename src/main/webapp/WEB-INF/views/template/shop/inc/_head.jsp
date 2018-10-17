@@ -14,9 +14,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="icon" href="<c:url value="/resources/images/favicon.ico" />">
 
-    <title>The best online shop on the world</title>
+    <title>ONSHOP - The best online shop on the world</title>
 
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap4/bootstrap.min.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/font-awesome-4.7.0/css/font-awesome.min.css" />">
@@ -25,6 +25,4 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/animate.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main_styles.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/responsive.css" />">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/single_styles.css" />">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/single_responsive.css" />">
 </head>

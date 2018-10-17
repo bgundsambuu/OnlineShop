@@ -7,7 +7,7 @@
                     <ul class="footer_nav">
                         <li><a href="#">Blog</a></li>
                         <li><a href="#">FAQs</a></li>
-                        <li><a href="contact.html">Contact us</a></li>
+                        <li><a href="#">Contact us</a></li>
                     </ul>
                 </div>
             </div>
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="footer_nav_container">
-                    <div class="cr">©2018 All Rights Reserverd. This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#">Colorlib</a></div>
+                    <div class="cr"> ©2018 All Rights Reserved.</div>
                 </div>
             </div>
         </div>
@@ -42,7 +42,6 @@
 <script src="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js" />"></script>
 <script src="<c:url value="/resources/plugins/easing/easing.js" />"></script>
 <script src="<c:url value="/resources/js/custom.js" />"></script>
-<script src="<c:url value="/resources/js/single_custom.js" />"></script>
 
 </body>
 </html>
