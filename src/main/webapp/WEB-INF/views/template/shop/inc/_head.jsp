@@ -23,6 +23,10 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/animate.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/plugins/jquery-ui-1.12.1.custom/jquery-ui.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main_styles.css" />">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/responsive.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/single_styles.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/single_responsive.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/categories_styles.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/categories_responsive.css" />">
 </head>
