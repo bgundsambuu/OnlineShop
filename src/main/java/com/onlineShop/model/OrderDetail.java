@@ -22,7 +22,7 @@ public class OrderDetail {
 //    @OneToMany
 //    @JoinColumn(name="product_id")
 //    private List<Product> productList;
-
+//dsad
     public OrderDetail() {
     }
 

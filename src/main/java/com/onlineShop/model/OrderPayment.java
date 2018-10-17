@@ -3,6 +3,7 @@ package com.onlineShop.model;
 /*
  *  Created by Solomon
  * */
+//asdas
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;

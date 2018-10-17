@@ -24,7 +24,7 @@ public class CardDetail {
 //    @ManyToOne
 //    @JoinColumn(name = "customerId")
 //    private Customer customer;
-
+//gffd
     public int getCardId() {
         return cardId;
     }
