@@ -41,7 +41,10 @@
 <script src="<c:url value="/resources/plugins/Isotope/isotope.pkgd.min.js" />"></script>
 <script src="<c:url value="/resources/plugins/OwlCarousel2-2.2.1/owl.carousel.js" />"></script>
 <script src="<c:url value="/resources/plugins/easing/easing.js" />"></script>
+<script src="<c:url value="/resources/plugins/jquery-ui-1.12.1.custom/jquery-ui.js" />"></script>
 <script src="<c:url value="/resources/js/custom.js" />"></script>
+<script src="<c:url value="/resources/js/single_custom.js" />"></script>
+<script src="<c:url value="/resources/js/categories_custom.js" />"></script>
 
 </body>
 </html>

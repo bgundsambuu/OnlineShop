@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@include file="/WEB-INF/views/template/dashboard/inc/template/_head.jsp" %>
 
 <body>
