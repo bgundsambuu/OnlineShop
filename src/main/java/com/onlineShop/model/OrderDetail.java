@@ -6,9 +6,7 @@ package com.onlineShop.model;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @DynamicUpdate
@@ -18,6 +16,9 @@ public class OrderDetail {
     @GeneratedValue
     private int orderDetailId;
     private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "productId")
+    private Product productList;
 //    @OneToMany
 //    @JoinColumn(name="product_id")
 //    private List<Product> productList;
@@ -40,6 +41,14 @@ public class OrderDetail {
 //    public void setProductList(List<Product> productList) {
 //        this.productList = productList;
 //    }
+
+    public Product getProductList() {
+        return productList;
+    }
+
+    public void setProductList(Product productList) {
+        this.productList = productList;
+    }
 
     public int getQuantity() {
         return quantity;

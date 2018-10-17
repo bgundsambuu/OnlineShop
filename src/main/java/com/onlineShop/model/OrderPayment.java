@@ -18,7 +18,7 @@ public class OrderPayment {
     private int orderPaymentId;
     private Date OrderDate;
     @OneToMany
-    @JoinColumn
+    @JoinColumn(name = "orderPaymentId")
     private List<OrderDetail> orderDetailList;
     @ManyToOne
     @JoinColumn(name = "cardId")
@@ -27,7 +27,7 @@ public class OrderPayment {
     @JoinColumn(name = "customerId")
     private Customer customer;
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "addressId")
     private Address address;
     private String orderStatus;
     private Date paidDate;

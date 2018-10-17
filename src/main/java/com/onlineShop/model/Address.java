@@ -21,7 +21,6 @@ public class Address {
     private String state;
     private String zipCode;
     private String country;
-    private int userId;
 
     public int getAddressId() {
         return addressId;
@@ -71,11 +70,4 @@ public class Address {
         this.country = country;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }

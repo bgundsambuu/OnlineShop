@@ -21,9 +21,9 @@ public class CardDetail {
     private String cardNumber;
     private Date cardExp;
     private String securityNumber;
-    @ManyToOne
-    @JoinColumn(name = "customerId")
-    private Customer customer;
+//    @ManyToOne
+//    @JoinColumn(name = "customerId")
+//    private Customer customer;
 
     public int getCardId() {
         return cardId;
@@ -73,7 +73,11 @@ public class CardDetail {
         this.securityNumber = securityNumber;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
+//
+//    public Customer getCustomer() {
+//        return customer;
+//    }
 }

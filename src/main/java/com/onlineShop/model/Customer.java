@@ -18,10 +18,12 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private String orderId;
     @OneToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "addressId")
     private Address address;
+    @OneToMany
+    @JoinColumn(name = "customerId")
+    private List<CardDetail> cardDetailList;
 
     public int getCustomerId() {
         return customerId;
@@ -55,14 +57,6 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
     public Address getAddress() {
         return address;
     }
@@ -71,4 +65,11 @@ public class Customer {
         this.address = address;
     }
 
+    public List<CardDetail> getCardDetailList() {
+        return cardDetailList;
+    }
+
+    public void setCardDetailList(List<CardDetail> cardDetailList) {
+        this.cardDetailList = cardDetailList;
+    }
 }
