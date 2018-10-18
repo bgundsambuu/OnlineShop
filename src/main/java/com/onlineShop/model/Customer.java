@@ -20,11 +20,11 @@ public class Customer {
     private String lastName;
     private String phoneNumber;
     @OneToOne
+    @JoinColumn(name = "userId")
+    private User user;
+    @OneToOne
     @JoinColumn(name = "addressId")
     private Address address;
-    @OneToMany
-    @JoinColumn(name = "customerId")
-    private List<CardDetail> cardDetailList;
 
     public int getCustomerId() {
         return customerId;
@@ -66,11 +66,4 @@ public class Customer {
         this.address = address;
     }
 
-    public List<CardDetail> getCardDetailList() {
-        return cardDetailList;
-    }
-
-    public void setCardDetailList(List<CardDetail> cardDetailList) {
-        this.cardDetailList = cardDetailList;
-    }
 }

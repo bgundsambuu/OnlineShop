@@ -1,9 +1,12 @@
 package com.onlineShop.model;
 /*
-*  Created by Solomon
-* */
+        Project Management class - Somesh Rao
+        Developer: Bayarjargal
+        Date: 10/16/2018 /October/
+*/
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,15 +19,18 @@ public class CardDetail {
     @Id
     @GeneratedValue
     private int cardId;
+
     private String cardHolderName;
     private String cardType;
     private String cardNumber;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date cardExp;
     private String securityNumber;
-//    @ManyToOne
-//    @JoinColumn(name = "customerId")
-//    private Customer customer;
-//gffd
+    private String zipCode;
+    @ManyToOne
+    @JoinColumn(name = "customerId")
+    private Customer customer;
+
     public int getCardId() {
         return cardId;
     }
@@ -73,11 +79,19 @@ public class CardDetail {
         this.securityNumber = securityNumber;
     }
 
-//    public void setCustomer(Customer customer) {
-//        this.customer = customer;
-//    }
-//
-//    public Customer getCustomer() {
-//        return customer;
-//    }
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
 }
