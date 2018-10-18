@@ -9,6 +9,8 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 
@@ -20,12 +22,16 @@ public class CardDetail {
     @GeneratedValue
     private int cardId;
 
+    @NotNull(message="Must insert card holder name.")
     private String cardHolderName;
     private String cardType;
+    @Pattern(regexp="\\d{16}", message="Card number must be 16 digits.")
     private String cardNumber;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date cardExp;
+    @Pattern(regexp="\\d{3}", message="CVV must be 3 digits.")
     private String securityNumber;
+    @Pattern(regexp="\\d{6}", message="Zip code must be 6 digits.")
     private String zipCode;
     @ManyToOne
     @JoinColumn(name = "customerId")

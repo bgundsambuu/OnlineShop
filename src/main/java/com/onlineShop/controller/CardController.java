@@ -14,9 +14,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,9 +42,37 @@ public class CardController {
 
     @RequestMapping(value = "/addCardDetail", method = RequestMethod.POST)
     public String addCardDetail(@ModelAttribute("cardDetail") @Valid CardDetail cardDetail,
-                                BindingResult result, HttpServletRequest request, Locale locale) {
+                                BindingResult result, HttpServletRequest request,
+                                Locale locale, Model model,
+                                RedirectAttributes redirectAttributes) {
+        List<CardDetail> carDetailList = cardService.getCardList(1);
+        model.addAttribute("cards", carDetailList);
 
-        cardService.addCardDetail(cardDetail);
+        if (result.hasErrors()) {
+            return "template/shop/cardDetail";
+        }
+
+        if(cardDetail.getCardType().equals("VISA")) {
+            if (!cardDetail.getCardNumber().startsWith("4"))
+            {
+                model.addAttribute("ERROR_MESSAGE","Visa card number must starts with 4.");
+                return "template/shop/cardDetail";
+            }
+        }
+        else{
+            if (!cardDetail.getCardNumber().startsWith("5"))
+            {
+                model.addAttribute("ERROR_MESSAGE","Master card number must starts with 5.");
+                return "template/shop/cardDetail";
+            }
+        }
+
+        boolean b = cardService.addCardDetail(cardDetail);
+        if(b) {
+            redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE","Successfully added new card.");
+            return "redirect:/card";
+        }
+        model.addAttribute("ERROR_MESSAGE", "Error occurred when add new card.");
         return "template/shop/cardDetail";
     }
 }

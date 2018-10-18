@@ -11,6 +11,18 @@
         <h2>
             <strong>Card details</strong>
         </h2>
+        <c:if test="${SUCCESS_MESSAGE != null}">
+            <label>
+                    ${SUCCESS_MESSAGE}
+            </label>
+        </c:if>
+        <br/>
+        <c:if test="${ERROR_MESSAGE != null}">
+            <label>
+                    ${ERROR_MESSAGE}
+            </label>
+        </c:if>
+        <br/>
         <c:forEach items="${cards}" var="card">
             <label>
                 <input type="radio" id="cards" value="${card.cardNumber}" >
@@ -46,8 +58,8 @@
                         type: </label>
                     <div>
                         <form:select path="cardType">
-                            <form:option value="Visa" label="Visa" />
-                            <form:option value="Master" label="Master" />
+                            <form:option value="VISA" label="VISA" />
+                            <form:option value="MASTER" label="MASTER" />
                         </form:select>
                     </div>
                 </div>
