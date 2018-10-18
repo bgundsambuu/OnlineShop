@@ -26,8 +26,9 @@
                         <form role="form">
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-alternative">
-                                    <input class="form-control" placeholder="Email" type="email">
+                                    <input class="form-control is-invalid" placeholder="Email" type="email">
                                 </div>
+                                <div class="invalid-feedback d-block">Please insert your email!</div>
                             </div>
                             <div class="form-group">
                                 <div class="input-group input-group-alternative">
