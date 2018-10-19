@@ -7,4 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-register page here
+<%@include file="/WEB-INF/views/template/shop/inc/headersimple.jsp" %>
+<%@include file="/WEB-INF/views/template/shop/inc/_register.jsp" %>
+<%@include file="/WEB-INF/views/template/shop/inc/footersimple.jsp" %>
