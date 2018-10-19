@@ -11,7 +11,7 @@ COLOR PALETTE
 [Table of Contents]
 
 1. Fonts
-2. Body and some general stuff
+2. Body and some general stuff.account_selection
 3. Home
 	3.1 Currency
 	3.2 Language
@@ -251,6 +251,10 @@ section
 	width: 100%;
 	overflow: hidden;
 }
+.section_container
+{
+	margin-top: 150px;
+}
 
 /*********************************
 3. Home
@@ -453,10 +457,10 @@ section
 	display: inline-block;
 	position: relative;
 	min-width: 50px;
-	padding-left: 20px;
+	padding-left: 0px;
 	text-align: center;
 	vertical-align: middle;
-	background: #1e1e27;
+	background: none;
 }
 .account > a
 {
@@ -466,6 +470,11 @@ section
 	height: 50px;
 	line-height: 50px;
 	font-size: 13px;
+}
+.account .acc-profile{
+	padding: 0 15px;
+	width: auto;
+	flex-direction: row;
 }
 .account > a > i
 {
@@ -481,10 +490,10 @@ section
 {
 	display: block;
 	position: absolute;
-	right: 0;
+	left: 50%;
 	top: 120%;
 	margin: 0;
-	width: 100%;
+	width: 150px;
 	background: #FFFFFF;
 	visibility: hidden;
 	opacity: 0;
@@ -495,14 +504,16 @@ section
 	-ms-transition: opacity 0.3s ease;
 	-o-transition: opacity 0.3s ease;
 	transition: all 0.3s ease;
+	margin-left: -75px;
 }
-.account_selection li
+.account .account_selection li
 {
+	display: block;
 	padding-left: 10px;
 	padding-right: 10px;
 	line-height: 50px;
 }
-.account_selection li a
+.account .account_selection li a
 {
 	display: block;
 	color: #232530;
@@ -513,16 +524,24 @@ section
 	-ms-transition: all 0.3s ease;
 	-o-transition: all 0.3s ease;
 	transition: all 0.3s ease;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	text-align: left;
+	padding-left: 10px;
 }
-.account_selection li a:hover
+.account .account_selection .account_selection_text{
+	padding-bottom: 0px;
+}
+.account .account_selection li a:hover
 {
 	color: #b5aec4;
 }
-.account_selection li:last-child a
+.account .account_selection li:last-child a
 {
 	border-bottom: none;
 }
-.account_selection li a i
+.account .account_selection li a i
 {
 	margin-right: 10px;
 }

@@ -27,8 +27,16 @@
                         <li class="account">
                             <a href="#"><i class="fa fa-user" aria-hidden="true"></i></a>
                             <ul class="account_selection">
-                                <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                                <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                <li><a href="/loginpage"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a></li>
+                                <li><a href="/registerpage"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
+                            </ul>
+                        </li>
+                        <li class="account">
+                            <a href="#" class="acc-profile">You <i class="fa fa-user" aria-hidden="true"></i></a>
+                            <ul class="account_selection">
+                                <li class="account_selection_text"><span>Hello Kenzo!</span></li>
+                                <li><a href="/profilepage"><i class="fa fa-cog" aria-hidden="true"></i> Profile</a></li>
+                                <li><a href="/signout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a></li>
                             </ul>
                         </li>
                         <li class="checkout">

@@ -34,6 +34,11 @@ public class KenzoController {
         return "template/shop/forgotpassword";
     }
 
+    @RequestMapping("/profilepage")
+    public String profilepage() {
+        return "template/shop/profilepage";
+    }
+
     @RequestMapping("/admin")
     public String admin() {
         return "template/dashboard/home";

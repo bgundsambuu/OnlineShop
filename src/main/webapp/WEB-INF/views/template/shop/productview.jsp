@@ -10,21 +10,8 @@
 <%@include file="/WEB-INF/views/template/shop/inc/header.jsp" %>
 
 <div class="container single_product_container">
-    <div class="row">
-        <div class="col">
 
-            <!-- Breadcrumbs -->
-
-            <div class="breadcrumbs d-flex flex-row align-items-center">
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
-                    <li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
+    <%@include file="/WEB-INF/views/template/shop/inc/_breadcrumb.jsp" %>
 
     <div class="row">
         <div class="col-lg-7">
