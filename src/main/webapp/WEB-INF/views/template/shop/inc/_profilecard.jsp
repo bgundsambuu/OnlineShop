@@ -15,7 +15,9 @@
             <%@include file="/WEB-INF/views/template/shop/inc/profile/_profilenav.jsp" %>
 
             <div class="col-lg-5 col-md-7">
-                <%@include file="/WEB-INF/views/template/shop/inc/profile/profile.jsp" %>
+                <jsp:include page="/WEB-INF/views/template/shop/inc/profile/card.jsp" flush="true">
+                    <jsp:param name="cardDetail" value="<%=request.getParameter(\"cardDetail\")%>"/>
+                </jsp:include>
             </div>
         </div>
     </div>

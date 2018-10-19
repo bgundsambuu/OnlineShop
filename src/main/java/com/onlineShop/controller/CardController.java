@@ -38,7 +38,7 @@ public class CardController {
         CardDetail cardDetail = new CardDetail();
         model.addAttribute("cardDetail", cardDetail);
 
-        return "template/shop/cardDetail";
+        return "template/shop/profilecard";
     }
 
     @RequestMapping(value = "/addCardDetail", method = RequestMethod.POST)
@@ -50,21 +50,21 @@ public class CardController {
         model.addAttribute("cards", carDetailList);
 
         if (result.hasErrors()) {
-            return "template/shop/cardDetail";
+            return "template/shop/profilecard";
         }
 
         if(cardDetail.getCardType().equals("VISA")) {
             if (!cardDetail.getCardNumber().startsWith("4"))
             {
                 model.addAttribute("ERROR_MESSAGE","Visa card number must starts with 4.");
-                return "template/shop/cardDetail";
+                return "template/shop/profilecard";
             }
         }
         else{
             if (!cardDetail.getCardNumber().startsWith("5"))
             {
                 model.addAttribute("ERROR_MESSAGE","Master card number must starts with 5.");
-                return "template/shop/cardDetail";
+                return "template/shop/profilecard";
             }
         }
 
@@ -77,7 +77,7 @@ public class CardController {
             return "redirect:/card";
         }
         model.addAttribute("ERROR_MESSAGE", "Error occurred when add new card.");
-        return "template/shop/cardDetail";
+        return "template/shop/profilecard";
     }
 }
 
