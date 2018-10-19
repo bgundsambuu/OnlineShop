@@ -51,14 +51,14 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary my-4">Create</button>
+                                <button type="button" class="btn btn-primary my-4">Create account</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-12">
-                        <p>Already have an account? <a href="#">Sign in ▶</a></p>
+                        <p>Already have an account? <a href="/loginpage">Sign in ▶</a></p>
                     </div>
                 </div>
             </div>

@@ -47,7 +47,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-6">
-                        <a href="#">Forgot password?</a>
+                        <a href="/forgotpage">Forgot password?</a>
                     </div>
                     <div class="col-6 text-right">
                         <a href="/registerpage">Create new account</a>
