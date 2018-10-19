@@ -27,15 +27,19 @@ public class CardDetail {
     private String cardType;
     @Pattern(regexp="\\d{16}", message="Card number must be 16 digits.")
     private String cardNumber;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(pattern = "MM/yyyy")
     private Date cardExp;
     @Pattern(regexp="\\d{3}", message="CVV must be 3 digits.")
     private String securityNumber;
-    @Pattern(regexp="\\d{6}", message="Zip code must be 6 digits.")
+    @Pattern(regexp="\\d{5}", message="Zip code must be 5 digits.")
     private String zipCode;
     @ManyToOne
     @JoinColumn(name = "customerId")
     private Customer customer;
+    @Transient
+    private int expMonth;
+    @Transient
+    private int expYear;
 
     public int getCardId() {
         return cardId;
@@ -99,5 +103,21 @@ public class CardDetail {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    public int getExpMonth() {
+        return expMonth;
+    }
+
+    public void setExpMonth(int expMonth) {
+        this.expMonth = expMonth;
+    }
+
+    public int getExpYear() {
+        return expYear;
+    }
+
+    public void setExpYear(int expYear) {
+        this.expYear = expYear;
     }
 }

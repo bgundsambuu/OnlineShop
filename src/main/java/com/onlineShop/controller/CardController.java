@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -66,6 +67,9 @@ public class CardController {
                 return "template/shop/cardDetail";
             }
         }
+
+        Date date = new Date(cardDetail.getExpYear(),cardDetail.getExpMonth(),1);
+        cardDetail.setCardExp(date);
 
         boolean b = cardService.addCardDetail(cardDetail);
         if(b) {
