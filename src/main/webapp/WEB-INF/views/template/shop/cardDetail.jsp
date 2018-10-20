@@ -26,7 +26,7 @@
                 </label>
             </c:if>
             <br/>
-            <c:if test="${cards != null}">
+            <c:if test="${not empty cards}">
                 <table border="1">
                     <thead>
                         <tr>

@@ -31,7 +31,7 @@ public class CardController {
     private CardService cardService;
 
     @RequestMapping("/card")
-    public String payment(Model model)
+    public String cardDetail(Model model)
     {
         List<CardDetail> carDetailList = cardService.getCardList(1);
         model.addAttribute("cards", carDetailList);

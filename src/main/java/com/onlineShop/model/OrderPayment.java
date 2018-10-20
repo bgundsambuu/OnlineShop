@@ -35,7 +35,8 @@ public class OrderPayment {
     private int total;
     private int totalAmount;
     private int taxAmount;
-
+    @Transient
+    private int zipCode;
     public OrderPayment() {
 
     }
@@ -126,5 +127,13 @@ public class OrderPayment {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
     }
 }

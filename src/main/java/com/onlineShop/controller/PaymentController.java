@@ -1,7 +1,9 @@
 package com.onlineShop.controller;
 
 import com.onlineShop.model.CardDetail;
+import com.onlineShop.model.OrderPayment;
 import com.onlineShop.service.CardService;
+import com.onlineShop.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -15,11 +17,17 @@ public class PaymentController {
     @Autowired
     private CardService cardService;
 
+    @Autowired
+    private PaymentService paymentService;
+
     @RequestMapping("/payment")
     public String payment(Model model)
     {
-        List<CardDetail> cards = cardService.getCardList(1);
-        model.addAttribute("products", cards);
+        List<CardDetail> carDetailList = cardService.getCardList(1);
+        model.addAttribute("cards", carDetailList);
+
+        OrderPayment orderPayment = paymentService.getOrderPayment(1);
+        model.addAttribute("orderPayment", orderPayment);
 
         return "template/shop/payment";
     }
