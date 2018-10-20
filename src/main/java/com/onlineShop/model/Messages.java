@@ -21,13 +21,13 @@ public class Messages {
     private int id;
 
     private int msgId;
-    private int msgValue;
+    private String msgValue;
 
-    public int getMsgValue() {
+    public String getMsgValue() {
         return msgValue;
     }
 
-    public void setMsgValue(int msgValue) {
+    public void setMsgValue(String msgValue) {
         this.msgValue = msgValue;
     }
 
