@@ -2,10 +2,12 @@ package com.onlineShop.service.impl;
 
 import com.onlineShop.Constant;
 import com.onlineShop.dao.*;
+import com.onlineShop.model.Customer;
 import com.onlineShop.model.User;
 import com.onlineShop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * Created by Mingwei on 10/12/2018
@@ -33,7 +35,6 @@ public class UserServiceImpl implements UserService {
     public User getUserByUserId(int userId) {
         User user = userDao.getUserByUserId(userId);
         if (user != null) {
-            user.setAddress(addressDao.getAddressByUserId(userId));
             if (Constant.Role.ADMIN.equals(user.getRole()))
                 user.setAdministrator(administratorDao.getAdminByUserId(userId));
             else if (Constant.Role.VENDOR.equals(user.getRole()))
@@ -45,33 +46,39 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * editUser
-     *
+     * Edit User
+     * Created by Mingwei
      * @param user
      * @return
      */
     public User editUser(User user) {
         userDao.editUser(user);
-        addressDao.editAddress(user.getAddress());
-        User userInDB = userDao.getUserByUserId(user.getUserId());
-        if (userInDB != null) {
-            userInDB.setAddress(addressDao.getAddressByUserId(user.getUserId()));
-            if (Constant.Role.ADMIN.equals(userInDB.getRole()) && user.getAdministrator() != null) {
-                administratorDao.editAdmin(user.getAdministrator());
-                userInDB.setAdministrator(administratorDao.getAdminByUserId(user.getUserId()));
-            } else if (Constant.Role.VENDOR.equals(userInDB.getRole()) && user.getVendor() != null) {
-                vendorDao.editVendor(user.getVendor());
-                userInDB.setVendor(vendorDao.getVendorByUserId(user.getUserId()));
-            } else if (Constant.Role.CUSTOMER.equals(userInDB.getRole()) && user.getCustomer() != null) {
-                customerDao.editCustomer(user.getCustomer());
-                userInDB.setCustomer(customerDao.getCustomerByUserId(user.getUserId()));
-            }
+        if (Constant.Role.ADMIN.equals(user.getRole()) && user.getAdministrator() != null) {
+            // TODO
+            administratorDao.editAdmin(user.getAdministrator());
+            user.setAdministrator(administratorDao.getAdminByUserId(user.getUserId()));
+        } else if (Constant.Role.VENDOR.equals(user.getRole()) && user.getVendor() != null) {
+            // TODO
+            vendorDao.editVendor(user.getVendor());
+            user.setVendor(vendorDao.getVendorByUserId(user.getUserId()));
+        } else if (Constant.Role.CUSTOMER.equals(user.getRole()) && user.getCustomer() != null) {
+            Customer customer = customerDao.getCustomerByUserId(user.getUserId());
+            String newFirstName = user.getCustomer().getFirstName();
+            String newLastName = user.getCustomer().getLastName();
+            String newPhone = user.getCustomer().getPhoneNumber();
+            if(!StringUtils.isEmpty(newFirstName)) customer.setFirstName(newFirstName);
+            if(!StringUtils.isEmpty(newLastName)) customer.setLastName(newLastName);
+            if(!StringUtils.isEmpty(newPhone)) customer.setPhoneNumber(newPhone);
+            customerDao.editCustomer(customer);
+            user.setCustomer(customerDao.getCustomerByUserId(user.getUserId()));
         }
-        return userInDB;
+        return user;
     }
 
     /**
-     * delete
+     * User delete
+     *
+     * created by Mingwei
      *
      * @param userId
      * @return

@@ -1,7 +1,6 @@
 package com.onlineShop.model;
 
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.ForeignKey;
 
 import javax.persistence.*;
 
@@ -16,9 +15,14 @@ public class User {
     private int userId;
     private String userName;
     private String password;
+    @Transient
+    private String oldPassword;
+    @Transient
+    private String newPassword;
+    @Transient
+    private String reEnterPassword;
     private String role;
     private String isActive;
-
     @Transient
     private Address address;
     @Transient
@@ -82,6 +86,30 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getReEnterPassword() {
+        return reEnterPassword;
+    }
+
+    public void setReEnterPassword(String reEnterPassword) {
+        this.reEnterPassword = reEnterPassword;
     }
 
     public String getRole() {

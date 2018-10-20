@@ -27,9 +27,9 @@ public class AddressDaoImpl implements AddressDao {
         session.flush();
     }
 
-    public Address getAddressByUserId(int userId){
+    public Address getAddressByAddressId(int addressId){
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Address where userId = ?");
-        query.setInteger(0, userId);
+        Query query = session.createQuery("from Address where addressId = ?");
+        query.setInteger(0, addressId);
         return (Address) query.uniqueResult();}
 }

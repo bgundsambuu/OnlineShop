@@ -16,6 +16,7 @@ public class Constant {
     public static final class Message{
         public static final String SUCCESS = "succeed";
         public static final String FAILURE = "failure";
+        public static final String USER_NOT_EXIST = "user doesn't exist.";
     }
 
 }
