@@ -75,6 +75,21 @@ public class KenzoController {
         return "template/dashboard/list";
     }
 
+    @RequestMapping("/admin/category")
+    public String admincategory() {
+        return "template/dashboard/category";
+    }
+
+    @RequestMapping("/admin/category/new")
+    public String admincategorynew() {
+        return "template/dashboard/categorynew";
+    }
+
+    @RequestMapping("/admin/product")
+    public String admincategory() {
+        return "template/dashboard/product";
+    }
+
     @RequestMapping("/vendor/registration")
     public String vendorregister() {
         return "template/dashboard/vendorregister";
