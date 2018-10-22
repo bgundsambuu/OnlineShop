@@ -86,7 +86,7 @@ public class KenzoController {
     }
 
     @RequestMapping("/admin/product")
-    public String admincategory() {
+    public String adminproduct() {
         return "template/dashboard/product";
     }
 

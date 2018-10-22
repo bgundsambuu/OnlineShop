@@ -14,7 +14,7 @@
             <!-- Card stats -->
             <div class="row">
                 <div class="col-xl-3 col-lg-6">
-                    <a href="#" type="button" class="btn btn-info">
+                    <a href="/admin/category/new" type="button" class="btn btn-info">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add category
                     </a>
                 </div>
