@@ -23,9 +23,6 @@ public class Vendor {
     @OneToOne
     @JoinColumn(name = "userId")
     private Address address;
-    @ManyToOne
-    @JoinColumn(name = "vendorCategoryID", nullable = false)
-    private VendorCategory vendorCategory;
 //    @OneToMany
 //    @JoinColumn
 //    private List<Product> productList;
