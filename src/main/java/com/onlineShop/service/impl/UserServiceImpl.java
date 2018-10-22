@@ -27,8 +27,9 @@ public class UserServiceImpl implements UserService {
     VendorDao vendorDao;
 
     /**
-     * getUserByUserId
-     *
+     * Get User By User Id
+     * @Author Mingwei
+     * @Date 10/12/2018
      * @param userId
      * @return
      */
@@ -47,7 +48,8 @@ public class UserServiceImpl implements UserService {
 
     /**
      * Edit User
-     * Created by Mingwei
+     * @Author Mingwei
+     * @Date 10/12/2018
      * @param user
      * @return
      */
@@ -77,9 +79,8 @@ public class UserServiceImpl implements UserService {
 
     /**
      * User delete
-     *
-     * created by Mingwei
-     *
+     * @Author Mingwei
+     * @Date 10/12/2018
      * @param userId
      * @return
      */

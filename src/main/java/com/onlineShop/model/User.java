@@ -1,8 +1,11 @@
 package com.onlineShop.model;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Mingwei on 10/14/2018.
@@ -13,19 +16,26 @@ public class User {
     @Id
     @GeneratedValue
     private int userId;
+    @NotEmpty(message = "Username may not be empty.")
+    @Size(max = 20, message = "Maximum 20 characters is limited.")
     private String userName;
+    @Size(max = 20, message = "Maximum 20 characters is limited.")
     private String password;
     @Transient
+    @Size(max = 20, message = "Maximum 20 characters is limited.")
     private String oldPassword;
     @Transient
+    @Size(max = 20, message = "Maximum 20 characters is limited.")
     private String newPassword;
     @Transient
+    @Size(max = 20, message = "Maximum 20 characters is limited.")
     private String reEnterPassword;
     private String role;
     private String isActive;
     @Transient
     private Address address;
     @Transient
+    @Valid
     private Customer customer;
     @Transient
     private Administrator administrator;
