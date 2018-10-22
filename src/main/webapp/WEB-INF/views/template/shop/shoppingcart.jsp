@@ -5,6 +5,7 @@
   Time: 6:54 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@include file="/WEB-INF/views/template/shop/inc/header.jsp" %>
@@ -30,54 +31,42 @@
                         <th class="product-remove">Remove</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td class="product-thumbnail">
-                            <img src="images/cloth_1.jpg" alt="Image" class="img-fluid">
-                        </td>
-                        <td class="product-name">
-                            <h2 class="h5 text-black">Top Up T-Shirt</h2>
-                        </td>
-                        <td>$49.00</td>
-                        <td>
-                            <div class="input-group mb-3" style="max-width: 120px;">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-primary js-btn-minus" type="button">−</button>
+                    <tbody id="product-table-body">
+                    <c:if test="${empty products}">
+                        <tr>
+                            <td class="product-thumbnail" colspan="6">
+                                <p class="text-center">
+                                    Your cart is empty.
+                                </p>
+                            </td>
+                        </tr>
+                    </c:if>
+                    <c:forEach items="${products}" var="product">
+                        <tr id="product-${product.productId}">
+                            <td class="product-thumbnail">
+                                <img src="<c:url value="/resources/images/product_1.png"/>" alt="">
+                            </td>
+                            <td class="product-name">
+                                <h2 class="h5 text-black">${product.productName}</h2>
+                            </td>
+                            <td>$${product.productPrice}</td>
+                            <td>
+                                <div class="input-group mb-3" style="max-width: 120px;">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-primary js-btn-minus" type="button">−</button>
+                                    </div>
+                                    <input type="text" class="form-control text-center" value="${cartItems.get(Long.valueOf(product.productId))}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-primary js-btn-plus" type="button">+</button>
+                                    </div>
                                 </div>
-                                <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-primary js-btn-plus" type="button">+</button>
-                                </div>
-                            </div>
 
-                        </td>
-                        <td>$49.00</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
-                    </tr>
+                            </td>
+                            <td>$${cartItems.get(Long.valueOf(product.productId))*product.productPrice}</td>
+                            <td><a href="#" data-deletecartitem="${product.productId}" class="btn btn-primary btn-sm">X</a></td>
+                        </tr>
+                    </c:forEach>
 
-                    <tr>
-                        <td class="product-thumbnail">
-                            <img src="images/cloth_2.jpg" alt="Image" class="img-fluid">
-                        </td>
-                        <td class="product-name">
-                            <h2 class="h5 text-black">Polo Shirt</h2>
-                        </td>
-                        <td>$49.00</td>
-                        <td>
-                            <div class="input-group mb-3" style="max-width: 120px;">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-primary js-btn-minus" type="button">−</button>
-                                </div>
-                                <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-primary js-btn-plus" type="button">+</button>
-                                </div>
-                            </div>
-
-                        </td>
-                        <td>$49.00</td>
-                        <td><a href="#" class="btn btn-primary btn-sm">X</a></td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -118,7 +107,9 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                                    <form action="/purchase" method="post">
+                                        <button type="submit" class="btn btn-primary btn-lg py-3 btn-block">Proceed to Checkout</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

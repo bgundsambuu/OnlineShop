@@ -25,11 +25,6 @@ public class KenzoController {
         return new ModelAndView("template/shop/productlist", "products", productService.findAll());
     }
 
-    @RequestMapping("/shoppingcart")
-    public String shoppingcart() {
-        return "template/shop/shoppingcart";
-    }
-
     @RequestMapping("/loginpage")
     public String loginpage() {
         return "template/shop/loginpage";

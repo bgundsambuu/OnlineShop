@@ -42,7 +42,7 @@
                         <li class="checkout">
                             <a href="/shoppingcart">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <span id="checkout_items" class="checkout_items">2</span>
+                                <span id="checkout_items" class="checkout_items d-none">0</span>
                             </a>
                         </li>
                     </ul>

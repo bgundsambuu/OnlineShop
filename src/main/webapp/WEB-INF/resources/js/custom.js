@@ -33,11 +33,31 @@ jQuery(document).ready(function ($) {
     var menuActive = false;
     var hamburgerClose = $('.hamburger_close');
     var fsOverlay = $('.fs_menu_overlay');
+    var checkout_items = $('#checkout_items');
+
+    prepareShoppingCart();
+    function prepareShoppingCart(){
+        $.ajax({
+            method: "POST",
+            url: "/ajaxGetShoppingCartItemCount",
+            success : function(itemsCount) {
+                console.log('INIT'+itemsCount);
+                if(itemsCount!=0){
+                    checkout_items.removeClass('d-none');
+                    checkout_items.text(itemsCount);
+                }else{
+                    var shoppingCartTable = $('#product-table-body');
+                    if(shoppingCartTable.length){
+                        var html = "<tr><p class='text-center'>Your cart is empty.</p></tr>";
+                        shoppingCartTable.append(html);
+                    }
+                }
+            }
+        });
+    }
 
     $(document).on("click", "a[data-addcart]", function (e) {
         var id = $(this).data('addcart');
-
-        console.log(id+'---------------------------------');
 
         var data = {
             'productId': id,
@@ -49,11 +69,38 @@ jQuery(document).ready(function ($) {
             url: "/ajaxAddItemToShoppingCart",
             data : JSON.stringify(data),
             contentType: 'application/json',   // Sends
-            success : function(data) {
-                console.log("SUCCESS: ", data);
+            success : function(itemsCount) {
+                checkout_items.removeClass('d-none');
+                checkout_items.text(itemsCount);
             }
-        }).done(function (msg) {
-            alert("Data Saved: " + msg);
+        });
+
+        e.preventDefault();
+    });
+
+    $(document).on("click", "a[data-deletecartitem]", function (e) {
+        var id = $(this).data('deletecartitem');
+        var tr_id = "product-"+id;
+
+        var data = {
+            'productId': id,
+            'quantity': 0
+        };
+
+        $.ajax({
+            method: "POST",
+            url: "/ajaxDeleteItemToShoppingCart",
+            data : JSON.stringify(data),
+            contentType: 'application/json',   // Sends
+            success : function(deletedProductID) {
+                console.log("deleted product: "+deletedProductID);
+
+                $('#'+tr_id).hide(200, function () {
+                    $('#'+tr_id).remove();
+                });
+
+                prepareShoppingCart();
+            }
         });
 
         e.preventDefault();

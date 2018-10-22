@@ -51,6 +51,29 @@ public class HomeController {
         return "login";
     }
 
+    @RequestMapping(value = "/shoppingcart", method = RequestMethod.GET)
+    public String getShippingCartItems(Model model, HttpSession session) {
+
+        List<Product> products = new ArrayList<>();
+
+        if (session.getAttribute("shoppingCart") == null) {
+            return "template/shop/shoppingcart";
+        }
+
+        HashMap<Long, Integer> cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+        for (Long productId : cartItems.keySet()) {
+            Product p = productService.findById(productId.intValue());
+            products.add(p);
+        }
+
+        System.out.println( cartItems.get(Long.valueOf(1)) + "=================");
+
+        model.addAttribute("products", products);
+        model.addAttribute("cartItems", cartItems);
+
+        return "template/shop/shoppingcart";
+    }
+
     @RequestMapping(value = "/addItemToShoppingCart", method = RequestMethod.POST)
     public String addItemToShoppingCart(@ModelAttribute("shoppingCartItems") ShoppingCartItems shoppingCartItems, HttpSession session) {
         HashMap<Long, Integer> cartItems;
@@ -81,10 +104,11 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/ajaxAddItemToShoppingCart", method = RequestMethod.POST)
-    public @ResponseBody ShoppingCartItems ajaxAddItemToShoppingCart(@RequestBody ShoppingCartItems shoppingCartItems, HttpSession session) {
+    public @ResponseBody
+    int ajaxAddItemToShoppingCart(@RequestBody ShoppingCartItems shoppingCartItems, HttpSession session) {
         HashMap<Long, Integer> cartItems;
 
-        System.out.println(shoppingCartItems.getProductId()+"------------------------------------");
+        System.out.println(shoppingCartItems.getProductId() + "------------------------------------");
 
         Long cartItemId = shoppingCartItems.getProductId();
         int cartItemQuantity = shoppingCartItems.getQuantity();
@@ -109,7 +133,45 @@ public class HomeController {
             }
         }
 
-        return shoppingCartItems;
+        return cartItems.keySet().size();
+    }
+
+
+    @RequestMapping(value = "/ajaxDeleteItemToShoppingCart", method = RequestMethod.POST)
+    public @ResponseBody
+    int ajaxDeleteItemToShoppingCart(@RequestBody ShoppingCartItems shoppingCartItems, HttpSession session) {
+        HashMap<Long, Integer> cartItems;
+        Long cartItemId = shoppingCartItems.getProductId();
+        int cartItemQuantity = shoppingCartItems.getQuantity();
+
+        if (session.getAttribute("shoppingCart") == null) {
+            return -1;
+        } else {
+            cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+            if (cartItems.containsKey(cartItemId)) {
+                cartItems.remove(cartItemId);
+
+            } else {
+                return  -1;
+            }
+        }
+        return cartItemId.intValue();
+    }
+
+
+
+    @RequestMapping(value = "/ajaxGetShoppingCartItemCount", method = RequestMethod.POST)
+    public @ResponseBody
+    int ajaxGetShoppingCartItemCount(HttpSession session) {
+        HashMap<Long, Integer> cartItems;
+
+        if (session.getAttribute("shoppingCart") == null) {
+            return 0;
+        }
+
+        cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+
+        return cartItems.keySet().size();
     }
 
     @RequestMapping(value = "/viewProd", method = RequestMethod.GET)
