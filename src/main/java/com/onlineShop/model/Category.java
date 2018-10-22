@@ -1,7 +1,10 @@
 package com.onlineShop.model;
 
+/*
+ *  Created by Solomon 10/13/2018
+ *  Online Shopping
+ * */
 import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,6 +16,7 @@ public class Category {
     @GeneratedValue
     private Integer categoryID;
     private String categoryName;
+
 
     public Integer getCategoryID() {
         return categoryID;

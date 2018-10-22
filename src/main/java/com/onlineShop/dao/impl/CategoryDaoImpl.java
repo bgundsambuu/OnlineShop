@@ -1,8 +1,11 @@
 package com.onlineShop.dao.impl;
 
-import com.onlineShop.dao.AddressDao;
-import com.onlineShop.model.Address;
-import com.onlineShop.model.Administrator;
+/*
+ *  Created by Solomon 10/13/2018
+ *  Online Shopping
+ * */
+import com.onlineShop.dao.CategoryDao;
+import com.onlineShop.model.Category;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,25 +14,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by Mingwei on 10/12/2018
- */
 @Repository
 @DynamicUpdate
 @Transactional
-public class AddressDaoImpl implements AddressDao {
+public class CategoryDaoImpl implements CategoryDao {
     @Autowired
     SessionFactory sessionFactory;
-
-    public void editAddress(Address address){
+    @Override
+    public void editCategory(Category category) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(address);
+        session.update(category);
         session.flush();
     }
 
-    public Address getAddressByUserId(int userId){
+    @Override
+    public Category getCategoryById(int categoryId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Vendor where address_Id = ?");
-        query.setInteger(0, userId);
-        return (Address) query.uniqueResult();}
+        Query query = session.createQuery("from Category where ");
+        return null;
+    }
 }

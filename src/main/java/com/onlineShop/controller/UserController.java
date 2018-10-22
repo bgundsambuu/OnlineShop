@@ -41,6 +41,7 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addUser(@Valid @ModelAttribute("customer") Customer customer) {
+
         return "template/shop/user";
     }
 

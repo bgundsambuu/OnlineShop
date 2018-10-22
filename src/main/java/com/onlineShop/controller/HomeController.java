@@ -14,7 +14,8 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        return "template/shop/home";
+//        return "template/shop/home";
+        return "redirect:/vendor/product/add";
     }
 
     @RequestMapping("/login")
