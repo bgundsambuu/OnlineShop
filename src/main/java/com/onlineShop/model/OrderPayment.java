@@ -32,9 +32,9 @@ public class OrderPayment {
     private Address address;
     private String orderStatus;
     private Date paidDate;
-    private int total;
-    private int totalAmount;
-    private int taxAmount;
+    private double total;
+    private double totalAmount;
+    private double taxAmount;
     @Transient
     private int zipCode;
     public OrderPayment() {
@@ -73,27 +73,27 @@ public class OrderPayment {
         this.paidDate = paidDate;
     }
 
-    public int getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
-    public int getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(int totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public int getTaxAmount() {
+    public double getTaxAmount() {
         return taxAmount;
     }
 
-    public void setTaxAmount(int taxAmount) {
+    public void setTaxAmount(double taxAmount) {
         this.taxAmount = taxAmount;
     }
 

@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="/WEB-INF/views/template/shop/inc/header.jsp" %>
+<%--<%@include file="/WEB-INF/views/template/shop/inc/header.jsp" %>--%>
 <div class="container-wrapper">
     <div class="container">
         <div class="page-header">
