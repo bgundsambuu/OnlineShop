@@ -1,7 +1,10 @@
 package com.onlineShop.controller;
 
+import com.onlineShop.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by Le on 1/24/2016.
@@ -9,14 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class KenzoController {
+    @Autowired
+    ProductService productService;
+
     @RequestMapping("/product/view")
     public String productview() {
         return "template/shop/productview";
     }
 
     @RequestMapping("/product/list")
-    public String productlist() {
-        return "template/shop/productlist";
+    public ModelAndView viewProd() {
+        return new ModelAndView("template/shop/productlist", "products", productService.findAll());
     }
 
     @RequestMapping("/loginpage")
@@ -67,6 +73,21 @@ public class KenzoController {
     @RequestMapping("/admin/list")
     public String adminlist() {
         return "template/dashboard/list";
+    }
+
+    @RequestMapping("/admin/category")
+    public String admincategory() {
+        return "template/dashboard/category";
+    }
+
+    @RequestMapping("/admin/category/new")
+    public String admincategorynew() {
+        return "template/dashboard/categorynew";
+    }
+
+    @RequestMapping("/admin/product")
+    public String adminproduct() {
+        return "template/dashboard/product";
     }
 
     @RequestMapping("/vendor/registration")

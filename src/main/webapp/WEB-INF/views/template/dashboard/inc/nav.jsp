@@ -105,18 +105,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/admin/product">
                         <i class="ni ni-planet text-blue"></i> Products
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-single-02 text-yellow"></i> Product Categories
+                    <a class="nav-link" href="/admin/vendor">
+                        <i class="ni ni-pin-3 text-orange"></i> Vendors
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="ni ni-pin-3 text-orange"></i> Users
+                    <a class="nav-link" href="/admin/category">
+                        <i class="ni ni-single-02 text-yellow"></i> Categories
                     </a>
                 </li>
             </ul>

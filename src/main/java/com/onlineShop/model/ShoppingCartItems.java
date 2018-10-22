@@ -1,7 +1,7 @@
 package com.onlineShop.model;
 
 public class ShoppingCartItems {
-    private Long productId;
+    public Long productId;
 
     private Integer quantity;
 
