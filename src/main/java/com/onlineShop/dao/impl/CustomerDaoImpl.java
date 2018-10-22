@@ -56,7 +56,6 @@ public class CustomerDaoImpl implements CustomerDao{
 
     /**
      * Edit customer
-     *
      * @author Mingwei He
      * @param customer
      *
@@ -67,9 +66,15 @@ public class CustomerDaoImpl implements CustomerDao{
         session.flush();
     }
 
+    /**
+     * Get Customer By UserId
+     * @author Mingwei
+     * @param userId user id
+     * @return Customer obj
+     */
     public Customer getCustomerByUserId (int userId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Customer where customerId = ?");
+        Query query = session.createQuery("from Customer where userId = ?");
         query.setInteger(0, userId);
         return (Customer) query.uniqueResult();
     }
