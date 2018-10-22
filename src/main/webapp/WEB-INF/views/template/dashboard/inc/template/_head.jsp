@@ -18,7 +18,7 @@
     <meta name="author" content="">
     <title>ONSHOP - Admin dashboard</title>
     <!-- Favicon -->
-    <link href="<c:url value="/resources/images/favicon.png" />" rel="icon" type="image/png">
+    <link href="<c:url value="/resources/images/favicon.ico" />" rel="icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">

@@ -23,7 +23,6 @@ import java.util.List;
 @Controller
 @SessionAttributes({"shoppingCart", "user"})
 public class HomeController {
-
     @Autowired
     private ShoppingCartService shoppingCartService;
     @Autowired
@@ -50,6 +49,29 @@ public class HomeController {
             model.addAttribute("msg", "You have been logged out correctly!!!!!!!!!!! test12");
         }
         return "login";
+    }
+
+    @RequestMapping(value = "/shoppingcart", method = RequestMethod.GET)
+    public String getShippingCartItems(Model model, HttpSession session) {
+
+        List<Product> products = new ArrayList<>();
+
+        if (session.getAttribute("shoppingCart") == null) {
+            return "template/shop/shoppingcart";
+        }
+
+        HashMap<Long, Integer> cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+        for (Long productId : cartItems.keySet()) {
+            Product p = productService.findById(productId.intValue());
+            products.add(p);
+        }
+
+        System.out.println( cartItems.get(Long.valueOf(1)) + "=================");
+
+        model.addAttribute("products", products);
+        model.addAttribute("cartItems", cartItems);
+
+        return "template/shop/shoppingcart";
     }
 
     @RequestMapping(value = "/addItemToShoppingCart", method = RequestMethod.POST)
@@ -79,6 +101,77 @@ public class HomeController {
             }
         }
         return "redirect:/viewProd";
+    }
+
+    @RequestMapping(value = "/ajaxAddItemToShoppingCart", method = RequestMethod.POST)
+    public @ResponseBody
+    int ajaxAddItemToShoppingCart(@RequestBody ShoppingCartItems shoppingCartItems, HttpSession session) {
+        HashMap<Long, Integer> cartItems;
+
+        System.out.println(shoppingCartItems.getProductId() + "------------------------------------");
+
+        Long cartItemId = shoppingCartItems.getProductId();
+        int cartItemQuantity = shoppingCartItems.getQuantity();
+
+        if (session.getAttribute("shoppingCart") == null) {
+            System.out.println("Add New Prod");
+            cartItems = new HashMap<>();
+            cartItems.put(cartItemId, cartItemQuantity);
+            session.setAttribute("shoppingCart", cartItems);
+        } else {
+            System.out.println("old session");
+            cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+            if (cartItems.containsKey(cartItemId)) {
+                cartItems.put(cartItemId, cartItems.get(cartItemId) + cartItemQuantity);
+                for (Long name : cartItems.keySet()) {
+                    String key = name.toString();
+                    String value = cartItems.get(name).toString();
+                    System.out.println("key = " + key + " value = " + value);
+                }
+            } else {
+                cartItems.put(cartItemId, cartItemQuantity);
+            }
+        }
+
+        return cartItems.keySet().size();
+    }
+
+
+    @RequestMapping(value = "/ajaxDeleteItemToShoppingCart", method = RequestMethod.POST)
+    public @ResponseBody
+    int ajaxDeleteItemToShoppingCart(@RequestBody ShoppingCartItems shoppingCartItems, HttpSession session) {
+        HashMap<Long, Integer> cartItems;
+        Long cartItemId = shoppingCartItems.getProductId();
+        int cartItemQuantity = shoppingCartItems.getQuantity();
+
+        if (session.getAttribute("shoppingCart") == null) {
+            return -1;
+        } else {
+            cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+            if (cartItems.containsKey(cartItemId)) {
+                cartItems.remove(cartItemId);
+
+            } else {
+                return  -1;
+            }
+        }
+        return cartItemId.intValue();
+    }
+
+
+
+    @RequestMapping(value = "/ajaxGetShoppingCartItemCount", method = RequestMethod.POST)
+    public @ResponseBody
+    int ajaxGetShoppingCartItemCount(HttpSession session) {
+        HashMap<Long, Integer> cartItems;
+
+        if (session.getAttribute("shoppingCart") == null) {
+            return 0;
+        }
+
+        cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+
+        return cartItems.keySet().size();
     }
 
     @RequestMapping(value = "/viewProd", method = RequestMethod.GET)
