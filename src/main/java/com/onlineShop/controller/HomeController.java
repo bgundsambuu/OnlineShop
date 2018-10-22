@@ -23,7 +23,6 @@ import java.util.List;
 @Controller
 @SessionAttributes({"shoppingCart", "user"})
 public class HomeController {
-
     @Autowired
     private ShoppingCartService shoppingCartService;
     @Autowired
@@ -79,6 +78,38 @@ public class HomeController {
             }
         }
         return "redirect:/viewProd";
+    }
+
+    @RequestMapping(value = "/ajaxAddItemToShoppingCart", method = RequestMethod.POST)
+    public @ResponseBody ShoppingCartItems ajaxAddItemToShoppingCart(@RequestBody ShoppingCartItems shoppingCartItems, HttpSession session) {
+        HashMap<Long, Integer> cartItems;
+
+        System.out.println(shoppingCartItems.getProductId()+"------------------------------------");
+
+        Long cartItemId = shoppingCartItems.getProductId();
+        int cartItemQuantity = shoppingCartItems.getQuantity();
+
+        if (session.getAttribute("shoppingCart") == null) {
+            System.out.println("Add New Prod");
+            cartItems = new HashMap<>();
+            cartItems.put(cartItemId, cartItemQuantity);
+            session.setAttribute("shoppingCart", cartItems);
+        } else {
+            System.out.println("old session");
+            cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+            if (cartItems.containsKey(cartItemId)) {
+                cartItems.put(cartItemId, cartItems.get(cartItemId) + cartItemQuantity);
+                for (Long name : cartItems.keySet()) {
+                    String key = name.toString();
+                    String value = cartItems.get(name).toString();
+                    System.out.println("key = " + key + " value = " + value);
+                }
+            } else {
+                cartItems.put(cartItemId, cartItemQuantity);
+            }
+        }
+
+        return shoppingCartItems;
     }
 
     @RequestMapping(value = "/viewProd", method = RequestMethod.GET)

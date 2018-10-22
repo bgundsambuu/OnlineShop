@@ -26,6 +26,10 @@ public class Product implements Serializable{
     @OneToMany
     @JoinColumn
     private List<ProductImage> productImageList;
+    @ManyToOne
+    @JoinColumn(name = "categoryId")
+    private Category category;
+
 
     public Product() {
 
@@ -85,5 +89,13 @@ public class Product implements Serializable{
 
     public void setProductImageList(List<ProductImage> productImageList) {
         this.productImageList = productImageList;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
