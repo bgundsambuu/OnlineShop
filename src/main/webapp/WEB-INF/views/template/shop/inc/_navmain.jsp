@@ -40,7 +40,7 @@
                             </ul>
                         </li>
                         <li class="checkout">
-                            <a href="#">
+                            <a href="/shoppingcart">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span id="checkout_items" class="checkout_items">2</span>
                             </a>

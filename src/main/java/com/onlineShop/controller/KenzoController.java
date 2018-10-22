@@ -19,6 +19,11 @@ public class KenzoController {
         return "template/shop/productlist";
     }
 
+    @RequestMapping("/shoppingcart")
+    public String shoppingcart() {
+        return "template/shop/shoppingcart";
+    }
+
     @RequestMapping("/loginpage")
     public String loginpage() {
         return "template/shop/loginpage";
