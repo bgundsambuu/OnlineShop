@@ -20,10 +20,10 @@ public class Customer {
     @GeneratedValue
     private int customerId;
     @NotEmpty(message = "First name may not be empty.")
-    @Size(max = 100, message = "Maximum 100 characters is limited.")
+    @Size(max = 100, message = "Maximum 100 characters limited.")
     private String firstName;
     @NotBlank(message = "Last name may not be empty.")
-    @Size(max = 100, message = "Maximum 100 characters is limited.")
+    @Size(max = 100, message = "Maximum 100 characters limited.")
     private String lastName;
     @NotBlank(message = "Phone number may not be empty.")
     @Pattern(regexp = "^(\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4}))|$", message = "Invalid phone number.")

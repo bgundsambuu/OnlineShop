@@ -18,21 +18,21 @@ public class User {
     @GeneratedValue
     private int userId;
     @NotEmpty(message = "Username may not be empty.")
-    @Size(max = 50, message = "Maximum 50 characters is limited.")
+    @Size(max = 100, message = "Maximum 100 characters limited.")
     private String userName;
-    @Size(max = 50, message = "Maximum 50 characters is limited.")
+    @Size(max = 100, message = "Maximum 100 characters limited.")
     private String password;
     @Transient
-    @Size(max = 50, message = "Maximum 50 characters is limited.")
+    @Size(max = 100, message = "Maximum 100 characters limited.")
     private String oldPassword;
     @Transient
-    @Size(max = 50, message = "Maximum 50 characters is limited.")
+    @Size(max = 100, message = "Maximum 100 characters limited.")
     private String newPassword;
     @Transient
-    @Size(max = 50, message = "Maximum 50 characters is limited.")
+    @Size(max = 100, message = "Maximum 100 characters limited.")
     private String reEnterPassword;
     private String role;
-    private String isActive;
+    private boolean isActive;
     @Transient
     private Address address;
     @Transient
@@ -131,11 +131,11 @@ public class User {
         this.role = role;
     }
 
-    public String getIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(String isActive) {
+    public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 }

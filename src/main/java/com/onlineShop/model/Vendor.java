@@ -22,6 +22,9 @@ public class Vendor {
     private String status;
     @OneToOne
     @JoinColumn(name = "userId")
+    private User user;
+    @OneToOne
+    @JoinColumn(name = "addressId")
     private Address address;
 //    @OneToMany
 //    @JoinColumn
@@ -90,4 +93,12 @@ public class Vendor {
 //    public void setProductList(List<Product> productList) {
 //        this.productList = productList;
 //    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

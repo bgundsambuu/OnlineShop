@@ -45,7 +45,7 @@ public class UserDaoImpl implements UserDao {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from User where userId = ? and isActive = ?");
         query.setInteger(0, userId);
-        query.setString(1, Constant.Active.YES);
+        query.setBoolean(1, Constant.Active.YES);
         return (User) query.uniqueResult();
     }
 }

@@ -2,9 +2,7 @@ package com.onlineShop.model;
 
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Mingwei on 10/14/2018.
@@ -16,7 +14,9 @@ public class Administrator {
     @Id
     @GeneratedValue
     private int adminId;
-    private int userId;
+    @OneToOne
+    @JoinColumn(name = "userId")
+    private User user;
     private String firstName;
     private String lastName;
     private String phoneNumber;
@@ -27,14 +27,6 @@ public class Administrator {
 
     public void setAdminId(int adminId) {
         this.adminId = adminId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -59,5 +51,13 @@ public class Administrator {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

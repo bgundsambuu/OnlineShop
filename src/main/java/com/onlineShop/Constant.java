@@ -5,14 +5,14 @@ package com.onlineShop;
  */
 public class Constant {
     public static final class Role{
-        public static final String ADMIN = "0";
-        public static final String VENDOR = "1";
-        public static final String CUSTOMER = "2";
+        public static final String ADMIN = "ROLE_ADMIN";
+        public static final String VENDOR = "ROLE_VENDOR";
+        public static final String CUSTOMER = "ROLE_USER";
     }
 
     public static final class Active {
-        public static final String YES = "1";
-        public static final String NO = "0";
+        public static final Boolean YES = true;
+        public static final Boolean NO = false;
     }
 
     public static final String MSG = "msg";
