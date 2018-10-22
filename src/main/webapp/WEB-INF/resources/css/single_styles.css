@@ -1110,8 +1110,10 @@ section
 {
 	color: #b5aec4;
 }
-.add_to_cart_button
+.single_product_container .add_to_cart_button
 {
+	visibility: visible;
+	opacity: 1;
 	width: 160px;
 	margin-left: 19px;
 	font-size: 12px !important;

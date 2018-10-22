@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 /**
  * Created by Mingwei on 10/14/2018.
+ * Max sizes modified by Andres as part of authentication part 10/22/2018
  */
 @Entity
 @DynamicUpdate

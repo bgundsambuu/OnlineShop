@@ -55,6 +55,11 @@ public class KenzoController {
         return "template/shop/profilepage";
     }
 
+    @RequestMapping("/paymentpage")
+    public String paymentpage() {
+        return "template/shop/paymentpage";
+    }
+
     @RequestMapping("/admin")
     public String admin() {
         return "template/dashboard/home";
