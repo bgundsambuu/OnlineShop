@@ -43,7 +43,6 @@ public class CardDaoImpl implements CardDao {
 
     @Override
     public void addCardDetail(CardDetail cardDetail) {
-
         Session session = sessionFactory.getCurrentSession();
         Customer customer = (Customer) session.get(Customer.class, 1);
         cardDetail.setCustomer(customer);

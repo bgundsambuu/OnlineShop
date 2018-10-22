@@ -38,12 +38,44 @@ public class PaymentController {
     @RequestMapping("/payment")
     public String payment(Model model)
     {
-        List<CardDetail> carDetailList = cardService.getCardList(1);
-        model.addAttribute("cards", carDetailList);
+        List<CardDetail> cardDetailList = cardService.getCardList(1);
+        if(cardDetailList==null||cardDetailList.size()==0)
+        {
+            model.addAttribute("ERROR_MESSAGE", "Please add card.");
+            return "template/shop/payment";
+        }
+        model.addAttribute("cards", cardDetailList);
 
         OrderPayment orderPayment = paymentService.getOrderPayment(1);
         model.addAttribute("orderPayment", orderPayment);
+        if(orderPayment==null)
+        {
+            model.addAttribute("ERROR_MESSAGE", "No pending cart is registered.");
+            return "template/shop/payment";
+        }
+        if(orderPayment.getOrderDetailList().isEmpty())
+        {
+            model.addAttribute("ERROR_MESSAGE", "No pending available cart details.");
+            return "template/shop/payment";
+        }
 
+        Subscription subscription = subscriptionService.getSubscription();
+        if(subscription==null)
+        {
+            model.addAttribute("ERROR_MESSAGE", "Please configure subscription.");
+            return "template/shop/payment";
+        }
+        double total = 0;
+        for(int i=0;i<orderPayment.getOrderDetailList().size();i++)
+        {
+            OrderDetail orderDetail = orderPayment.getOrderDetailList().get(i);
+            total = total + orderDetail.getProduct().getProductPrice() * orderDetail.getQuantity();
+        }
+        double taxAmount = total*subscription.getTaxPercentage()/100;
+        orderPayment.setTotal(total);
+        orderPayment.setTaxAmount(taxAmount);
+        orderPayment.setTotalAmount(orderPayment.getTotal()+taxAmount);
+        model.addAttribute("orderPayment", orderPayment);
         return "template/shop/payment";
     }
 

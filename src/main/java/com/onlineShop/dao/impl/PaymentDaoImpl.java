@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -47,13 +48,31 @@ public class PaymentDaoImpl implements PaymentDao {
     }
 
     @Override
-    public Product blockProduct(OrderPayment orderPayment) {
+    public Product blockProduct(OrderPayment orderPayment){
+        Session session = sessionFactory.getCurrentSession();
+        for(int i=0;i<orderPayment.getOrderDetailList().size();i++) {
+            OrderDetail orderDetail = orderPayment.getOrderDetailList().get(i);
+            OrderDetail dbOrderDetail = (OrderDetail) session.get(OrderDetail.class, orderDetail.getOrderDetailId());
+            if(dbOrderDetail.getProduct().getUnitInStock()<dbOrderDetail.getQuantity()){
+                return  dbOrderDetail.getProduct();
+            }
+            else {
+                dbOrderDetail.getProduct().setUnitInStock(dbOrderDetail.getProduct().getUnitInStock()-dbOrderDetail.getQuantity());
+                session.saveOrUpdate(dbOrderDetail);
+            }
+        }
+        session.flush();
         return null;
     }
 
     @Override
-    public boolean checkOut(OrderPayment orderPaymentId) {
-        return false;
+    public boolean checkOut(OrderPayment orderPayment) {
+        Session session = sessionFactory.getCurrentSession();
+        orderPayment.setPaidDate(new Date());
+        orderPayment.setOrderStatus("PAYED");
+        session.saveOrUpdate(orderPayment);
+        session.flush();
+        return true;
     }
 
     @Override
@@ -64,6 +83,33 @@ public class PaymentDaoImpl implements PaymentDao {
 
     @Override
     public boolean writeToFinTxns(OrderPayment orderPayment, Subscription subscription) {
-        return false;
+        Session session = sessionFactory.getCurrentSession();
+        List<OrderDetail> orderDetailList = orderPayment.getOrderDetailList();
+        for (OrderDetail orderDetail : orderDetailList) {
+            CompanyFinTxn companyFinTxn = new CompanyFinTxn();
+            companyFinTxn.setPaidDate(new Date());
+            companyFinTxn.setAmount((orderDetail.getQuantity() * orderDetail.getProduct().getProductPrice()) * subscription.getCompPercentage() / 100);
+            companyFinTxn.setProductId(orderDetail.getProduct().getProductId());
+            companyFinTxn.setStatus("Payed");
+            //companyFinTxn.setVendorId(orderDetail.getProduct().get);
+
+            VendorFinTxn vendorFinTxn = new VendorFinTxn();
+            vendorFinTxn.setPaidDate(new Date());
+            vendorFinTxn.setAmount(orderDetail.getQuantity() * orderDetail.getProduct().getProductPrice() * subscription.getVendorPercentage() / 100);
+            vendorFinTxn.setProductId(orderDetail.getProduct().getProductId());
+            vendorFinTxn.setStatus("Payed");
+
+            TaxFinTxn taxFinTxn = new TaxFinTxn();
+            taxFinTxn.setPaidDate(new Date());
+            taxFinTxn.setAmount(orderDetail.getQuantity() * orderDetail.getProduct().getProductPrice() * subscription.getTaxPercentage() / 100);
+            taxFinTxn.setProductId(orderDetail.getProduct().getProductId());
+            taxFinTxn.setStatus("Payed");
+
+            session.saveOrUpdate(companyFinTxn);
+            session.saveOrUpdate(vendorFinTxn);
+            session.saveOrUpdate(taxFinTxn);
+        }
+        session.flush();
+        return true;
     }
 }

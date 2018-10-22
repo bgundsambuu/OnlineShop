@@ -6,7 +6,6 @@ package com.onlineShop.dao;
         Date: 10/16/2018 /October/
 */
 
-import com.onlineShop.Constant;
 import com.onlineShop.model.Messages;
 import com.onlineShop.model.OrderPayment;
 import com.onlineShop.model.Product;
