@@ -17,18 +17,18 @@ public class User {
     @GeneratedValue
     private int userId;
     @NotEmpty(message = "Username may not be empty.")
-    @Size(max = 50, message = "Maximum 20 characters is limited.")
+    @Size(max = 50, message = "Maximum 50 characters is limited.")
     private String userName;
-    @Size(max = 50, message = "Maximum 20 characters is limited.")
+    @Size(max = 50, message = "Maximum 50 characters is limited.")
     private String password;
     @Transient
-    @Size(max = 50, message = "Maximum 20 characters is limited.")
+    @Size(max = 50, message = "Maximum 50 characters is limited.")
     private String oldPassword;
     @Transient
-    @Size(max = 50, message = "Maximum 20 characters is limited.")
+    @Size(max = 50, message = "Maximum 50 characters is limited.")
     private String newPassword;
     @Transient
-    @Size(max = 50, message = "Maximum 20 characters is limited.")
+    @Size(max = 50, message = "Maximum 50 characters is limited.")
     private String reEnterPassword;
     private String role;
     private String isActive;
