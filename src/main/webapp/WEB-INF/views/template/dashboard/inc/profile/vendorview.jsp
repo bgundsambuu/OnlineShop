@@ -55,8 +55,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                                </div>
+                            </div>
                         </div>
+                    </form>
                         <hr class="my-4" />
+
+                        <form>
                         <!-- Address -->
                         <h6 class="heading-small text-muted mb-4">Password change</h6>
                         <div class="pl-lg-4">
@@ -84,10 +92,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary">Change password</button>
+                                </div>
+                            </div>
                         </div>
+                        </form>
                         <!-- Address -->
                         <hr class="my-4" />
                         <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                        <form>
                         <div class="pl-lg-4">
                             <div class="row">
                                 <div class="col-md-12">
@@ -117,9 +132,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary">Update address</button>
+                                </div>
+                            </div>
                         </div>
+                        </form>
                         <!-- Payment -->
                         <hr class="my-4" />
+                        <form action="/">
                         <h6 class="heading-small text-muted mb-4">Payment information</h6>
                         <div class="pl-lg-4">
                             <div class="row">
@@ -144,11 +166,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary">Update Card</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="pl-lg-4">
-                            <a href="#!" class="btn btn-primary">Update</a>
-                        </div>
-                    </form>
+                        </form>
                 </div>
             </div>
         </div>
