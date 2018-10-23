@@ -1,13 +1,9 @@
 package com.onlineShop.dao.impl;
 
-/*
- * Created by Solomon.
- * 10/17/2018.
- * Online Shopping.
- *
- * */
+import com.onlineShop.Constant;
 import com.onlineShop.dao.ProductDao;
 import com.onlineShop.model.Product;
+import com.onlineShop.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,13 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 @DynamicUpdate
+@Transactional
 public class ProductDaoImpl implements ProductDao {
-
     @Autowired
-    SessionFactory sessionFactory;
-
+    private SessionFactory sessionFactory;
     @Override
     public Product findById(Integer prodId) {
         Session session = sessionFactory.getCurrentSession();
@@ -47,6 +41,36 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> findAll() {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Product where flag = 2");
+        List<Product> prodList = query.list();
+        return prodList;
+    }
+
+    @Override
+    public List<Product> findPriceAndCategory(Integer categoryId, Double downPrice, Double upPrice) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Product where categoryID = ? and productPrice between ? and ?");
+        query.setInteger(0, categoryId);
+        query.setDouble(1, downPrice);
+        query.setDouble(2, upPrice);
+        List<Product> prodList = query.list();
+        return prodList;
+    }
+    @Override
+    public List<Product> findSimilarProd(String productName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Product where productName like CONCAT('%',?,'%')");
+        query.setString(0, productName);
+        List<Product> prodList = query.list();
+        return prodList;
+    }
+
+    @Override
+    public List<Product> findSimilarProdWithRange(String productName, Double downPrice, Double upPrice) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Product where productName like CONCAT('%',?,'%') and productPrice between ? and ?");
+        query.setString(0, productName);
+        query.setDouble(1, downPrice);
+        query.setDouble(2, upPrice);
         List<Product> prodList = query.list();
         return prodList;
     }
