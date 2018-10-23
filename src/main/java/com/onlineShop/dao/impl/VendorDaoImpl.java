@@ -28,7 +28,7 @@ public class VendorDaoImpl implements VendorDao {
 
     public Vendor getVendorByUserId(int userId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Vendor where userId = ?");
+        Query query = session.createQuery("from Vendor where vendorId = ?");
         query.setInteger(0, userId);
         return (Vendor) query.uniqueResult();
     }
