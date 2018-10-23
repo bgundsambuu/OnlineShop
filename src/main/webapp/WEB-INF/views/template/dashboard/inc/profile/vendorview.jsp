@@ -58,6 +58,35 @@
                         </div>
                         <hr class="my-4" />
                         <!-- Address -->
+                        <h6 class="heading-small text-muted mb-4">Password change</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-oldpassword">Old password</label>
+                                        <input id="input-oldpassword" class="form-control form-control-alternative" placeholder="Old password" type="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-newpassword">New password</label>
+                                        <input id="input-newpassword" class="form-control form-control-alternative" placeholder="New password" type="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-confirmpassword">Confirm new password</label>
+                                        <input id="input-confirmpassword" class="form-control form-control-alternative" placeholder="Confirm new password" type="password">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Address -->
+                        <hr class="my-4" />
                         <h6 class="heading-small text-muted mb-4">Contact information</h6>
                         <div class="pl-lg-4">
                             <div class="row">
@@ -89,13 +118,31 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Payment -->
                         <hr class="my-4" />
-                        <!-- Description -->
-                        <h6 class="heading-small text-muted mb-4">About me</h6>
+                        <h6 class="heading-small text-muted mb-4">Payment information</h6>
                         <div class="pl-lg-4">
-                            <div class="form-group">
-                                <label>About Me</label>
-                                <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-card">Card number</label>
+                                        <input id="input-card" class="form-control form-control-alternative" placeholder="Card number" value="" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-name-card">Name on card</label>
+                                        <input type="text" id="input-name-card" class="form-control form-control-alternative" placeholder="Name on card" value="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-cvv">CVV</label>
+                                        <input type="number" id="input-cvv" class="form-control form-control-alternative" placeholder="CVV code">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="pl-lg-4">
