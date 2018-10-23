@@ -22,9 +22,12 @@ public class Customer {
     @NotEmpty(message = "First name may not be empty.")
     @Size(max = 100, message = "Maximum 100 characters limited.")
     private String firstName;
+
     @NotBlank(message = "Last name may not be empty.")
     @Size(max = 100, message = "Maximum 100 characters limited.")
     private String lastName;
+
+
     @NotBlank(message = "Phone number may not be empty.")
     @Pattern(regexp = "^(\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4}))|$", message = "Invalid phone number.")
     private String phoneNumber;
@@ -34,6 +37,8 @@ public class Customer {
     @OneToOne
     @JoinColumn(name = "addressId")
     private Address address;
+
+
 
     public int getCustomerId() {
         return customerId;

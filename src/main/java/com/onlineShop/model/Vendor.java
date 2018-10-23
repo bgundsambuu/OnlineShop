@@ -20,10 +20,12 @@ public class Vendor {
     private String name;
     private String phoneNumber;
     private String status;
-    @OneToOne
+
+    @OneToOne (cascade = {CascadeType.ALL})
     @JoinColumn(name = "userId")
     private User user;
-    @OneToOne
+
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "addressId")
     private Address address;
 //    @OneToMany

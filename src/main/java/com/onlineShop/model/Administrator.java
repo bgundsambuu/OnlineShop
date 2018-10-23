@@ -14,9 +14,11 @@ public class Administrator {
     @Id
     @GeneratedValue
     private int adminId;
+
     @OneToOne
     @JoinColumn(name = "userId")
     private User user;
+
     private String firstName;
     private String lastName;
     private String phoneNumber;
