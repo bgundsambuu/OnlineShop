@@ -61,9 +61,13 @@ public class VendorController {
             System.out.println(e.getCause()+""+e.getMessage());
         }
 
-        return "hello";
+        return "template/shop/productlist";
     }
 
+    @RequestMapping(value = "/vendor/product/edit/{vendorId}")
+    public String EditVendor(){
+        return "";
+    }
     @RequestMapping(value = "/vendor/product/view")
     public String viewProduct(@ModelAttribute("product") Product product, Model model) {
         return "template/shop/productview";

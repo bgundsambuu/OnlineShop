@@ -49,7 +49,7 @@
                     <form:errors path="flag" cssClass="color: #ff0000;"/>
                 </div>
         </div>
-
+    </div>
 
        <div  class="form-group">
             <form:label path="inputImages" >Image</form:label>
