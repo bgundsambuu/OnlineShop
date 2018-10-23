@@ -34,7 +34,7 @@ public class Product_Dao implements Serializable {
     private String productDescription;
 
     @Min(value = 0, message = "Price should be a number.")
-    private double productPrice;
+    private int productPrice;
     @Min(value = 0)
     @Max(value = 1000, message = "you can only have upto 1000 units in the stock. ")
     private int unitInStock;
@@ -44,7 +44,7 @@ public class Product_Dao implements Serializable {
     @DateTimeFormat(pattern="MM/dd/yyyy")
     private Date creationDate;
 
-    @NotNull
+    //@NotNull
     private String mainPicturePath;
 
     private Category category;
@@ -103,11 +103,11 @@ public class Product_Dao implements Serializable {
         this.productDescription = productDescription;
     }
 
-    public double getProductPrice() {
+    public int getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(double productPrice) {
+    public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
     }
 

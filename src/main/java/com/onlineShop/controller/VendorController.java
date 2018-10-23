@@ -76,13 +76,14 @@ public class VendorController {
         return "template/shop/productview";
     }
 
-    @RequestMapping(value = "/vendor/product/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/vendor/product/new", method = RequestMethod.GET)
     public String doAdd(@ModelAttribute("product") Product_Dao product, Model model) {
-        return "template/shop/addProduct";
+System.out.println("1111111111111111111111111111111111111111-----------------------1111111111111111111111111111111111");
+        return "template/dashboard/vendorproductnew";
     }
 
 
-    @RequestMapping(value = "/vendor/product/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/vendor/product/new", method = RequestMethod.POST)
     public String addproductbyVendor(@ModelAttribute("product") @Valid Product_Dao productToBeAdded,
                                      BindingResult result, RedirectAttributes redirectAttributes,
                                      Model model,
@@ -94,8 +95,8 @@ public class VendorController {
        // Integer vendorId_solo = (Integer )session.getAttribute("currentVendor");
         session.setAttribute("currentuser", 1);
         if (result.hasErrors()) {
-            System.out.println("0000000000000000000-------------------------------------000000000000000000000000000000000");
-            return "template/shop/addProduct";
+            System.out.println("0000000000000000000-------------------------------------000000000000000000000000000000000"+result.getFieldErrors());
+            return "template/dashboard/vendorproductnew";
         }
         Vendor loginuser = new Vendor();
         if (session.getAttribute("currentuser") != null) {
@@ -109,6 +110,7 @@ public class VendorController {
         List<ProductImage> productImages = new ArrayList<ProductImage>();
         List<MultipartFile> multipartFiles = productToBeAdded.getInputImages();
         String imagename = null;
+        if(multipartFiles!=null){
         for (MultipartFile malti : multipartFiles) {
             if (malti != null && !malti.isEmpty()) {
                 try {
@@ -121,6 +123,7 @@ public class VendorController {
                     System.out.println("picture problem"+malti.getOriginalFilename()+"   ==============================00000000000000000000000000000--------------------------");
                 }
             }
+        }
         }
 
         product.setProductImageList(productImages);
