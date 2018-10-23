@@ -95,9 +95,34 @@ public class KenzoController {
         return "template/dashboard/product";
     }
 
+
+    @RequestMapping("/vendor")
+    public String vendor() {
+        return "template/dashboard/vendorhome";
+    }
+
+    @RequestMapping("/vendor/login")
+    public String vendorlogin() {
+        return "template/dashboard/vendorlogin";
+    }
+
+    @RequestMapping("/vendor/product/new")
+    public String vendorproductnew() {
+        return "template/dashboard/vendorproductnew";
+    }
+
+    @RequestMapping("/vendor/product")
+    public String vendorproduct() {
+        return "template/dashboard/vendorproduct";
+    }
+
     @RequestMapping("/vendor/registration")
     public String vendorregister() {
         return "template/dashboard/vendorregister";
     }
 
+    @RequestMapping("/vendor/profile")
+    public String vendorprofile() {
+        return "template/dashboard/vendorprofile";
+    }
 }

@@ -8,5 +8,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@include file="/WEB-INF/views/template/dashboard/inc/template/vendorheader.jsp" %>
-<%@include file="/WEB-INF/views/template/dashboard/inc/product/vendorview.jsp" %>
+<%@include file="/WEB-INF/views/template/dashboard/inc/product/vendoradd.jsp" %>
 <%@include file="/WEB-INF/views/template/dashboard/inc/template/footer.jsp" %>
