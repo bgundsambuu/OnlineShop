@@ -43,11 +43,6 @@ public class Product {
     @JoinColumn(name = "categoryId")
     private Category category;
 
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
     @ManyToOne
     @JoinColumn(name = "vendor_id")
     private Vendor vendor_id;
@@ -168,13 +163,5 @@ public class Product {
     public void setProductImageList(List<ProductImage> productImageList) {
 
         this.productImageList = productImageList;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 }
