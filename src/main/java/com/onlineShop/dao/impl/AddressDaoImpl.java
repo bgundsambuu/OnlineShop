@@ -27,6 +27,11 @@ public class AddressDaoImpl implements AddressDao {
         session.flush();
     }
 
+    @Override
+    public Address getAddressByAddressId(int addressId) {
+        return null;
+    }
+
     public Address getAddressByUserId(int userId){
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Vendor where address_Id = ?");
