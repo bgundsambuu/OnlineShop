@@ -8,9 +8,11 @@ import com.onlineShop.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -67,7 +69,7 @@ public class HomeController {
             products.add(p);
         }
 
-        System.out.println( cartItems.get(Long.valueOf(1)) + "=================");
+        System.out.println(cartItems.get(Long.valueOf(1)) + "=================");
 
         model.addAttribute("products", products);
         model.addAttribute("cartItems", cartItems);
@@ -153,13 +155,11 @@ public class HomeController {
                 cartItems.remove(cartItemId);
 
             } else {
-                return  -1;
+                return -1;
             }
         }
         return cartItemId.intValue();
     }
-
-
 
     @RequestMapping(value = "/ajaxGetShoppingCartItemCount", method = RequestMethod.POST)
     public @ResponseBody
@@ -208,6 +208,7 @@ public class HomeController {
 
     @RequestMapping(value = "/purchase", method = RequestMethod.POST)
     public String purchase(HttpSession session) {
+        test();
         session.setAttribute("user", 1);
         Integer userId = (Integer) session.getAttribute("user");
         if (userId == null) {
@@ -220,8 +221,8 @@ public class HomeController {
 
         OrderPayment check_orderPayment = shoppingCartService.findByState("PENDING", userId);
         System.out.println("----------------------------------------------------8888888888888------------------------------");
-        if(check_orderPayment!=null){
-            System.out.println(check_orderPayment.getOrderDetailList().size()+"777777777777777777777777777777777777777");
+        if (check_orderPayment != null) {
+            System.out.println(check_orderPayment.getOrderDetailList().size() + "777777777777777777777777777777777777777");
             List<OrderDetail> odList = check_orderPayment.getOrderDetailList();//orderDetailService.findByOrderPaymentId(check_orderPayment.getOrderPaymentId());
 //                    check_orderPayment.getOrderDetailList();
             System.out.println(odList.size() + " = 09999999999999999------------------------------------------------------------------------------");
@@ -245,12 +246,72 @@ public class HomeController {
         Integer userID = (Integer) session.getAttribute("user");
         System.out.println(userID + "--------------------------------------------------++++++++++++++++++++++++++");
         Customer customer = customerService.getCustomerById(userID);
-        System.out.println(customer.getFirstName() +"   = llllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
+        System.out.println(customer.getFirstName() + "   = llllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
         OrderPayment orderPayment = new OrderPayment();
         orderPayment.setCustomer(customer);
         orderPayment.setOrderDetailList(orderDetailList);
         orderPayment.setOrderStatus("pending");
         shoppingCartService.add(orderPayment);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/searchCategory", method = RequestMethod.GET)
+    public String searchCategory(HttpServletRequest request, Model model) {
+        Integer categoryId = (Integer) request.getAttribute("category");
+        List<Product> products = productService.findByCategoryId(categoryId);
+        model.addAttribute("products", products);
+        return "redirect:/";
+    }
+    @RequestMapping(value = "/searchPriceAndCategory", method = RequestMethod.GET)
+    public String searchPriceAndCategory(HttpServletRequest request, Model model) {
+//        Integer categoryId = (Integer) request.getAttribute("category");
+//        Double downPrice = (Double) request.getAttribute("downPrice");
+//        Double upPrice = (Double) request.getAttribute("upPrice");
+        Integer categoryId = 1;
+        Double downPrice = 20d;
+        Double upPrice = 100d;
+
+        List<Product> products = productService.findPriceAndCategory(categoryId, downPrice, upPrice);
+
+        products.forEach(product -> System.out.println(product.getProductName()));
+        model.addAttribute("products", products);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/searchSimilarProduct", method = RequestMethod.GET)
+    public String searchSimilarProduct(HttpServletRequest request, Model model) {
+        String productName = (String) request.getAttribute("Product");
+        Double downPrice = (Double) request.getAttribute("downPrice");
+        Double upPrice = (Double) request.getAttribute("upPrice");
+        List<Product> products;
+        if(productName == null){
+            return "redirect:/";
+        }
+        if(downPrice == null || upPrice == null){
+            products = productService.findSimilarProd(productName);
+        }else {
+            products = productService.findSimilarProdWithRange(productName, downPrice, upPrice);
+        }
+        products.forEach(product -> System.out.println(product.getProductName()));
+        model.addAttribute("products", products);
+        return "redirect:/";
+    }
+    public String test(){
+        System.out.println("Start Testing @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        String productName = "rey";
+        Double downPrice = 10d;
+        Double upPrice = 500d;
+        List<Product> products;
+        if(productName == null){
+            return "redirect:/";
+        }
+        if(downPrice == null || upPrice == null){
+            products = productService.findSimilarProd(productName);
+        }else {
+            products = productService.findSimilarProdWithRange(productName, downPrice, upPrice);
+        }
+        System.out.println(products.size());
+        products.forEach(product -> System.out.println(product.getProductName()));
         return "redirect:/";
     }
 }
