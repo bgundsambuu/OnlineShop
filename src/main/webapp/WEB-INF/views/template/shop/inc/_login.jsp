@@ -21,7 +21,7 @@
                 <div class="card shadow">
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
-                            Sign in
+                            Sign in:
                         </div>
                         <form role="form">
                             <div class="form-group mb-3">
