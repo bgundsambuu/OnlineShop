@@ -5,8 +5,8 @@ import com.onlineShop.model.User;
 import com.onlineShop.service.EncryptionService;
 import com.onlineShop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +24,8 @@ import java.util.List;
 @Controller
 public class RegisterController {
 
-//    @Autowired
-//    private MailSender MsgMail;
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Autowired
     private UserService userService;
@@ -102,15 +102,23 @@ public class RegisterController {
                 }
             }
             if(validuser) {
-                SimpleMailMessage Msg = new SimpleMailMessage();
-                Msg.setFrom("andres.mendez.cor@gmail.com");
-                Msg.setTo(email);
-                Msg.setSubject("Online Shopping Password recovery");
+                // SimpleMailMessage Msg = new SimpleMailMessage();
+                // Msg.setFrom("andres.mendez.cor@gmail.com");
+                //  Msg.setTo(email);
+                // Msg.setSubject("Online Shopping Password recovery");
 //                EncryptionService encryptionService = new EncryptionServiceImpl();
                 String encryptedText = realuser.getPassword();
 //                String DecryptedPass = encryptionService.DecryptPass(encryptedText);
-                Msg.setText("Your password is: " + encryptedText + "   --- Please change your password on next login.");
-                //MsgMail.send(Msg);
+                //Msg.setText("Your password is: " + encryptedText + "   --- Please change your password on next login.");
+                // creates a simple e-mail object
+                SimpleMailMessage mailMessage = new SimpleMailMessage();
+                mailMessage.setTo(email);
+                mailMessage.setFrom("andres.mendez.cor@gmail.com");
+                mailMessage.setSubject("Online Shopping Password recovery");
+                mailMessage.setText("Your password is: " + encryptedText + "   --- Please change your password on next login.");
+
+                // sends the e-mail
+                mailSender.send(mailMessage);
                 return "login";
             }else{
                 return "RecoverPasswordFail";
