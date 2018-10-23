@@ -36,7 +36,10 @@ public class Product {
     private int unitInStock;
 
     private String flag;
-    @OneToMany
+
+    private String mainPicturePath;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn
     private List<ProductImage> productImageList;
     @ManyToOne
@@ -51,7 +54,7 @@ public class Product {
     @DateTimeFormat(pattern="MM/dd/yyyy")
     private Date creationDate;
 
-    private String mainPicturePath;
+
 
     public String getMainPicturePath() {
         return mainPicturePath;
