@@ -50,6 +50,11 @@ public class KenzoController {
         return "template/shop/profilecard";
     }
 
+    @RequestMapping("/profileaddress")
+    public String profileaddress() {
+        return "template/shop/profileaddress";
+    }
+
     @RequestMapping("/profilepage")
     public String profilepage() {
         return "template/shop/profilepage";
