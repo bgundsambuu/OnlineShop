@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 @DynamicUpdate
 @Transactional
@@ -32,5 +34,12 @@ public class CategoryDaoImpl implements CategoryDao {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Category where ");
         return null;
+    }
+    @Override
+    public List<Category> categoryList(){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Category");
+        List<Category> categories = query.list();
+        return categories;
     }
 }

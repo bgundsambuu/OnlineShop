@@ -23,7 +23,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product findById(Integer prodId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Product where productId = ?");
+        Query query = session.createQuery("from Product where productId = ? and flag = 2");
         query.setInteger(0, prodId);
         return (Product) query.uniqueResult();
     }
@@ -48,7 +48,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> findPriceAndCategory(Integer categoryId, Double downPrice, Double upPrice) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Product where categoryID = ? and productPrice between ? and ?");
+        Query query = session.createQuery("from Product where flag = 2 and categoryID = ? and productPrice between ? and ?");
         query.setInteger(0, categoryId);
         query.setDouble(1, downPrice);
         query.setDouble(2, upPrice);
@@ -58,7 +58,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> findSimilarProd(String productName) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Product where productName like CONCAT('%',?,'%')");
+        Query query = session.createQuery("from Product where flag = 2 and productName like CONCAT('%',?,'%')");
         query.setString(0, productName);
         List<Product> prodList = query.list();
         return prodList;
@@ -67,7 +67,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> findSimilarProdWithRange(String productName, Double downPrice, Double upPrice) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Product where productName like CONCAT('%',?,'%') and productPrice between ? and ?");
+        Query query = session.createQuery("from Product where productName like CONCAT('%',?,'%') and flag = 2 and productPrice between ? and ?");
         query.setString(0, productName);
         query.setDouble(1, downPrice);
         query.setDouble(2, upPrice);

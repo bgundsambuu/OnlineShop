@@ -6,8 +6,11 @@ package com.onlineShop.dao;
  * */
 import com.onlineShop.model.Category;
 
+import java.util.List;
+
 public interface CategoryDao {
 
     void editCategory(Category category);
     Category getCategoryById(int categoryId);
+    List<Category> categoryList();
 }
