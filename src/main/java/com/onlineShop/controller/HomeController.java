@@ -15,13 +15,14 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Le on 1/24/2016.
  */
 
 @Controller
-@SessionAttributes({"shoppingCart", "user"})
 public class HomeController {
     @Autowired
     private ShoppingCartService shoppingCartService;
@@ -33,19 +34,19 @@ public class HomeController {
     private ProductService productService;
 
     @RequestMapping("/")
-    public String home(HttpSession session) {
+    public String home() {
         return "template/shop/home";
-//        return "redirect:user/3";
+       // return "redirect:/vendor/product/add";
     }
 
     @RequestMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout",
+    public String login(@RequestParam(value="error", required = false) String error, @RequestParam(value="logout",
             required = false) String logout, Model model) {
-        if (error != null) {
+        if (error!=null) {
             model.addAttribute("error", "Invalid username and password!!!");
         }
 
-        if (logout != null) {
+        if(logout!=null) {
             model.addAttribute("msg", "You have been logged out correctly!!!!!!!!!!! test12");
         }
         return "login";
