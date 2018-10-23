@@ -9,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 /**
  * Created by Mingwei on 10/12/2018
+ * Modified by Andres on 10/23/2018
  */
 @Service
 public class UserServiceImpl implements UserService {
@@ -90,4 +93,34 @@ public class UserServiceImpl implements UserService {
         userDao.editUser(user);
         return Constant.Message.SUCCESS;
     }
+
+    //Added by Andres
+    public void addUser(User user) { userDao.addUser(user); }
+
+    //Added by Andres
+    public User getUserById(int userId) {
+        return userDao.getUserById(userId);
+    }
+
+    //Added by Andres
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
+
+    //Added by Andres
+    public User getUserByEmail(String username) { return userDao.getUserByEmail(username); }
+
+    //Added by Andres
+    public int getNextId() {
+        List<User> userList = getAllUsers();
+        int NextId = 1;
+        for (int i=0; i< userList.size(); i++) {
+            if(userList.get(i).getUserId()>NextId){
+                NextId = userList.get(i).getUserId();
+            }
+        }
+        NextId = NextId+1;
+        return NextId;
+    }
+
 }

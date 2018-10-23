@@ -21,7 +21,7 @@
                 <div class="card shadow">
                     <div class="card-body px-lg-5 py-lg-5">
                         <div class="text-center text-muted mb-4">
-                            Sign in
+                            Sign in:
                         </div>
                         <form role="form">
                             <div class="form-group mb-3">
@@ -35,10 +35,10 @@
                                     <input class="form-control" placeholder="Password" type="password">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <input type="checkbox" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Remember me</label>
-                            </div>
+                            <%--<div class="form-group">--%>
+                                <%--<input type="checkbox" id="customCheck1">--%>
+                                <%--<label class="custom-control-label" for="customCheck1">Remember me</label>--%>
+                            <%--</div>--%>
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary my-4">Sign in</button>
                             </div>

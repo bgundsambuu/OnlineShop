@@ -1,9 +1,13 @@
 package com.onlineShop.dao.impl;
 
-import com.onlineShop.Constant;
+/*
+ * Created by Solomon.
+ * 10/17/2018.
+ * Online Shopping.
+ *
+ * */
 import com.onlineShop.dao.ProductDao;
 import com.onlineShop.model.Product;
-import com.onlineShop.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,11 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-@DynamicUpdate
 @Transactional
-public class ProdDaoImpl implements ProductDao {
+@DynamicUpdate
+public class ProductDaoImpl implements ProductDao {
+
     @Autowired
-    private SessionFactory sessionFactory;
+    SessionFactory sessionFactory;
+
     @Override
     public Product findById(Integer prodId) {
         Session session = sessionFactory.getCurrentSession();
@@ -43,5 +49,30 @@ public class ProdDaoImpl implements ProductDao {
         Query query = session.createQuery("from Product where flag = 2");
         List<Product> prodList = query.list();
         return prodList;
+    }
+
+    @Override
+    public void Save(Product product) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.save(product);
+        session.flush();
+    }
+
+    @Override
+    public void update(Product product) {
+
+        Session session = sessionFactory.getCurrentSession();
+        session.update(product);
+        session.flush();
+    }
+
+    @Override
+    public Product getProductById(long id) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("select * FROM Product where productId=? and flag eq 2");
+
+        query.setString(0,String.valueOf(id));
+        return (Product) query.uniqueResult();
     }
 }

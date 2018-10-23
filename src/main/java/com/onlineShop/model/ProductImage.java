@@ -2,6 +2,8 @@ package com.onlineShop.model;
 
 /**
  * Created by Solomon.
+ * online Shopping 10/13/2018
+ *
  */
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -36,10 +38,12 @@ public class ProductImage {
     }
 
     public void setProductImageId(int productImageId) {
+
         this.productImageId = productImageId;
     }
 
     public String getUrl() {
+
         return url;
     }
 
