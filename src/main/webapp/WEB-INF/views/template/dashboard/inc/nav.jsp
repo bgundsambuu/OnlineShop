@@ -100,25 +100,34 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/myadmin/admin-view">
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/product">
-                        <i class="ni ni-planet text-blue"></i> Products
+                    <a class="nav-link" href="/myadmin/addAdmin">
+                        <i class="ni ni-planet text-blue"></i> Add Admin
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/vendor">
-                        <i class="ni ni-pin-3 text-orange"></i> Vendors
+                    <a class="nav-link" href="/myadmin/addCustomer">
+                        <i class="ni ni-pin-3 text-orange"></i> Add Customer
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/category">
-                        <i class="ni ni-single-02 text-yellow"></i> Categories
+                    <a class="nav-link" href="/vendor/addVendor">
+                        <i class="ni ni-single-02 text-yellow"></i> Add Vendor
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/vendor/getAllPendingVendors">
+                        <i class="ni ni-single-02 text-yellow"></i> Pending Vendors
+                    </a>
+                </li>
+
+
+
             </ul>
             <!-- Divider -->
             <hr class="my-3">
