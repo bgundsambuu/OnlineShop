@@ -2,10 +2,7 @@ package com.onlineShop.controller;
 
 import com.onlineShop.Constant;
 import com.onlineShop.controller.validation.UserValidator;
-import com.onlineShop.model.Administrator;
 import com.onlineShop.model.User;
-import com.onlineShop.model.Customer;
-import com.onlineShop.model.Vendor;
 import com.onlineShop.service.UserService;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
