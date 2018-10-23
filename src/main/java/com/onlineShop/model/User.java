@@ -22,6 +22,8 @@ public class User {
     private String userName;
     @Size(max = 100, message = "Maximum 100 characters limited.")
     private String password;
+
+
     @Transient
     @Size(max = 100, message = "Maximum 100 characters limited.")
     private String oldPassword;
@@ -138,4 +140,9 @@ public class User {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
+
+    public boolean isActive() { return isActive; }
+
+    public void setActive(boolean active) { isActive = active; }
+
 }
