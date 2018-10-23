@@ -1,8 +1,10 @@
 package com.onlineShop.controller;
 
+import com.onlineShop.service.CategoryService;
 import com.onlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class KenzoController {
     @Autowired
     ProductService productService;
+    @Autowired
+    CategoryService categoryService;
 
     @RequestMapping("/product/view")
     public String productview() {
@@ -21,8 +25,10 @@ public class KenzoController {
     }
 
     @RequestMapping("/product/list")
-    public ModelAndView viewProd() {
-        return new ModelAndView("template/shop/productlist", "products", productService.findAll());
+    public String viewProd(Model model) {
+        model.addAttribute("category", categoryService.findAllCategories());
+        model.addAttribute("products", productService.findAll());
+        return "template/shop/productlist";
     }
 
     @RequestMapping("/loginpage")
@@ -48,6 +54,11 @@ public class KenzoController {
     @RequestMapping("/profilecard")
     public String profilecard() {
         return "template/shop/profilecard";
+    }
+
+    @RequestMapping("/profileaddress")
+    public String profileaddress() {
+        return "template/shop/profileaddress";
     }
 
     @RequestMapping("/profilepage")

@@ -55,10 +55,54 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                                </div>
+                            </div>
                         </div>
+                    </form>
                         <hr class="my-4" />
+
+                        <form>
                         <!-- Address -->
+                        <h6 class="heading-small text-muted mb-4">Password change</h6>
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-oldpassword">Old password</label>
+                                        <input id="input-oldpassword" class="form-control form-control-alternative" placeholder="Old password" type="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-newpassword">New password</label>
+                                        <input id="input-newpassword" class="form-control form-control-alternative" placeholder="New password" type="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-confirmpassword">Confirm new password</label>
+                                        <input id="input-confirmpassword" class="form-control form-control-alternative" placeholder="Confirm new password" type="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary">Change password</button>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                        <!-- Address -->
+                        <hr class="my-4" />
                         <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                        <form>
                         <div class="pl-lg-4">
                             <div class="row">
                                 <div class="col-md-12">
@@ -88,20 +132,47 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr class="my-4" />
-                        <!-- Description -->
-                        <h6 class="heading-small text-muted mb-4">About me</h6>
-                        <div class="pl-lg-4">
-                            <div class="form-group">
-                                <label>About Me</label>
-                                <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary">Update address</button>
+                                </div>
                             </div>
                         </div>
+                        </form>
+                        <!-- Payment -->
+                        <hr class="my-4" />
+                        <form action="/">
+                        <h6 class="heading-small text-muted mb-4">Payment information</h6>
                         <div class="pl-lg-4">
-                            <a href="#!" class="btn btn-primary">Update</a>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-card">Card number</label>
+                                        <input id="input-card" class="form-control form-control-alternative" placeholder="Card number" value="" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-name-card">Name on card</label>
+                                        <input type="text" id="input-name-card" class="form-control form-control-alternative" placeholder="Name on card" value="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="input-cvv">CVV</label>
+                                        <input type="number" id="input-cvv" class="form-control form-control-alternative" placeholder="CVV code">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-primary">Update Card</button>
+                                </div>
+                            </div>
                         </div>
-                    </form>
+                        </form>
                 </div>
             </div>
         </div>
