@@ -22,4 +22,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     public OrderPayment findById(int id) {
         return shoppingCartDao.findById(id);
     }
+
+    @Override
+    public OrderPayment findByState(String status, Integer customerId) {
+        return shoppingCartDao.findByStatus(status, customerId);
+    }
 }

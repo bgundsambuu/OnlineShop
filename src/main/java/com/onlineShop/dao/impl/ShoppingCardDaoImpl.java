@@ -41,4 +41,13 @@ public class ShoppingCardDaoImpl implements ShoppingCartDao{
         query.setInteger(0, id);
         return (OrderPayment) query.uniqueResult();
     }
+
+    @Override
+    public OrderPayment findByStatus(String status, Integer customerId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from OrderPayment where orderStatus = ? and customerid = ?");
+        query.setString(0, status);
+        query.setInteger(1, customerId);
+        return (OrderPayment) query.uniqueResult();
+    }
 }

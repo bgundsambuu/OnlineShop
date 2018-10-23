@@ -6,6 +6,8 @@ import com.onlineShop.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderDetailServiceImpl implements OrderDetailService {
     @Autowired
@@ -19,5 +21,10 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     }
     public OrderDetail findById(Integer orderDetailId){
         return orderDetailDao.findByID(orderDetailId);
+    }
+
+    @Override
+    public List<OrderDetail> findByOrderPaymentId(int orderPaymentId) {
+        return orderDetailDao.findByOrderPaymentID(orderPaymentId);
     }
 }

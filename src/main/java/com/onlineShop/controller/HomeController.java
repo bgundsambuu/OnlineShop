@@ -206,14 +206,28 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/purchase", method = RequestMethod.POST)
-    public String deleteShoppingCard(HttpSession session) {
+    public String purchase(HttpSession session) {
         session.setAttribute("user", 1);
-        if (session.getAttribute("user") == null) {
+        Integer userId = (Integer) session.getAttribute("user");
+        if (userId == null) {
             return "redirect:/loginpage";
         }
 
         if (session.getAttribute("shoppingCart") == null) {
             return "redirect:/viewProd";
+        }
+
+        OrderPayment check_orderPayment = shoppingCartService.findByState("PENDING", userId);
+        System.out.println("----------------------------------------------------8888888888888------------------------------");
+        if(check_orderPayment!=null){
+            System.out.println(check_orderPayment.getOrderDetailList().size()+"777777777777777777777777777777777777777");
+            List<OrderDetail> odList = check_orderPayment.getOrderDetailList();//orderDetailService.findByOrderPaymentId(check_orderPayment.getOrderPaymentId());
+//                    check_orderPayment.getOrderDetailList();
+            System.out.println(odList.size() + " = 09999999999999999------------------------------------------------------------------------------");
+//            System.out.println(odList.get(0) + " = 33333333333333333333333333333333333333333333333");
+//            odList.forEach(od -> System.out.println(od.getOrderDetailId()+ "11[11111111111111111111111111111111"));
+            //odList.forEach(od -> orderDetailService.deleteOrderDetail(od));
+            shoppingCartService.remove(check_orderPayment);
         }
 
         HashMap<Long, Integer> hashMap = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
@@ -227,12 +241,14 @@ public class HomeController {
             orderDetailList.add(orderDetail);
         }
 
-        int userID = (Integer) session.getAttribute("user");
+        Integer userID = (Integer) session.getAttribute("user");
+        System.out.println(userID + "--------------------------------------------------++++++++++++++++++++++++++");
         Customer customer = customerService.getCustomerById(userID);
+        System.out.println(customer.getFirstName() +"   = llllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
         OrderPayment orderPayment = new OrderPayment();
         orderPayment.setCustomer(customer);
         orderPayment.setOrderDetailList(orderDetailList);
-        orderPayment.setOrderStatus("ready");
+        orderPayment.setOrderStatus("pending");
         shoppingCartService.add(orderPayment);
         return "redirect:/";
     }
