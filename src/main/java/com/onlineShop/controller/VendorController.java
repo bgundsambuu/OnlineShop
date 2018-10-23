@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -93,7 +94,8 @@ public class VendorController {
        // Integer vendorId_solo = (Integer )session.getAttribute("currentVendor");
         session.setAttribute("currentuser", 1);
         if (result.hasErrors()) {
-            return "";
+            System.out.println("0000000000000000000-------------------------------------000000000000000000000000000000000");
+            return "template/shop/addProduct";
         }
         Vendor loginuser = new Vendor();
         if (session.getAttribute("currentuser") != null) {
@@ -104,7 +106,7 @@ public class VendorController {
         Product product = (Product) ProductFactory.getINSTANCE().createUserFromDto(productToBeAdded);
         product.setVendor_id(loginuser);
 
-        List<ProductImage> productImages = new ArrayList<>();
+        List<ProductImage> productImages = new ArrayList<ProductImage>();
         List<MultipartFile> multipartFiles = productToBeAdded.getInputImages();
         String imagename = null;
         for (MultipartFile malti : multipartFiles) {
@@ -115,7 +117,8 @@ public class VendorController {
                     malti.transferTo(new File("c:\\images\\" + imagename));
                     productImages.add(new ProductImage(imagename));
                 } catch (Exception e) {
-//                    throw new FileNotFoundException("Unable to save image: " + image.getOriginalFilename());
+              //     throw new FileNotFoundException("Unable to save image: " + malti.getOriginalFilename());
+                    System.out.println("picture problem"+malti.getOriginalFilename()+"   ==============================00000000000000000000000000000--------------------------");
                 }
             }
         }
@@ -123,6 +126,7 @@ public class VendorController {
         product.setProductImageList(productImages);
         if (productImages.size() > 0)
             product.setMainPicturePath(productImages.get(0).getUrl());
+        System.out.println("-----------------------------------------------11111111111111111111111111111111111111111111111111111111111111111111111");
         try {
             productService.saveProduct(product);
         } catch (Exception s) {

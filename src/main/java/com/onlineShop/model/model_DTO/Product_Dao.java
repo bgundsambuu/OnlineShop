@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
 import java.util.Date;
@@ -37,10 +38,20 @@ public class Product_Dao implements Serializable {
     @Min(value = 0)
     @Max(value = 1000, message = "you can only have upto 1000 units in the stock. ")
     private int unitInStock;
-    private List<MultipartFile> inputImages;
+
+    private String flag;
+    @Past(message = "Creation Date can't be in the future")
+    @DateTimeFormat(pattern="MM/dd/yyyy")
+    private Date creationDate;
+
+    @NotNull
     private String mainPicturePath;
+
     private Category category;
+
     private Vendor vendor_id;
+
+    private List<MultipartFile> inputImages;
 
     public Category getCategory() {
         return category;
@@ -74,10 +85,7 @@ public class Product_Dao implements Serializable {
         this.mainPicturePath = mainPicturePath;
     }
 
-    private String flag;
-    @Past
-    @DateTimeFormat(pattern="MM/dd/yyyy")
-    private Date creationDate;
+
 
     public String getProductName() {
         return productName;

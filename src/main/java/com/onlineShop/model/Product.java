@@ -39,7 +39,7 @@ public class Product {
 
     private String mainPicturePath;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn
     private List<ProductImage> productImageList;
     @ManyToOne
