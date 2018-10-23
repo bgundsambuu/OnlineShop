@@ -24,8 +24,8 @@ import java.util.List;
 @Controller
 public class RegisterController {
 
-    @Autowired
-    private MailSender MsgMail;
+//    @Autowired
+//    private MailSender MsgMail;
 
     @Autowired
     private UserService userService;
@@ -110,7 +110,7 @@ public class RegisterController {
                 String encryptedText = realuser.getPassword();
 //                String DecryptedPass = encryptionService.DecryptPass(encryptedText);
                 Msg.setText("Your password is: " + encryptedText + "   --- Please change your password on next login.");
-                MsgMail.send(Msg);
+                //MsgMail.send(Msg);
                 return "login";
             }else{
                 return "RecoverPasswordFail";
