@@ -35,10 +35,10 @@
                                     <input class="form-control" placeholder="Password" type="password">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <input type="checkbox" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">Remember me</label>
-                            </div>
+                            <%--<div class="form-group">--%>
+                                <%--<input type="checkbox" id="customCheck1">--%>
+                                <%--<label class="custom-control-label" for="customCheck1">Remember me</label>--%>
+                            <%--</div>--%>
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary my-4">Sign in</button>
                             </div>
