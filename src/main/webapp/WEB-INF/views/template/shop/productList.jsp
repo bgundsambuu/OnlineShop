@@ -35,13 +35,9 @@
                                         <span class="type_sorting_text">Default Sorting</span>
                                         <i class="fa fa-angle-down"></i>
                                         <ul class="sorting_type">
-                                            <li class="type_sorting_btn"
-                                                data-isotope-option='{ "sortBy": "original-order" }'><span>Default Sorting</span>
-                                            </li>
-                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'>
-                                                <span>Price</span></li>
-                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'>
-                                                <span>Product Name</span></li>
+                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default Sorting</span></li>
+                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
+                                            <li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Product Name</span></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -65,9 +61,7 @@
                                         </ul>
                                     </div>
                                     <div class="page_total"><span>of</span> 3</div>
-                                    <div id="next_page" class="page_next"><a href="#"><i class="fa fa-long-arrow-right"
-                                                                                         aria-hidden="true"></i></a>
-                                    </div>
+                                    <div id="next_page" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
                                 </div>
 
                             </div>
@@ -75,27 +69,25 @@
                             <!-- Product Grid -->
 
                             <div class="product-grid">
-                                <c:forEach items="${products}" var="product">
-                                    <div class="product-item ${product.category.categoryID}">
-                                        <div class="product discount product_filter">
-                                            <div class="product_image">
-                                                <img src="<c:url value="/resources/images/product_1.png"/>" alt="">
-                                            </div>
-                                            <div class="product_info">
-                                                <h6 class="product_name"><a
-                                                        href="/product/${product.productId}">${product.productName}</a>
-                                                </h6>
-                                                <div class="product_price">$${product.productPrice}</div>
-                                            </div>
-                                        </div>
-                                        <div class="red_button add_to_cart_button"><a href="#"
-                                                                                      data-addcart="${product.productId}">Add
-                                            to cart</a></div>
-                                    </div>
-                                </c:forEach>
-                            </div>
 
-                            <!-- Product Sorting -->
+                                <!-- Product 1 -->
+
+                                <c:forEach items="${product}" var="product">
+                                <div class="product-item men">
+                                    <div class="product discount product_filter">
+                                        <div class="product_image">
+                                            <img src="images/product_1.png" alt="">
+                                        </div>
+                                        <div class="favorite favorite_left"></div>
+                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                                        <div class="product_info">
+                                            <h6 class="product_name"><a href="single.html">${product.productName}</a></h6>
+                                            <div class="product_price">${product.productPrice}</div>
+                                        </div>
+                                    </div>
+                                    <div class="red_button add_to_cart_button"><a href="/vendor/product/edit/${product.productId}">View!!!</a></div>
+                                </div>
+                                </c:forEach>
 
                             <div class="product_sorting_container product_sorting_container_bottom clearfix">
                                 <ul class="product_sorting">
@@ -122,8 +114,7 @@
                                         </ul>
                                     </div>
                                     <div class="page_total"><span>of</span> 3</div>
-                                    <div id="next_page_1" class="page_next"><a href="#"><i
-                                            class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
+                                    <div id="next_page_1" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
                                 </div>
 
                             </div>
