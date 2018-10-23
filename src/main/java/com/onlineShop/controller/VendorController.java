@@ -128,7 +128,7 @@ public class VendorController {
         }
 
         redirectAttributes.addFlashAttribute("product", product);
-        return "redirect:/vendor/product/view";
+        return "redirect:/vendor/product";
     }
 
 

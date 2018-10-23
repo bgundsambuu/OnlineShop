@@ -14,7 +14,7 @@
             <!-- Card stats -->
             <div class="row">
                 <div class="col-xl-3 col-lg-6">
-                    <a href="#" type="button" class="btn btn-info">
+                    <a href="/vendor/product/new" type="button" class="btn btn-info">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Product
                     </a>
                 </div>
@@ -40,8 +40,8 @@
                             <th scope="col">Category</th>
                             <th scope="col">Price</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Vendor</th>
                             <th scope="col">Quantity</th>
+                            <th scope="col">Sold</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -74,10 +74,10 @@
                               </span>
                             </td>
                             <td>
-                                Nike
+                                20
                             </td>
                             <td>
-                                20
+                                10
                             </td>
                             <td class="text-right">
                                 <div class="dropdown">
