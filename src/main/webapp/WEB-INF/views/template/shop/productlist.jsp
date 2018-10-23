@@ -125,7 +125,6 @@
                                                 class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
                                     </div>
 
->>>>>>> Kenzo
                                 </div>
 
                             </div>
