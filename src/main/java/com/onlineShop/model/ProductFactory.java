@@ -1,6 +1,6 @@
 package com.onlineShop.model;
 
-import com.onlineShop.model.model_Dao.Product_Dao;
+import com.onlineShop.model.model_DTO.Product_Dao;
 
 
 /*

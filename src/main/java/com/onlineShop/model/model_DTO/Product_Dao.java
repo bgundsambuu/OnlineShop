@@ -1,16 +1,12 @@
-package com.onlineShop.model.model_Dao;
+package com.onlineShop.model.model_DTO;
 
 import com.onlineShop.model.Category;
-import com.onlineShop.model.ProductImage;
 import com.onlineShop.model.Vendor;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
@@ -22,6 +18,8 @@ import java.util.List;
 /*
  *  Created by Solomon 10/21/2018
  *  Online Shopping
+ *
+ *  Product DTO
  * */
 
 

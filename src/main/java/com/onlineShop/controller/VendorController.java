@@ -1,7 +1,7 @@
 package com.onlineShop.controller;
 
 import com.onlineShop.model.*;
-import com.onlineShop.model.model_Dao.Product_Dao;
+import com.onlineShop.model.model_DTO.Product_Dao;
 import com.onlineShop.service.AddressService;
 import com.onlineShop.service.ProductService;
 import com.onlineShop.service.VendorService;
