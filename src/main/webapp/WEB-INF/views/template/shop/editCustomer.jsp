@@ -93,7 +93,7 @@
                                     <div class="input-group input-group-alternative">
                                         <form:input path="userName" value="${user.userName}" maxlength="20"
                                                     cssClass="form-control ${status.error ? 'is-invalid' : ''}"
-                                                    placeholder="Username" type="text"/>
+                                                    placeholder="Username(Email)" type="text"/>
                                     </div>
                                     <form:errors path="userName" cssClass="invalid-feedback d-block"/>
                                 </div>
@@ -101,7 +101,7 @@
                             <spring:bind path="oldPassword">
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
-                                        <form:input path="oldPassword" maxlength="20"
+                                        <form:input path="oldPassword" maxlength="100" value="${user.oldPassword}"
                                                     cssClass="form-control ${status.error ? 'is-invalid' : ''}"
                                                     placeholder="Old Password" type="password"/>
                                     </div>
@@ -111,7 +111,7 @@
                             <spring:bind path="newPassword">
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
-                                        <form:input path="newPassword" maxlength="20"
+                                        <form:input path="newPassword" maxlength="100" value="${user.newPassword}"
                                                     cssClass="form-control ${status.error ? 'is-invalid' : ''}"
                                                     placeholder="New Password" type="password"/>
                                     </div>
@@ -121,14 +121,14 @@
                             <spring:bind path="reEnterPassword">
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
-                                        <form:input path="reEnterPassword" maxlength="20"
+                                        <form:input path="reEnterPassword" maxlength="100" value="${user.reEnterPassword}"
                                                     cssClass="form-control ${status.error ? 'is-invalid' : ''}"
                                                     placeholder="Re-enter password" type="password"/>
                                     </div>
                                     <form:errors path="reEnterPassword" cssClass="invalid-feedback d-block"/>
                                 </div>
                             </spring:bind>
-                            <div class="text-right">
+                            <div class="text-left">
                                 <button type="submit" class="btn btn-primary my-4">Save Changes</button>
                                 <button type="button" id="btnCancel" style="margin-left: 1em;"
                                         class="btn btn-primary my-4">Cancel

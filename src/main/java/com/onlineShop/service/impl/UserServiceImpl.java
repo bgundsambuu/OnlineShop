@@ -2,8 +2,10 @@ package com.onlineShop.service.impl;
 
 import com.onlineShop.Constant;
 import com.onlineShop.dao.*;
+import com.onlineShop.model.Administrator;
 import com.onlineShop.model.Customer;
 import com.onlineShop.model.User;
+import com.onlineShop.model.Vendor;
 import com.onlineShop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,21 +61,25 @@ public class UserServiceImpl implements UserService {
     public User editUser(User user) {
         userDao.editUser(user);
         if (Constant.Role.ADMIN.equals(user.getRole()) && user.getAdministrator() != null) {
-            // TODO
-            administratorDao.editAdmin(user.getAdministrator());
+            Administrator admin = administratorDao.getAdminByUserId(user.getUserId());
+            admin.setFirstName(user.getAdministrator().getFirstName());
+            admin.setLastName(user.getAdministrator().getLastName());
+            admin.setPhoneNumber(user.getAdministrator().getPhoneNumber());
+            administratorDao.editAdmin(admin);
             user.setAdministrator(administratorDao.getAdminByUserId(user.getUserId()));
         } else if (Constant.Role.VENDOR.equals(user.getRole()) && user.getVendor() != null) {
-            // TODO
-            vendorDao.editVendor(user.getVendor());
+            Vendor vendor = vendorDao.getVendorByUserId(user.getUserId());
+            vendor.setFirstName(user.getVendor().getFirstName());
+            vendor.setLastName(user.getVendor().getLastName());
+            vendor.setPhoneNumber(user.getVendor().getPhoneNumber());
+            vendor.setName(user.getVendor().getName());
+            vendorDao.editVendor(vendor);
             user.setVendor(vendorDao.getVendorByUserId(user.getUserId()));
         } else if (Constant.Role.CUSTOMER.equals(user.getRole()) && user.getCustomer() != null) {
             Customer customer = customerDao.getCustomerByUserId(user.getUserId());
-            String newFirstName = user.getCustomer().getFirstName();
-            String newLastName = user.getCustomer().getLastName();
-            String newPhone = user.getCustomer().getPhoneNumber();
-            if(!StringUtils.isEmpty(newFirstName)) customer.setFirstName(newFirstName);
-            if(!StringUtils.isEmpty(newLastName)) customer.setLastName(newLastName);
-            if(!StringUtils.isEmpty(newPhone)) customer.setPhoneNumber(newPhone);
+            customer.setFirstName(user.getCustomer().getFirstName());
+            customer.setLastName(user.getCustomer().getLastName());
+            customer.setPhoneNumber(user.getCustomer().getPhoneNumber());
             customerDao.editCustomer(customer);
             user.setCustomer(customerDao.getCustomerByUserId(user.getUserId()));
         }
@@ -108,18 +114,7 @@ public class UserServiceImpl implements UserService {
     }
 
     //Added by Andres
-    public User getUserByEmail(String username) {
-        User user = userDao.getUserByEmail(username);
-        if (user != null) {
-            if (Constant.Role.ADMIN.equals(user.getRole()))
-                user.setAdministrator(administratorDao.getAdminByUserId(user.getUserId()));
-            else if (Constant.Role.VENDOR.equals(user.getRole()))
-                user.setVendor(vendorDao.getVendorByUserId(user.getUserId()));
-            else if (Constant.Role.CUSTOMER.equals(user.getRole()))
-                user.setCustomer(customerDao.getCustomerByUserId(user.getUserId()));
-        }
-        return user;
-    }
+    public User getUserByEmail(String username) { return userDao.getUserByEmail(username); }
 
     //Added by Andres
     public int getNextId() {

@@ -17,6 +17,7 @@ public class Constant {
 
     public static final String MSG = "msg";
     public static final String MSG_DETAIL = "msg_detail";
+    public static final String EMPTY = "";
     public static final class Message{
         public static final String SUCCESS = "Success.";
         public static final String FAILURE = "Failure.";
