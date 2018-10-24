@@ -114,7 +114,18 @@ public class UserServiceImpl implements UserService {
     }
 
     //Added by Andres
-    public User getUserByEmail(String username) { return userDao.getUserByEmail(username); }
+    public User getUserByEmail(String username) {
+        User user = userDao.getUserByEmail(username);
+        if (user != null) {
+            if (Constant.Role.ADMIN.equals(user.getRole()))
+                user.setAdministrator(administratorDao.getAdminByUserId(user.getUserId()));
+            else if (Constant.Role.VENDOR.equals(user.getRole()))
+                user.setVendor(vendorDao.getVendorByUserId(user.getUserId()));
+            else if (Constant.Role.CUSTOMER.equals(user.getRole()))
+                user.setCustomer(customerDao.getCustomerByUserId(user.getUserId()));
+        }
+        return user;
+    }
 
     //Added by Andres
     public int getNextId() {
