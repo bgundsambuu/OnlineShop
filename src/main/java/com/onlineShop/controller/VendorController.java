@@ -3,6 +3,7 @@ package com.onlineShop.controller;
 import com.onlineShop.model.*;
 import com.onlineShop.model.model_DTO.Product_Dao;
 import com.onlineShop.service.AddressService;
+import com.onlineShop.service.CategoryService;
 import com.onlineShop.service.ProductService;
 import com.onlineShop.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +38,17 @@ public class VendorController {
     VendorService vendorService;
 
     @Autowired
+    CategoryService categoryService;
+
+    @Autowired
     ProductService productService;
 
     @Autowired
     AddressService addressService;
 
-    @RequestMapping(value = "/vendor/{vendorId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/vendor/{vendorId}", method = RequestMethod.GET)
     public String vendorProfile(@PathVariable int vendorId, Model model,
-                                HttpServletRequest request){
+                                HttpServletRequest request) {
         try {
 
             Vendor vendor = vendorService.findVendorById(vendorId);
@@ -52,25 +56,26 @@ public class VendorController {
 //            Address address = addressService.getAddressByUserId(vendorId);
 //            vendor.setAddress(address);
 
-            System.out.println(vendor.getFirstName()+"===============================================");
+            System.out.println(vendor.getFirstName() + "===============================================");
 
             List<Product> productList = vendor.getProductList();
             System.out.println(vendor.getName() + "--------------------------------------------------------------------------");
             model.addAttribute("vendor", vendor);
             model.addAttribute("product", productList);
-        }catch (Exception e){
-            System.out.println(e.getCause()+""+e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getCause() + "" + e.getMessage());
         }
 
         return "template/shop/productlist";
     }
 
     @RequestMapping(value = "/vendor/product/edit/{vendorId}")
-    public String EditVendor(){
+    public String EditVendor() {
 
         return "";
     }
-    @RequestMapping(value = "/vendor/product/view")
+
+    @RequestMapping(value = "/vendor/product/view", method = RequestMethod.GET)
     public String viewProduct(@ModelAttribute("product") Product product, Model model) {
 
         return "template/shop/productview";
@@ -78,7 +83,7 @@ public class VendorController {
 
     @RequestMapping(value = "/vendor/product/new", method = RequestMethod.GET)
     public String doAdd(@ModelAttribute("product") Product_Dao product, Model model) {
-System.out.println("1111111111111111111111111111111111111111-----------------------1111111111111111111111111111111111");
+        System.out.println("1111111111111111111111111111111111111111-----------------------1111111111111111111111111111111111");
         return "template/dashboard/vendorproductnew";
     }
 
@@ -89,13 +94,15 @@ System.out.println("1111111111111111111111111111111111111111--------------------
                                      Model model,
                                      HttpSession session) {
         /*
-        *
-        * vendorId_solo have to be changed after integration in to the sessionName
-        * */
-       // Integer vendorId_solo = (Integer )session.getAttribute("currentVendor");
+         *
+         * vendorId_solo have to be changed after integration in to the sessionName
+         * */
+        // Integer vendorId_solo = (Integer s)session.getAttribute("currentVendor");
+        List<Category> categories = categoryService.findAllCategories();
+        model.addAttribute("categories", categories);
         session.setAttribute("currentuser", 1);
         if (result.hasErrors()) {
-            System.out.println("0000000000000000000-------------------------------------000000000000000000000000000000000"+result.getFieldErrors());
+            System.out.println("0000000000000000000-------------------------------------000000000000000000000000000000000" + result.getFieldErrors());
             return "template/dashboard/vendorproductnew";
         }
         Vendor loginuser = new Vendor();
@@ -103,29 +110,32 @@ System.out.println("1111111111111111111111111111111111111111--------------------
             Integer vendorId = (Integer) session.getAttribute("currentuser");
             loginuser = vendorService.findVendorById(vendorId);
         }
-        System.out.println(loginuser.getName()+" = 00000000000000000000000000000000000000000000000000000000000000000000000000");
+        System.out.println(loginuser.getName() + " = 00000000000000000000000000000000000000000000000000000000000000000000000000");
         Product product = (Product) ProductFactory.getINSTANCE().createUserFromDto(productToBeAdded);
         product.setVendor_id(loginuser);
 
         List<ProductImage> productImages = new ArrayList<ProductImage>();
         List<MultipartFile> multipartFiles = productToBeAdded.getInputImages();
         String imagename = null;
-        if(multipartFiles!=null){
-        for (MultipartFile malti : multipartFiles) {
-            if (malti != null && !malti.isEmpty()) {
-                try {
-                    manageDirectory("c:\\images");
-                    imagename = new Date().getDate() + "" + malti.getOriginalFilename();
-                    malti.transferTo(new File("c:\\images\\" + imagename));
-                    productImages.add(new ProductImage(imagename));
-                } catch (Exception e) {
-              //     throw new FileNotFoundException("Unable to save image: " + malti.getOriginalFilename());
-                    System.out.println("picture problem"+malti.getOriginalFilename()+"   ==============================00000000000000000000000000000--------------------------");
+
+        System.out.println("EMpty +++++++++++++++++" + "0000000000000000000000000000000000" + "------------------");
+
+        if (multipartFiles != null) {
+            for (MultipartFile malti : multipartFiles) {
+                if (malti != null && !malti.isEmpty()) {
+                    try {
+                        manageDirectory("c:\\images");
+                        imagename = new Date().getDate() + "" + malti.getOriginalFilename();
+                        malti.transferTo(new File("c:\\images\\" + imagename));
+                        productImages.add(new ProductImage(imagename));
+                    } catch (Exception e) {
+                        //     throw new FileNotFoundException("Unable to save image: " + malti.getOriginalFilename());
+                        System.out.println("picture problem" + malti.getOriginalFilename() + "   ==============================00000000000000000000000000000--------------------------");
+                    }
                 }
             }
-        }
-        }
 
+        }
         product.setProductImageList(productImages);
         if (productImages.size() > 0)
             product.setMainPicturePath(productImages.get(0).getUrl());
