@@ -19,7 +19,7 @@ INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `prod
 INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`) VALUES ('8', '2', 'Fujifilm X100T 16 MP Digital Camera (Silver)', 'Fujifilm X100T 16 MP Digital Camera (Silver)', '59', '2000', '1');
 INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`) VALUES ('9', '2', 'DYMO LabelWriter 450 Turbo Thermal Label Printer', 'DYMO LabelWriter 450 Turbo Thermal Label Printer', '29', '20', '2');
 
-INSERT INTO `onshop`.`subscription` (`amount`, `compPercentage`, `dateCreated`, `status`, `taxPercentage`, `vendorPercentage`) VALUES ('10000', '20', '10/24/2018', 'A', '10', '80');
+INSERT INTO `onshop`.`subscription` (`amount`, `compPercentage`, `dateCreated`, `status`, `taxPercentage`, `vendorPercentage`) VALUES ('10000', '20', '2018/10/24', 'A', '10', '80');
 
 INSERT INTO `onshop`.`messages` (`msgId`, `msgValue`) VALUES ('404', 'No card found./Not match.');
 INSERT INTO `onshop`.`messages` (`msgId`, `msgValue`) VALUES ('402', 'Insufficient balance.');
