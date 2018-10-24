@@ -162,6 +162,9 @@
                     </div>
                 </fieldset>
             </form:form>
+            <c:if test="${redirect != null}">
+                <a href="/payment">Return to payment</a>
+            </c:if>
         </div>
     </div>
 </div>
