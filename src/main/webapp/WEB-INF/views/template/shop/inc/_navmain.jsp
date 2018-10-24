@@ -5,6 +5,7 @@
   Time: 11:03 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="main_nav_container">
@@ -12,15 +13,24 @@
         <div class="row">
             <div class="col-lg-12 text-right">
                 <div class="logo_container">
-                    <a href="#"></a>
+                    <a href="/"></a>
                 </div>
                 <nav class="navbar">
                     <ul class="navbar_menu">
-                        <li><a href="<c:url value="/" />">home</a></li>
-                        <li><a href="#">shop</a></li>
-                        <li><a href="#">men's</a></li>
-                        <li><a href="#">women's</a></li>
-                        <li><a href="#">kids'</a></li>
+                        <c:if test="${empty requestScope.category_id}">
+                            <li class="active"><a href="/">home</a></li>
+                        </c:if>
+                        <c:if test="${not empty requestScope.category_id}">
+                            <li><a href="/">home</a></li>
+                        </c:if>
+                        <c:forEach items="${requestScope.categories}" var="cat">
+                            <c:if test="${cat.categoryID == requestScope.category_id}">
+                                <li class="active"><a href="/category/${cat.categoryID}">${cat.categoryName}</a></li>
+                            </c:if>
+                            <c:if test="${cat.categoryID != requestScope.category_id}">
+                                <li><a href="/category/${cat.categoryID}">${cat.categoryName}</a></li>
+                            </c:if>
+                        </c:forEach>
                     </ul>
                     <ul class="navbar_user">
                         <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
@@ -54,20 +64,3 @@
         </div>
     </div>
 </div>
-
-<%--<ul class="nav navbar-nav pull-right">--%>
-    <%--<c:if test="${pageContext.request.userPrincipal.name != null}">--%>
-        <%--<li><a>Welcome: ${pageContext.request.userPrincipal.name}</a></li>--%>
-        <%--<li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>--%>
-        <%--<c:if test="${pageContext.request.userPrincipal.name != 'admin'}">--%>
-            <%--<li><a href="<c:url value="/customer/cart" />">Cart</a></li>--%>
-        <%--</c:if>--%>
-        <%--<c:if test="${pageContext.request.userPrincipal.name  == 'admin'}">--%>
-            <%--<li><a href="<c:url value="/admin" />">Admin</a></li>--%>
-        <%--</c:if>--%>
-    <%--</c:if>--%>
-    <%--<c:if test="${pageContext.request.userPrincipal.name  == null}">--%>
-        <%--<li><a href="<c:url value="/login/" />">Login</a></li>--%>
-        <%--<li><a href="<c:url value="/register" />">Register</a></li>--%>
-    <%--</c:if>--%>
-<%--</ul>--%>

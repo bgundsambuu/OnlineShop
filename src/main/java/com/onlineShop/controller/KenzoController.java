@@ -1,12 +1,13 @@
 package com.onlineShop.controller;
 
+import com.onlineShop.model.Category;
+import com.onlineShop.model.Product;
 import com.onlineShop.service.CategoryService;
 import com.onlineShop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by Le on 1/24/2016.
@@ -26,9 +27,29 @@ public class KenzoController {
 
     @RequestMapping("/product/list")
     public String viewProd(Model model) {
-        model.addAttribute("category", categoryService.findAllCategories());
+        model.addAttribute("categories", categoryService.findAllCategories());
         model.addAttribute("products", productService.findAll());
         return "template/shop/productlist";
+    }
+
+    @RequestMapping(value="/category/{categoryId}", method = RequestMethod.GET)
+    public String viewProdByCategory(@PathVariable int categoryId, Model model) {
+        Category category = categoryService.findById(categoryId);
+        model.addAttribute("category_id", category.getCategoryID());
+        model.addAttribute("category_name", category.getCategoryName());
+        model.addAttribute("categories", categoryService.findAllCategories());
+        model.addAttribute("products", productService.findByCategoryId(categoryId));
+        return "template/shop/productlist";
+    }
+
+    @RequestMapping(value="/product/{productId}", method = RequestMethod.GET)
+    public String viewProdById(@PathVariable int productId, Model model) {
+        Product product = productService.findById(productId);
+        model.addAttribute("category_name", product.getCategory().getCategoryName());
+        model.addAttribute("category_id", product.getCategory().getCategoryID());
+        model.addAttribute("categories", categoryService.findAllCategories());
+        model.addAttribute("product", product);
+        return "template/shop/productview";
     }
 
     @RequestMapping("/loginpage")

@@ -5,6 +5,7 @@
   Time: 1:48 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="main_slider" style="background-image:url(<c:url value="/resources/images/slider_1.jpg"/>)">

@@ -51,7 +51,7 @@
                             </td>
                             <td>$${product.productPrice}</td>
                             <td>
-                                <div class="input-group mb-3" style="max-width: 120px;">
+                                <div class="input-group mb-3 product-cart" style="max-width: 120px;">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-primary js-btn-minus" type="button">−</button>
                                     </div>
@@ -76,7 +76,6 @@
                 <div class="col-md-6">
                     <div class="row mb-5">
                         <div class="col-md-12">
-                            <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
                         </div>
                     </div>
                 </div>

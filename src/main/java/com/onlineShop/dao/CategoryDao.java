@@ -13,4 +13,5 @@ public interface CategoryDao {
     void editCategory(Category category);
     Category getCategoryById(int categoryId);
     List<Category> categoryList();
+    Category findById(Integer categoryId);
 }

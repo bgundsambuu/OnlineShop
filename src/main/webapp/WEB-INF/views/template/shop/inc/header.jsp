@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Le
@@ -6,6 +5,7 @@
   Time: 5:14 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -13,9 +13,10 @@
 
 <body>
 <div class="super_container">
-
     <header class="header trans_300">
-        <%@include file="/WEB-INF/views/template/shop/inc/_navmain.jsp" %>
+
+        <c:import url="/WEB-INF/views/template/shop/inc/_navmain.jsp"/>
+
     </header>
 
     <%@include file="/WEB-INF/views/template/shop/inc/_navmobile.jsp" %>

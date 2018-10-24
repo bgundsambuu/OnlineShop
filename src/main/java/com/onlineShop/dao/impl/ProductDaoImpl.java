@@ -1,9 +1,8 @@
 package com.onlineShop.dao.impl;
 
-import com.onlineShop.Constant;
+
 import com.onlineShop.dao.ProductDao;
 import com.onlineShop.model.Product;
-import com.onlineShop.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -94,9 +93,8 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getProductById(long id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("select * FROM Product where productId=? and flag eq 2");
-
-        query.setString(0,String.valueOf(id));
+        Query query = session.createQuery("from Product where productId=? and flag = 2");
+        query.setLong(0,id);
         return (Product) query.uniqueResult();
     }
 }

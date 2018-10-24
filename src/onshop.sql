@@ -18,3 +18,11 @@ INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `prod
 INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`) VALUES ('7', '2', 'Pryma Headphones, Rose Gold & Grey', 'Pryma Headphones, Rose Gold & Grey', '999', '6', '3');
 INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`) VALUES ('8', '2', 'Fujifilm X100T 16 MP Digital Camera (Silver)', 'Fujifilm X100T 16 MP Digital Camera (Silver)', '59', '2000', '1');
 INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`) VALUES ('9', '2', 'DYMO LabelWriter 450 Turbo Thermal Label Printer', 'DYMO LabelWriter 450 Turbo Thermal Label Printer', '29', '20', '2');
+
+INSERT INTO `onshop`.`subscription` (`amount`, `compPercentage`, `dateCreated`, `status`, `taxPercentage`, `vendorPercentage`) VALUES ('10000', '20', '2018/10/24', 'A', '10', '80');
+
+INSERT INTO `onshop`.`messages` (`msgId`, `msgValue`) VALUES ('404', 'No card found./Not match.');
+INSERT INTO `onshop`.`messages` (`msgId`, `msgValue`) VALUES ('402', 'Insufficient balance.');
+INSERT INTO `onshop`.`messages` (`msgId`, `msgValue`) VALUES ('420', 'The requested resource does not support one or more of the given parameters.');
+INSERT INTO `onshop`.`messages` (`msgId`, `msgValue`) VALUES ('200', 'OK/Success');
+INSERT INTO `onshop`.`messages` (`msgId`, `msgValue`) VALUES ('500', 'Server error./System is busy now, please try again later.');

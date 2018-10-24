@@ -42,4 +42,13 @@ public class CategoryDaoImpl implements CategoryDao {
         List<Category> categories = query.list();
         return categories;
     }
+
+    @Override
+    public Category findById(Integer categoryId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Category where categoryId = ?");
+        query.setInteger(0,categoryId);
+        Category category = (Category) query.uniqueResult();
+        return category;
+    }
 }

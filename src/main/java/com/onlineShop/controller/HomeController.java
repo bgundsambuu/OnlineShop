@@ -1,10 +1,7 @@
 package com.onlineShop.controller;
 
 import com.onlineShop.model.*;
-import com.onlineShop.service.CustomerService;
-import com.onlineShop.service.OrderDetailService;
-import com.onlineShop.service.ProductService;
-import com.onlineShop.service.ShoppingCartService;
+import com.onlineShop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,11 +31,15 @@ public class HomeController {
     private OrderDetailService orderDetailService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping("/")
-    public String home() {
-        //return "template/shop/home";
-        return "redirect:/vendor/product/new";
+    public String home(Model model) {
+        model.addAttribute("categories", categoryService.findAllCategories());
+        model.addAttribute("products", productService.findAll());
+        return "template/shop/home";
+//        return "redirect:/vendor/product/new";
     }
 
     @RequestMapping("/login")
@@ -58,6 +59,7 @@ public class HomeController {
     public String getShippingCartItems(Model model, HttpSession session) {
 
         List<Product> products = new ArrayList<>();
+        model.addAttribute("categories", categoryService.findAllCategories());
 
         if (session.getAttribute("shoppingCart") == null) {
             return "template/shop/shoppingcart";
@@ -110,11 +112,16 @@ public class HomeController {
     public @ResponseBody
     int ajaxAddItemToShoppingCart(@RequestBody ShoppingCartItems shoppingCartItems, HttpSession session) {
         HashMap<Long, Integer> cartItems;
-
         System.out.println(shoppingCartItems.getProductId() + "------------------------------------");
 
         Long cartItemId = shoppingCartItems.getProductId();
         int cartItemQuantity = shoppingCartItems.getQuantity();
+
+
+        Integer unitStock = productService.getProductById(shoppingCartItems.getProductId()).getUnitInStock();
+        if(unitStock < cartItemQuantity){
+            return -1;
+        }
 
         if (session.getAttribute("shoppingCart") == null) {
             System.out.println("Add New Prod");
@@ -125,7 +132,7 @@ public class HomeController {
             System.out.println("old session");
             cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
             if (cartItems.containsKey(cartItemId)) {
-                cartItems.put(cartItemId, cartItems.get(cartItemId) + cartItemQuantity);
+                cartItems.put(cartItemId, cartItemQuantity);
                 for (Long name : cartItems.keySet()) {
                     String key = name.toString();
                     String value = cartItems.get(name).toString();
@@ -250,9 +257,9 @@ public class HomeController {
         OrderPayment orderPayment = new OrderPayment();
         orderPayment.setCustomer(customer);
         orderPayment.setOrderDetailList(orderDetailList);
-        orderPayment.setOrderStatus("pending");
+        orderPayment.setOrderStatus("PENDING");
         shoppingCartService.add(orderPayment);
-        return "redirect:/";
+        return "redirect:/payment";
     }
 
     @RequestMapping(value = "/searchCategory", method = RequestMethod.GET)

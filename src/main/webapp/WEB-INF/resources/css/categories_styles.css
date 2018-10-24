@@ -582,6 +582,9 @@ section
 	-o-transition: color 0.3s ease;
 	transition: color 0.3s ease;
 }
+.navbar_menu li.active a{
+	color: red;
+}
 .navbar_menu li a:hover
 {
 	color: #b5aec4;
