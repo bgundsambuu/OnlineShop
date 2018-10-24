@@ -8,9 +8,9 @@ public interface VendorDao {
     void editVendor(Vendor vendor);
     Vendor getVendorByUserId(int userId);
 
-    public List<Vendor> getAllVendor();
+    List<Vendor> getAllVendor();
 
-    public void addVendor(Vendor vendor);
+    void addVendor(Vendor vendor);
 
     public  List<Vendor> getAllPendingVendor();
 

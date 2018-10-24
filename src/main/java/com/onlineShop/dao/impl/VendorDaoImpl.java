@@ -49,6 +49,7 @@ public class VendorDaoImpl implements VendorDao {
 
     }*/
 
+
     @Override
     public List<Vendor> getAllVendor() {
 
@@ -61,6 +62,8 @@ public class VendorDaoImpl implements VendorDao {
         return vendorList;
     }
 
+
+
     @Override
     public void addVendor(Vendor vendor) {
 
@@ -68,22 +71,22 @@ public class VendorDaoImpl implements VendorDao {
 
 
         User newUser = new User();
-        newUser.setUserName(vendor.getUser().getUserName());
-        newUser.setPassword(vendor.getUser().getPassword());
-        newUser.setIsActive(true);
+//        newUser.setUserName(vendor.getUser().getUserName());
+//        newUser.setPassword(vendor.getUser().getPassword());
+//        newUser.setIsActive(true);
 
         vendor.setStatus("pending");
 
-        Address newAddress = new Address();
-        newAddress.setCity(vendor.getAddress().getCity());
-        newAddress.setCountry(vendor.getAddress().getCountry());
-        newAddress.setState(vendor.getAddress().getState());
-        newAddress.setZipCode(vendor.getAddress().getZipCode());
-        newAddress.setStreet(vendor.getAddress().getStreet());
+//        Address newAddress = new Address();
+//        newAddress.setCity(vendor.getAddress().getCity());
+//        newAddress.setCountry(vendor.getAddress().getCountry());
+//        newAddress.setState(vendor.getAddress().getState());
+//        newAddress.setZipCode(vendor.getAddress().getZipCode());
+//        newAddress.setStreet(vendor.getAddress().getStreet());
 
         session.saveOrUpdate(vendor);
-        session.saveOrUpdate(newUser);
-        session.saveOrUpdate(newAddress);
+//        session.saveOrUpdate(newUser);
+//        session.saveOrUpdate(newAddress);
 
         session.flush();
 
@@ -114,18 +117,22 @@ public class VendorDaoImpl implements VendorDao {
 //        query.setParameter("employee_id",10);
 //        List results = query.list()
 
-        Query query = session.createQuery("from Vendor where vendorId = :vendorId");
-        query.setParameter("vendorId", vendorId);
+        Query query = session.createQuery("from Vendor where vendorId = ?");
+        query.setInteger(0, vendorId);
 
-        Vendor vendor = (Vendor) query.list();
+        Vendor vendor = (Vendor) query.uniqueResult();
+
+        System.out.println(vendorId+" = 111111111111111111");
+        System.out.println(vendor.getFirstName()+"---------------");
         //Vendor vendor = (Vendor) session.get(Vendor.class, vendorId);
-        session.flush();
+        //session.flush();
         return vendor;
     }
 
     @Override
     public void updateVendorStatus(Vendor vendor) {
         Session session = sessionFactory.getCurrentSession();
+        //vendor.setStatus("active");
         session.update(vendor);
         //session.saveOrUpdate(vendor);
 

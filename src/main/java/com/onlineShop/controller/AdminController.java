@@ -88,6 +88,7 @@ public class AdminController {
         }
 
         List<Administrator> administratorList = adminService.getAllAdmin();
+
         for(int i = 0; i< administratorList.size(); i++){
             if (administrator.getUser().getUserName().equals(administratorList.get(i).getUser().getUserName())){
                 model.addAttribute("emailMsg", "Email Already Exist");

@@ -25,10 +25,10 @@
 
                             <p class="lead">Please fill in your information below</p>
                         </div>
-
-                        <form:form action="/vendor/addVendor" modelAttribute="vendor" method="POST">
+                    <form:form action="/vendor/addVendor" modelAttribute="vendor" method="POST">
 
                         <h3>Basic Information</h3>
+
                         <form:hidden path="user.userId"/>
                         <form:hidden path="vendorId"/>
                         <form:hidden path="address.addressId"></form:hidden>
@@ -126,11 +126,8 @@
 
                         <input type="submit" value="Submit" class="btn btn-primary"/>
 
-                        <a href="<c:url value="/"/>" class="btn btn-danger">Cancel</a>
-
-
-
-                        </form:form>
+                        <a href="<c:url value="/myadmin/admin-view"/>" class="btn btn-danger">Cancel</a>
+                    </form:form>
                     </div>
                     </div>
                 </div>

@@ -43,23 +43,23 @@
 
                                             <div class="form-group">
                                                 <label for="vendorId">Vendor ID</label>
-                                                <form:input path="vendorId" id="vendorId" alue="${vendor.vendorId}" disabled="true" cssClass="form-control"/>
+                                                <form:input path="vendorId" id="vendorId" value="${vendor.vendorId}" disabled="true" cssClass="form-control"/>
 
                                             </div><div class="form-group"> <div class="form-group">
                                             <label for="firstName">First Name</label>
-                                            <form:input path="firstName" id="firstName" alue="${vendor.firstName}" disabled="true" cssClass="form-control"/>
+                                            <form:input path="firstName" id="firstName" value="${vendor.firstName}" disabled="true" cssClass="form-control"/>
 
                                         </div><div class="form-group"> <div class="form-group">
                                             <label for="lastName">Last Name</label>
-                                            <form:input path="lastName" id="lastName" alue="${vendor.lastName}" disabled="true" cssClass="form-control"/>
+                                            <form:input path="lastName" id="lastName" value="${vendor.lastName}" disabled="true" cssClass="form-control"/>
 
                                         </div><div class="form-group"> <div class="form-group">
                                             <label for="phoneNumber">Phone Number</label>
-                                            <form:input path="phoneNumber" id="phoneNumber" alue="${vendor.phoneNumber}" disabled="true" cssClass="form-control"/>
+                                            <form:input path="phoneNumber" id="phoneNumber" value="${vendor.phoneNumber}" disabled="true" cssClass="form-control"/>
 
                                         </div><div class="form-group"> <div class="form-group">
                                             <label for="status">Status</label>
-                                            <form:input path="status" id="status" alue="${vendor.status}" disabled="false" cssClass="form-control"/>
+                                            <form:input path="status" id="status" value="${vendor.status}" disabled="false" cssClass="form-control"/>
 
                                         </div><div class="form-group">
 

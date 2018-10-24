@@ -21,11 +21,11 @@ public class Vendor {
     private String phoneNumber;
     private String status;
 
-    @OneToOne (cascade = {CascadeType.ALL})
+    @OneToOne (fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "userId")
     private User user;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "addressId")
     private Address address;
 //    @OneToMany

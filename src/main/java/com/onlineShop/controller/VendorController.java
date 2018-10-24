@@ -38,27 +38,28 @@ public class VendorController {
         return "/template/shop/adminview/vendor-form";
     }
 
-
     @RequestMapping(value = "/addVendor", method = RequestMethod.POST)
     public String saveVendor(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result, Model model){
 
         if (result.hasErrors()) {
             return "/template/shop/adminview/vendor-form";
         }
-
-        List<Vendor> vendorList = vendorService.getAllVendor();
-        for(int i = 0; i< vendorList.size(); i++){
-            if (vendor.getUser().getUserName().equals(vendorList.get(i).getUser().getUserName())){
-                model.addAttribute("emailMsg", "Email Already Exist");
-
-                return "/template/shop/adminview/vendor-form";
-            }
-        }
+//
+//        List<Vendor> vendorList = vendorService.getAllVendor();
+//        for(int i = 0; i< vendorList.size(); i++){
+//            if (vendor.getUser().getUserName().equals(vendorList.get(i).getUser().getUserName())){
+//                model.addAttribute("emailMsg", "Email Already Exist");
+//
+//                return "/template/shop/adminview/vendor-form";
+//            }
+//        }
 
         vendorService.addVendor(vendor);
 
-        return "/template/shop/adminview/vendor-registration-success";
-//        return "redirect:vendor/vendorPayment";
+        String url = "/template/shop/adminview/vendor-payment";
+
+//        return "/template/shop/adminview/vendor-registration-success";
+        return url;
 //
     }
 
@@ -75,6 +76,8 @@ public class VendorController {
     @RequestMapping(value = "/getPendingVendorById/{vendorId}", method = RequestMethod.GET)
     public String getPendingVendorById(@PathVariable int vendorId, Model model){
         Vendor vendor = vendorService.getPendingVendorById(vendorId);
+        System.out.println(vendorId+"==================");
+        System.out.println(vendor.getFirstName()+"==================");
         model.addAttribute("vendor", vendor);
 
         return "/template/shop/adminview/new-vendor-detail";
@@ -91,6 +94,7 @@ public class VendorController {
 
     @RequestMapping(value = "/vendorApprove", method = RequestMethod.POST)
     public String vendorApprovePost(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result, Model model){
+            vendor.setStatus("approved");
             vendorService.updateVendorStatus(vendor);
         return "/template/shop/adminview/new-vendor-approval-success";
     }
