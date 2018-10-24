@@ -58,10 +58,11 @@ jQuery(document).ready(function ($) {
 
     $(document).on("click", "a[data-addcart]", function (e) {
         var id = $(this).data('addcart');
+        var quantity = $(this).data('quantity');
 
         var data = {
             'productId': id,
-            'quantity': 1
+            'quantity': quantity
         };
 
         $.ajax({
@@ -72,6 +73,8 @@ jQuery(document).ready(function ($) {
             success : function(itemsCount) {
                 checkout_items.removeClass('d-none');
                 checkout_items.text(itemsCount);
+
+                window.location = document.location.origin+'/shoppingcart';
             }
         });
 

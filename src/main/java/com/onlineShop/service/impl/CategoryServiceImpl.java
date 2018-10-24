@@ -14,4 +14,9 @@ public class CategoryServiceImpl implements CategoryService{
     public List<Category> findAllCategories(){
         return categoryDao.categoryList();
     }
+
+    @Override
+    public Category findById(Integer categoryId) {
+        return categoryDao.findById(categoryId);
+    }
 }

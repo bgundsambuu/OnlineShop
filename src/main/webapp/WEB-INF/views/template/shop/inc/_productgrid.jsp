@@ -23,7 +23,7 @@
                         <div class="product_price">$${product.productPrice}</div>
                     </div>
                 </div>
-                <div class="red_button add_to_cart_button"><a href="#" data-addcart="${product.productId}">Add to cart</a></div>
+                <div class="red_button add_to_cart_button"><a href="#" data-addcart="${product.productId}" data-quantity="1">Add to cart</a></div>
             </div>
         </c:forEach>
     </div>

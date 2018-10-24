@@ -42,7 +42,7 @@ public class Product {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn
     private List<ProductImage> productImageList;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "categoryId")
     private Category category;
 

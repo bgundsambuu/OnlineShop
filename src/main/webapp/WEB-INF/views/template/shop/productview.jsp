@@ -5,13 +5,18 @@
   Time: 3:09 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@include file="/WEB-INF/views/template/shop/inc/header.jsp" %>
+<c:set var="category_name" value="${category_name}" scope="request"/>
+<c:set var="category_id" value="${category_id}" scope="request"/>
+<c:set var="product" value="${product}" scope="request"/>
+
+<c:import url="/WEB-INF/views/template/shop/inc/header.jsp" />
 
 <div class="container single_product_container">
 
-    <%@include file="/WEB-INF/views/template/shop/inc/_breadcrumb.jsp" %>
+    <c:import url="/WEB-INF/views/template/shop/inc/_breadcrumb.jsp" />
 
     <div class="row">
         <div class="col-lg-7">
@@ -37,65 +42,19 @@
         <div class="col-lg-5">
             <div class="product_details">
                 <div class="product_details_title">
-                    <h2>Pocket cotton sweatshirt</h2>
-                    <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
+                    <h2>${product.productName}</h2>
+                    <p>${product.productDescription}</p>
                 </div>
-                <div class="product_price">$495.00</div>
+                <div class="product_price">$${product.productPrice}</div>
                 <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
                     <span>Quantity:</span>
                     <div class="quantity_selector">
                         <span class="minus"><i class="fa fa-minus" aria-hidden="true"></i></span>
                         <span id="quantity_value">1</span>
+                        <span id="max_value" class="d-none">${product.unitInStock}</span>
                         <span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
                     </div>
-                    <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<!-- Tabs -->
-
-<div class="tabs_section_container">
-
-    <div class="container">
-        <div class="row">
-            <div class="col">
-
-                <!-- Tab Description -->
-                <div class="mt-5">
-                    <div class="row">
-                        <div class="col-lg-5 desc_col">
-                            <div class="tab_title">
-                                <h4>Description</h4>
-                            </div>
-                            <div class="tab_text_block">
-                                <h2>Pocket cotton sweatshirt</h2>
-                                <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
-                            </div>
-                            <div class="tab_image">
-                                <img src="<c:url value="/resources/images/desc_1.jpg"/>" alt="">
-                            </div>
-                            <div class="tab_text_block">
-                                <h2>Pocket cotton sweatshirt</h2>
-                                <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 offset-lg-2 desc_col">
-                            <div class="tab_image">
-                                <img src="<c:url value="/resources/images/desc_2.jpg"/>" alt="">
-                            </div>
-                            <div class="tab_text_block">
-                                <h2>Pocket cotton sweatshirt</h2>
-                                <p>Nam tempus turpis at metus scelerisque placerat nulla deumantos solicitud felis. Pellentesque diam dolor, elementum etos lobortis des mollis ut...</p>
-                            </div>
-                            <div class="tab_image desc_last">
-                                <img src="<c:url value="/resources/images/desc_3.jpg"/>" alt="">
-                            </div>
-                        </div>
-                    </div>
+                    <div class="red_button add_to_cart_button"><a href="#" id="add_cart_button" data-addcart="${product.productId}" data-quantity="1">Add to cart</a></div>
                 </div>
             </div>
         </div>
