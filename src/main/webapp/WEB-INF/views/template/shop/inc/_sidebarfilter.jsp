@@ -6,21 +6,21 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="sidebar">
-    <div class="sidebar_section">
-        <div class="sidebar_title">
-            <h5>Product Category</h5>
+    <c:if test="${not empty category_id}">
+        <div class="sidebar_section">
+            <div class="sidebar_title">
+                <h5>Product Category</h5>
+            </div>
+            <ul class="sidebar_categories">
+                <c:forEach items="${requestScope.categories}" var="cat">
+                    <li><a href="/category/${cat.categoryID}">${cat.categoryName}</a></li>
+                </c:forEach>
+            </ul>
         </div>
-        <ul class="sidebar_categories">
-            <li><a href="#">Men</a></li>
-            <li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Women</a></li>
-            <li><a href="#">Accessories</a></li>
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="#">Collection</a></li>
-            <li><a href="#">Shop</a></li>
-        </ul>
-    </div>
+    </c:if>
 
     <!-- Price Range Filtering -->
     <div class="sidebar_section">

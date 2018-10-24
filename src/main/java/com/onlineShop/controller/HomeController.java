@@ -1,10 +1,7 @@
 package com.onlineShop.controller;
 
 import com.onlineShop.model.*;
-import com.onlineShop.service.CustomerService;
-import com.onlineShop.service.OrderDetailService;
-import com.onlineShop.service.ProductService;
-import com.onlineShop.service.ShoppingCartService;
+import com.onlineShop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,9 +31,13 @@ public class HomeController {
     private OrderDetailService orderDetailService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping("/")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("categories", categoryService.findAllCategories());
+        model.addAttribute("products", productService.findAll());
         return "template/shop/home";
 //        return "redirect:/vendor/product/new";
     }
