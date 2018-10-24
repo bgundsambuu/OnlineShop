@@ -33,6 +33,8 @@ public class PaymentDaoImpl implements PaymentDao {
         Query query = session.createQuery("from OrderPayment where customerId = ? and orderStatus='PENDING'");
         query.setInteger(0, userId);
         OrderPayment orderPayment = (OrderPayment)query.uniqueResult();
+        if(orderPayment==null)
+            return null;
         query = session.createQuery("from OrderDetail where orderPaymentId = ? ");
         query.setInteger(0, orderPayment.getOrderPaymentId());
         List<OrderDetail> orderDetailList = query.list();
