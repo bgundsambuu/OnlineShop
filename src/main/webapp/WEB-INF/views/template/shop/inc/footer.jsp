@@ -8,8 +8,8 @@
             <div class="col-lg-6">
                 <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
                     <ul class="footer_nav">
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQs</a></li>
+                        <li><a href="/vendorlogin">Vendor login</a></li>
+                        <li><a href="/vendorregister">Vendor register</a></li>
                         <li><a href="#">Contact us</a></li>
                     </ul>
                 </div>
