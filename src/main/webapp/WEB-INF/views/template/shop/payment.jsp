@@ -33,7 +33,7 @@
         <div>
             <div>
                 <form:input type="hidden" path="orderPaymentId"/>
-                <form:errors path="orderPaymentId"/>
+                <%--<form:errors path="orderPaymentId"/>--%>
                 <br>
             </div>
         </div>

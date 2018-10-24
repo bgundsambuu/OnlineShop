@@ -74,7 +74,7 @@ jQuery(document).ready(function ($) {
                 checkout_items.removeClass('d-none');
                 checkout_items.text(itemsCount);
 
-                window.location = document.location.origin+'/shoppingcart';
+                window.location = 'http://localhost:8080/shoppingcart';
             }
         });
 

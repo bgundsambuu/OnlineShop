@@ -259,7 +259,7 @@ public class HomeController {
         orderPayment.setOrderDetailList(orderDetailList);
         orderPayment.setOrderStatus("pending");
         shoppingCartService.add(orderPayment);
-        return "redirect:/";
+        return "redirect:/payment";
     }
 
     @RequestMapping(value = "/searchCategory", method = RequestMethod.GET)
