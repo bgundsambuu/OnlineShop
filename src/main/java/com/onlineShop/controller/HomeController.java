@@ -257,7 +257,7 @@ public class HomeController {
         OrderPayment orderPayment = new OrderPayment();
         orderPayment.setCustomer(customer);
         orderPayment.setOrderDetailList(orderDetailList);
-        orderPayment.setOrderStatus("pending");
+        orderPayment.setOrderStatus("PENDING");
         shoppingCartService.add(orderPayment);
         return "redirect:/payment";
     }
