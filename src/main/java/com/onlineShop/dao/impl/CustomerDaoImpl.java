@@ -74,7 +74,7 @@ public class CustomerDaoImpl implements CustomerDao{
      */
     public Customer getCustomerByUserId (int userId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Customer where userId = ?");
+        Query query = session.createQuery("from Customer where customerId = ?");
         query.setInteger(0, userId);
         return (Customer) query.uniqueResult();
     }

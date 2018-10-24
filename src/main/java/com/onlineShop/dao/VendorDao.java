@@ -17,4 +17,6 @@ public interface VendorDao {
     public Vendor getPendingVendorById(int vendorId);
 
     public void updateVendorStatus(Vendor vendor);
+
+    public Vendor getVendorById(int vendorId);
 }

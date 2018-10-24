@@ -33,10 +33,12 @@ public class PaymentDaoImpl implements PaymentDao {
         Query query = session.createQuery("from OrderPayment where customerId = ? and orderStatus='PENDING'");
         query.setInteger(0, userId);
         OrderPayment orderPayment = (OrderPayment)query.uniqueResult();
-        query = session.createQuery("from OrderDetail where orderPaymentId = ? ");
-        query.setInteger(0, orderPayment.getOrderPaymentId());
-        List<OrderDetail> orderDetailList = query.list();
-        orderPayment.setOrderDetailList(orderDetailList);
+        //if(orderPayment==null)
+        //    return null;
+        //query = session.createQuery("from OrderDetail where orderPaymentId = ? ");
+        //query.setInteger(0, orderPayment.getOrderPaymentId());
+        //List<OrderDetail> orderDetailList = query.list();
+        //orderPayment.setOrderDetailList(orderDetailList);
         return orderPayment;
     }
 
@@ -89,20 +91,20 @@ public class PaymentDaoImpl implements PaymentDao {
             CompanyFinTxn companyFinTxn = new CompanyFinTxn();
             companyFinTxn.setPaidDate(new Date());
             companyFinTxn.setAmount((orderDetail.getQuantity() * orderDetail.getProduct().getProductPrice()) * subscription.getCompPercentage() / 100);
-            companyFinTxn.setProductId(orderDetail.getProduct().getProductId());
+            //companyFinTxn.setProductId(orderDetail.getProduct().getProductId());
             companyFinTxn.setStatus("Payed");
             //companyFinTxn.setVendorId(orderDetail.getProduct().get);
 
             VendorFinTxn vendorFinTxn = new VendorFinTxn();
             vendorFinTxn.setPaidDate(new Date());
             vendorFinTxn.setAmount(orderDetail.getQuantity() * orderDetail.getProduct().getProductPrice() * subscription.getVendorPercentage() / 100);
-            vendorFinTxn.setProductId(orderDetail.getProduct().getProductId());
+            //vendorFinTxn.setProductId(orderDetail.getProduct().getProductId());
             vendorFinTxn.setStatus("Payed");
 
             TaxFinTxn taxFinTxn = new TaxFinTxn();
             taxFinTxn.setPaidDate(new Date());
             taxFinTxn.setAmount(orderDetail.getQuantity() * orderDetail.getProduct().getProductPrice() * subscription.getTaxPercentage() / 100);
-            taxFinTxn.setProductId(orderDetail.getProduct().getProductId());
+            //taxFinTxn.setProductId(orderDetail.getProduct().getProductId());
             taxFinTxn.setStatus("Payed");
 
             session.saveOrUpdate(companyFinTxn);

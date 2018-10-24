@@ -7,7 +7,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="/WEB-INF/views/template/shop/inc/header.jsp" %>
 <div class="container-wrapper">
     <div class="container">
         <div class="page-header">
@@ -162,6 +161,9 @@
                     </div>
                 </fieldset>
             </form:form>
+            <c:if test="${redirect != null}">
+                <a href="/payment">Return to payment</a>
+            </c:if>
         </div>
     </div>
 </div>

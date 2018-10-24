@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 @DynamicUpdate
 @Transactional
@@ -36,9 +38,16 @@ public class OrderDetailDaoImpl implements OrderDetailDao {
     @Override
     public OrderDetail findByID(int orderDetailId) {
         Session session = sessionFactory.getCurrentSession();
-
         Query query = session.createQuery("from OrderDetail where orderDetailId = ?");
         query.setInteger(0, orderDetailId);
         return (OrderDetail) query.uniqueResult();
+    }
+
+    @Override
+    public List<OrderDetail> findByOrderPaymentID(int orderPaymentId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from OrderDetail where orderPaymentId = ?");
+        query.setInteger(0, orderPaymentId);
+        return (List<OrderDetail>) query.uniqueResult();
     }
 }

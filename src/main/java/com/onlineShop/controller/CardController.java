@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,14 +29,14 @@ public class CardController {
     private CardService cardService;
 
     @RequestMapping("/card")
-    public String cardDetail(Model model)
+    public String cardDetail(Model model, String redirect)
     {
         List<CardDetail> carDetailList = cardService.getCardList(1);
         model.addAttribute("cards", carDetailList);
         CardDetail cardDetail = new CardDetail();
         model.addAttribute("cardDetail", cardDetail);
-
-        return "template/shop/profilecard";
+        model.addAttribute("redirect",redirect);
+        return "template/shop/cardDetail";
     }
 
     @RequestMapping(value = "/addCardDetail", method = RequestMethod.POST)
@@ -48,26 +48,26 @@ public class CardController {
         model.addAttribute("cards", carDetailList);
 
         if (result.hasErrors()) {
-            return "template/shop/profilecard";
+            return "template/shop/cardDetail";
         }
 
         if(cardDetail.getCardType().equals("VISA")) {
             if (!cardDetail.getCardNumber().startsWith("4"))
             {
                 model.addAttribute("ERROR_MESSAGE","Visa card number must starts with 4.");
-                return "template/shop/profilecard";
+                return "template/shop/cardDetail";
             }
         }
         else{
             if (!cardDetail.getCardNumber().startsWith("5"))
             {
                 model.addAttribute("ERROR_MESSAGE","Master card number must starts with 5.");
-                return "template/shop/profilecard";
+                return "template/shop/cardDetail";
             }
         }
 
-        Date date = new Date(cardDetail.getExpYear(),cardDetail.getExpMonth(),1);
-        cardDetail.setCardExp(date);
+        LocalDate localDate = LocalDate.of(cardDetail.getExpYear(),cardDetail.getExpMonth(),1);
+        cardDetail.setCardExp(java.sql.Date.valueOf(localDate));
 
         boolean b = cardService.addCardDetail(cardDetail);
         if(b) {
@@ -75,7 +75,7 @@ public class CardController {
             return "redirect:/card";
         }
         model.addAttribute("ERROR_MESSAGE", "Error occurred when add new card.");
-        return "template/shop/profilecard";
+        return "template/shop/cardDetail";
     }
 }
 

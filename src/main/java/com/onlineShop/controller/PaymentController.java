@@ -32,17 +32,19 @@ public class PaymentController {
     @Autowired
     private SubscriptionService subscriptionService;
 
-    @Autowired
-    private BankAPIService bankAPIService;
-
     @RequestMapping("/payment")
     public String payment(Model model)
     {
+        Subscription subscription = subscriptionService.getSubscription();
+        if(subscription==null)
+        {
+            model.addAttribute("ERROR_MESSAGE", "Please configure subscription.");
+            return "template/shop/payment";
+        }
         List<CardDetail> cardDetailList = cardService.getCardList(1);
         if(cardDetailList==null||cardDetailList.size()==0)
         {
             model.addAttribute("ERROR_MESSAGE", "Please add card.");
-            return "template/shop/payment";
         }
         model.addAttribute("cards", cardDetailList);
 
@@ -59,12 +61,6 @@ public class PaymentController {
             return "template/shop/payment";
         }
 
-        Subscription subscription = subscriptionService.getSubscription();
-        if(subscription==null)
-        {
-            model.addAttribute("ERROR_MESSAGE", "Please configure subscription.");
-            return "template/shop/payment";
-        }
         double total = 0;
         for(int i=0;i<orderPayment.getOrderDetailList().size();i++)
         {
@@ -81,16 +77,19 @@ public class PaymentController {
 
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public String addCardDetail(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
-                                BindingResult result, HttpServletRequest request,
-                                Locale locale, Model model,
-                                RedirectAttributes redirectAttributes) {
+                                BindingResult result,
+                                Locale locale, Model model, String card, boolean newaddress) {
         if (result.hasErrors()) {
             return "template/shop/payment";
         }
-        //validation
-        //  check address is new
-        //  check cardid is selected?
 
+        if(card.isEmpty()||card==null)
+        {
+            model.addAttribute("ERROR_MESSAGE","Please select a card.");
+            return "template/shop/payment";
+        }
+
+        //if(newaddress)
         Result result1 = paymentService.doPayment(orderPayment);
 
         /*

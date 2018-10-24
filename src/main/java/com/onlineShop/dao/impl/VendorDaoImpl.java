@@ -33,7 +33,7 @@ public class VendorDaoImpl implements VendorDao {
 
     public Vendor getVendorByUserId(int userId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Vendor where userId = ?");
+        Query query = session.createQuery("from Vendor where user_id = ?");
         query.setInteger(0, userId);
         return (Vendor) query.uniqueResult();
     }
@@ -140,4 +140,10 @@ public class VendorDaoImpl implements VendorDao {
     }
 
 
+    public Vendor getVendorById(int vendorId){
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Vendor where vendorId = ?");
+        query.setInteger(0, vendorId);
+        return (Vendor) query.uniqueResult();
+    }
 }

@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -17,8 +18,10 @@ public class User {
     @Id
     @GeneratedValue
     private int userId;
-    @NotEmpty(message = "Username may not be empty.")
+    @NotEmpty(message = "Username(Email) may not be empty.")
     @Size(max = 100, message = "Maximum 100 characters limited.")
+    @Pattern(regexp = "^([\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6})|$",
+            message = "Invalid email address.")
     private String userName;
     @Size(max = 100, message = "Maximum 100 characters limited.")
     private String password;
@@ -39,8 +42,10 @@ public class User {
     @Valid
     private Customer customer;
     @Transient
+    @Valid
     private Administrator administrator;
     @Transient
+    @Valid
     private Vendor vendor;
 
     public Address getAddress() {

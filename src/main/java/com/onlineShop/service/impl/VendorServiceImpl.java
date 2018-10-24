@@ -44,4 +44,10 @@ public class VendorServiceImpl implements VendorService {
     public void updateVendorStatus(Vendor vendor) {
         vendorDao.updateVendorStatus(vendor);
     }
+
+    @Override
+    public Vendor findVendorById(int vendorId) {
+
+        return vendorDao.getVendorById(vendorId);
+    }
 }

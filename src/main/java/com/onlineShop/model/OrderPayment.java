@@ -18,7 +18,7 @@ public class OrderPayment {
     @GeneratedValue
     private int orderPaymentId;
     private Date OrderDate;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "orderPaymentId")
     private List<OrderDetail> orderDetailList;
     @ManyToOne

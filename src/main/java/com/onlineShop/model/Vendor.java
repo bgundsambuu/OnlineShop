@@ -3,11 +3,13 @@ package com.onlineShop.model;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
+/*
+ *  Created by Solomon 10/21/2018
+ *  Online Shopping
+ * */
 
-/**
- * Created by Mingwei on 10/14/2018.
- */
 @Entity
 @DynamicUpdate
 public class Vendor {
@@ -29,8 +31,38 @@ public class Vendor {
     @JoinColumn(name = "addressId")
     private Address address;
 //    @OneToMany
-//    @JoinColumn
-//    private List<Product> productList;
+//    @JoinColumn(name = "vendorCategoryID", nullable = false)
+//    private List<VendorCategory> vendorCategory;
+
+    @OneToMany(mappedBy = "vendor_id", fetch = FetchType.EAGER)
+    private List<Product> productList;
+
+    public Vendor() {
+
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+//    public VendorCategory getVendorCategory() {
+//        return vendorCategory;
+//    }
+//
+//    public void setVendorCategory(VendorCategory vendorCategory) {
+//        this.vendorCategory = vendorCategory;
+//    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+    }
 
     public int getVendorId() {
         return vendorId;
@@ -88,19 +120,5 @@ public class Vendor {
         this.address = address;
     }
 
-//    public List<Product> getProductList() {
-//        return productList;
-//    }
-//
-//    public void setProductList(List<Product> productList) {
-//        this.productList = productList;
-//    }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

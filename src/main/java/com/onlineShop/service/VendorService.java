@@ -1,5 +1,4 @@
 package com.onlineShop.service;
-
 import com.onlineShop.model.Vendor;
 
 import java.util.List;
@@ -8,12 +7,13 @@ import java.util.List;
  * Created By krish on Oct, 2018
  */
 public interface VendorService {
+    Vendor findVendorById(int vendorId);
 
     public List<Vendor> getAllVendor();
 
     public void addVendor(Vendor vendor);
 
-    public  List<Vendor> getAllPendingVendor();
+    public List<Vendor> getAllPendingVendor();
 
     public Vendor getPendingVendorById(int vendorId);
 
