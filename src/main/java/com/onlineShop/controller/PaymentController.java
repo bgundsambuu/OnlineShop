@@ -77,16 +77,19 @@ public class PaymentController {
 
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public String addCardDetail(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
-                                BindingResult result, HttpServletRequest request,
-                                Locale locale, Model model,
-                                RedirectAttributes redirectAttributes) {
+                                BindingResult result,
+                                Locale locale, Model model, String card, boolean newaddress) {
         if (result.hasErrors()) {
             return "template/shop/payment";
         }
-        //validation
-        //  check address is new
-        //  check cardid is selected?
 
+        if(card.isEmpty()||card==null)
+        {
+            model.addAttribute("ERROR_MESSAGE","Please select a card.");
+            return "template/shop/payment";
+        }
+
+        //if(newaddress)
         Result result1 = paymentService.doPayment(orderPayment);
 
         /*

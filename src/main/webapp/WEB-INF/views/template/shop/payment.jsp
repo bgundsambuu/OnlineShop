@@ -27,7 +27,7 @@
             </c:if>
             <br/>
 
-            <form:form role="form" method="post" action="addCardDetail"
+            <form:form role="form" method="post" action="pay"
                        modelAttribute="orderPayment">
                 <fieldset>
                     <div>
@@ -37,7 +37,7 @@
                     <c:if test="${not empty cards}">
                         <c:forEach items="${cards}" var="card">
                             <label>
-                                <input type="radio" id="cards" value="${card.cardNumber}" >
+                                <input type="radio" id="cards" value="${card.cardNumber}" name="card">
                                     ${card.cardType} - XXXXXXXXXXXX${card.cardNumber.substring(11,15)} - <fmt:formatDate pattern="MM/yyyy"
                                                                                                                          value="${card.cardExp}"/>
                             </label>
@@ -118,6 +118,10 @@
                         <div>
                             <hr/>
                             <h3>Shipping detail</h3>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="newaddr" name="newaddress"/>
+                            <label for="newaddr">New Address?</label>
                         </div>
                         <div>
                             <label for="address.state">State: </label>
