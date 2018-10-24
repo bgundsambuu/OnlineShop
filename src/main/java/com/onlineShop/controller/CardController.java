@@ -29,14 +29,14 @@ public class CardController {
     private CardService cardService;
 
     @RequestMapping("/card")
-    public String cardDetail(Model model)
+    public String cardDetail(Model model, String redirect)
     {
         List<CardDetail> carDetailList = cardService.getCardList(1);
         model.addAttribute("cards", carDetailList);
         CardDetail cardDetail = new CardDetail();
         model.addAttribute("cardDetail", cardDetail);
-
-        return "template/shop/profilecard";
+        model.addAttribute("redirect",redirect);
+        return "template/shop/cardDetail";
     }
 
     @RequestMapping(value = "/addCardDetail", method = RequestMethod.POST)

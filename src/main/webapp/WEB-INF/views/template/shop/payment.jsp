@@ -12,7 +12,7 @@
     <div class="container">
         <div class="page-header">
             <h2>
-                <strong>Card details</strong>
+                <strong>Payment</strong>
             </h2>
             <c:if test="${SUCCESS_MESSAGE != null}">
                 <label>
@@ -54,6 +54,7 @@
                             </div>
                         </div>
                     </c:if>
+                    <a href="/card?redirect=payment">Add new card</a>
                     <c:if test="${orderPayment!=null}">
                         <div>
                             <div>
