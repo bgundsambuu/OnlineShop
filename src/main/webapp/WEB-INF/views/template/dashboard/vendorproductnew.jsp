@@ -76,13 +76,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="unitInStock">Unit in stock:</label>
+                                    <form:input id="creationDate" path="creationDate" placeholder="MM/dd/yyyy" class="form:input-large"/>
+                                    <form:errors path="creationDate" cssClass="color: #ff0000;"/>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" >Image:</label>
                                     <input type="file" id="image"
-                                           path ="inputImages" class="form-control form-control-alternative" placeholder="Product image"></input>
+                                           path ="inputImages"
+                                           class="form-control form-control-alternative"
+                                           placeholder="Product image"></input>
                                 </div>
                             </div>
                         </div>
@@ -91,11 +102,11 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label" for="category">Category</label>
-                                    <select class="custom-select" id="category">
+                                    <select name="category" class="custom-select" id="category">
                                         <option selected>-</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <c:forEach items="${categories}" var="category">
+                                            <option value="${category.categoryID}">${category.categoryName}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>

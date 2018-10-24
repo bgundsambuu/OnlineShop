@@ -31,7 +31,7 @@ public class ProductFactory {
         product1.setFlag(product.getFlag());
         product1.setCategory(product.getCategory());
         product1.setCreationDate(product.getCreationDate());
-
+        product1.setMainPicturePath(product.getMainPicturePath());
         product1.setUnitInStock(product.getUnitInStock());
         product1.setVendor_id(product.getVendor_id());
         product1.setProductPrice(product.getProductPrice());
