@@ -1,5 +1,6 @@
 package com.onlineShop.controller;
 
+import com.onlineShop.SessionUtil;
 import com.onlineShop.model.*;
 import com.onlineShop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -220,12 +221,16 @@ public class HomeController {
 
     @RequestMapping(value = "/purchase", method = RequestMethod.POST)
     public String purchase(HttpSession session) {
-        test();
-        session.setAttribute("user", 1);
-        Integer userId = (Integer) session.getAttribute("user");
-        if (userId == null) {
+//        test();
+//        User user = (User)session.getAttribute("user");
+//        System.out.println(user.getCustomer().getCustomerId()+"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        User user = SessionUtil.getUser();
+//        session.setAttribute("user", 1);
+
+        if (user == null) {
             return "redirect:/loginpage";
         }
+        Integer userId = user.getCustomer().getCustomerId();
 
         if (session.getAttribute("shoppingCart") == null) {
             return "redirect:/viewProd";
@@ -255,9 +260,9 @@ public class HomeController {
             orderDetailList.add(orderDetail);
         }
 
-        Integer userID = (Integer) session.getAttribute("user");
-        System.out.println(userID + "--------------------------------------------------++++++++++++++++++++++++++");
-        Customer customer = customerService.getCustomerById(userID);
+//        Integer userID = (Integer) session.getAttribute("user");
+        System.out.println(userId + "--------------------------------------------------++++++++++++++++++++++++++");
+        Customer customer = customerService.getCustomerById(userId);
         System.out.println(customer.getFirstName() + "   = llllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
         OrderPayment orderPayment = new OrderPayment();
         orderPayment.setCustomer(customer);
