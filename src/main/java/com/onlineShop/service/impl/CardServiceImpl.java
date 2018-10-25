@@ -41,4 +41,9 @@ public class CardServiceImpl implements CardService {
         }
         return true;
     }
+
+    @Override
+    public CardDetail getCardById(int cardId) {
+        return cardDao.getCardById(cardId);
+    }
 }

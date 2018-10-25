@@ -7,5 +7,5 @@ package com.onlineShop.service;
 */
 
 public interface BankAPIService {
-    public int callBankAPI();
+    public int callBankAPI(String cardNo, String expiredMonth, String expiredYear, String cvv, String ownerName, String zipCode, String purchaseAmnt);
 }

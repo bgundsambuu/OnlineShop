@@ -50,4 +50,10 @@ public class CardDaoImpl implements CardDao {
         session.flush();
     }
 
+    @Override
+    public CardDetail getCardById(int cardId) {
+        Session session = sessionFactory.getCurrentSession();
+        return (CardDetail) session.get(CardDetail.class, cardId);
+    }
+
 }

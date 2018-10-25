@@ -15,4 +15,5 @@ public interface CardDao {
         List<CardDetail> getCardList(int userId);
         Customer getCustomer(int userId);
         void addCardDetail(CardDetail cardDetail);
+        CardDetail getCardById(int cardId);
 }

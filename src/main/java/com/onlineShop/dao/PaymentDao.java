@@ -6,13 +6,13 @@ package com.onlineShop.dao;
         Date: 10/16/2018 /October/
 */
 
-import com.onlineShop.model.Messages;
-import com.onlineShop.model.OrderPayment;
-import com.onlineShop.model.Product;
-import com.onlineShop.model.Subscription;
+import com.onlineShop.model.*;
+
+import java.util.List;
 
 public interface PaymentDao {
         OrderPayment getOrderPayment(int userId);
+        List<OrderDetail> getOrderDetail(int orderPaymentId);
         Subscription getSubscription();
         Product blockProduct(OrderPayment orderPaymentId);
         boolean checkOut(OrderPayment orderPaymentId);

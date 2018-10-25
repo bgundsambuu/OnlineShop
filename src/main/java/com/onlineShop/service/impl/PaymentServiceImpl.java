@@ -7,6 +7,7 @@ package com.onlineShop.service.impl;
 */
 
 import com.onlineShop.dao.CardDao;
+import com.onlineShop.dao.CustomerDao;
 import com.onlineShop.dao.PaymentDao;
 import com.onlineShop.model.*;
 import com.onlineShop.service.BankAPIService;
@@ -16,6 +17,8 @@ import com.onlineShop.service.SubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -28,6 +31,9 @@ public class PaymentServiceImpl implements PaymentService {
     private CardDao cardDao;
 
     @Autowired
+    private CustomerDao customerDao;
+
+    @Autowired
     private SubscriptionService subscriptionService;
 
     @Override
@@ -36,24 +42,27 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Result doPayment(OrderPayment orderPayment) {
-        List<CardDetail> carDetailList = cardDao.getCardList(1);
-        if(carDetailList==null||carDetailList.isEmpty())
-        {
-            return new Result(40, "Please register card.");
-        }
+    public Result doPayment(OrderPayment orderPayment, boolean newAddress) {
         Subscription subscription = subscriptionService.getSubscription();
         if(subscription==null)
         {
             return new Result(41, "Please configure subscription.");
         }
+        List<OrderDetail> orderDetailList = paymentDao.getOrderDetail(orderPayment.getOrderPaymentId());
+        orderPayment.setOrderDetailList(orderDetailList);
         Product product = paymentDao.blockProduct(orderPayment);
         if(product!=null)
         {
             return new Result(42, "We are sorry, We have only "+product.getUnitInStock()+ " "+product.getProductName()+".");
         }
+        LocalDate localDate = orderPayment.getCard().getCardExp().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         BankAPIService bankAPIService = new BankAPIServiceImpl();
-        int bankResult = bankAPIService.callBankAPI();
+        int bankResult = bankAPIService.callBankAPI(String.valueOf(orderPayment.getCard().getCardNumber()),
+                        String.valueOf(localDate.getMonthValue()),
+                        String.valueOf(localDate.getYear()),
+                        String.valueOf(orderPayment.getCard().getSecurityNumber()),
+                        String.valueOf(orderPayment.getCard().getCardHolderName()), String.valueOf(orderPayment.getCard().getZipCode()),
+                        String.valueOf(orderPayment.getTotalAmount()));
         if(bankResult != 200)
         {
             Messages messages = paymentDao.getMsg(bankResult);
@@ -71,10 +80,17 @@ public class PaymentServiceImpl implements PaymentService {
             return new Result(44, "Error occurred on financial transaction.");
         }
         EmailService emailService = new EmailServiceImpl();
-        Result result = emailService.sendEmail();
+        String receipt = "Transaction Successful. \r\nPurchase total: "+ orderPayment.getTotal()+"\r\n Tax:"+orderPayment.getTaxAmount()+"\r\nOverall amount:"+
+                orderPayment.getTotalAmount()+"\r\n"+
+                "Products:\r\n";
+        for(OrderDetail orderDetail: orderPayment.getOrderDetailList())
+        {
+            receipt+="\r\n"+"Product: "+orderDetail.getProduct().getProductName()+"\r\nPrice:"+orderDetail.getProduct().getProductPrice()+"$\r\nQuantity:"+orderDetail.getQuantity()+"\r\n";
+        }
+        Result result = emailService.sendEmail(orderPayment.getCustomer().getUser().getUserName(),"Purchase receipt",receipt);
         if(result.getId()!=0)
             return result;
 
-        return new Result(0,"");
+        return new Result(0,receipt);
     }
 }

@@ -5,5 +5,5 @@ import com.onlineShop.model.Address;
 public interface AddressService {
 
     void editAddress(Address address);
-    Address getAddressByUserId(int userId);
+    Address getAddressByAddressId(int addressId);
 }

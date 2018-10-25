@@ -9,5 +9,4 @@ import com.onlineShop.model.Address;
 public interface AddressDao {
     void editAddress(Address address);
     Address getAddressByAddressId(int addressId);
-    Address getAddressByUserId(int userId);
 }

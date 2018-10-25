@@ -68,13 +68,15 @@ public class CustomerDaoImpl implements CustomerDao{
 
     /**
      * Get Customer By UserId
+     * @Note please don't change this method.
+     * please create your own method.
      * @author Mingwei
      * @param userId user id
      * @return Customer obj
      */
     public Customer getCustomerByUserId (int userId) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Customer where customerId = ?");
+        Query query = session.createQuery("from Customer where userId = ?");
         query.setInteger(0, userId);
         return (Customer) query.uniqueResult();
     }

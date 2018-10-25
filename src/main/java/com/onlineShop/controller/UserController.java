@@ -1,6 +1,7 @@
 package com.onlineShop.controller;
 
 import com.onlineShop.Constant;
+import com.onlineShop.SessionUtil;
 import com.onlineShop.controller.validation.UserValidator;
 import com.onlineShop.model.Administrator;
 import com.onlineShop.model.User;
@@ -36,24 +37,19 @@ public class UserController {
      * Retrieve user info by user id
      * @Author Mingwei
      * @Date 10/12/2018
-     * @param userId
      * @param model
      * @param request
      * @return
      */
-    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
-    public String getUser(@PathVariable int userId, Model model, HttpServletRequest request) {
+    @RequestMapping(method = RequestMethod.GET)
+    public String getUser(Model model, HttpServletRequest request) {
         String retPage = Constant.EMPTY;
         try{
             String msg = request.getParameter(Constant.MSG);
             if(!StringUtils.isEmpty(msg)) model.addAttribute(Constant.MSG, msg);
-            User user = userService.getUserByUserId(userId);
+            User user = SessionUtil.getUser();
             retPage = getReturnPage(user);
-            if(user == null){
-                model.addAttribute(Constant.MSG, Constant.Message.FAILURE);
-                model.addAttribute(Constant.MSG_DETAIL, Constant.Message.USER_NOT_EXIST);
-                user = new User();
-            }
+            if(user == null) return retPage;
             model.addAttribute("user", user);
         }catch(Exception e){
             model.addAttribute(Constant.MSG, Constant.Message.FAILURE);
@@ -127,9 +123,9 @@ public class UserController {
      * @return
      */
     private String getReturnPage(User user){
-        if(user == null) return "template/shop/editCustomer";
+        if(user == null) return "redirect:/";
         if(user.getAdministrator() !=null) return "template/dashboard/profile";
-        if(user.getVendor() != null) return "template/dashboard/vendorprofile";
+        if(user.getVendor() != null) return "template/dashboard/vendor_profile";
         if(user.getCustomer() != null) return "template/shop/editCustomer";
         else return "redirect:/";
     }
