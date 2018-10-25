@@ -20,25 +20,16 @@ public class CompanyFinTxn {
     @GeneratedValue
     private int id;
 
-    private int vendorId;
-    private int productId;
+    private long productId;
     private double amount;
     private Date paidDate;
     private String status;
 
-    public int getVendorId() {
-        return vendorId;
-    }
-
-    public void setVendorId(int vendorId) {
-        this.vendorId = vendorId;
-    }
-
-    public int getProductId() {
+    public long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(long productId) {
         this.productId = productId;
     }
 

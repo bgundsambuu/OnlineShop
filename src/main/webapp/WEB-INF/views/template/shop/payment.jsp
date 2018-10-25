@@ -43,6 +43,7 @@
                             </label>
                             <br/>
                         </c:forEach>
+                    <c:if test="${orderPayment!=null}">
                         <div class="form-group">
                             <label for="zipCode">Billing zip code:
                             </label>
@@ -53,6 +54,7 @@
                                 <form:errors path="zipCode"/>
                             </div>
                         </div>
+                    </c:if>
                     </c:if>
                     <a href="/card?redirect=payment">Add new card</a>
                     <c:if test="${orderPayment!=null}">

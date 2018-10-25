@@ -9,5 +9,5 @@ package com.onlineShop.service;
 import com.onlineShop.model.Result;
 
 public interface EmailService {
-    public Result sendEmail();
+    public Result sendEmail(String emailAddress, String Subject, String email);
 }
