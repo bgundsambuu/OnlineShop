@@ -79,9 +79,9 @@ public class PaymentServiceImpl implements PaymentService {
         {
             receipt+="\r\n"+"Product: "+orderDetail.getProduct().getProductName()+"\r\nPrice:"+orderDetail.getProduct().getProductPrice()+"$\r\nQuantity:"+orderDetail.getQuantity()+"\r\n";
         }
-        Result result = emailService.sendEmail(orderPayment.getCustomer().getUser().getUserName(),"Purchase receipt",receipt);
-        if(result.getId()!=0)
-            return result;
+        //Result result = emailService.sendEmail(orderPayment.getCustomer().getUser().getUserName(),"Purchase receipt",receipt);
+        // if(result.getId()!=0)
+        //    return result;
 
         return new Result(0,receipt);
     }
