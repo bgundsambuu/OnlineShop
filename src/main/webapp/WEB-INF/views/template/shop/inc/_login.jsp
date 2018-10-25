@@ -43,7 +43,7 @@
                                 <%--<label class="custom-control-label" for="customCheck1">Remember me</label>--%>
                             <%--</div>--%>
                             <div class="text-center">
-                                <input type="submit" value="SignIn" class="btn btn-primary my-4">
+                                <input type="submit" value="Log In" class="btn btn-primary my-4">
                                 <a href="/"><button type="button" class="btn btn-primary my-4">Cancel</button></a>
                             </div>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

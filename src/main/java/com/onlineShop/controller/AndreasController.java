@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class AndreasController {
-    @RequestMapping("/loginadmin")
+    @RequestMapping("/adminlogin")
     public String loginadmin() {
         return "template/dashboard/login";
     }
 
 
-    @RequestMapping("loginvendor")
+    @RequestMapping("/vendorlogin")
     public String vendorlogin() {
         return "template/dashboard/vendorlogin";
     }
