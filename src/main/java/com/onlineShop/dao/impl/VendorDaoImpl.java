@@ -141,9 +141,10 @@ public class VendorDaoImpl implements VendorDao {
     public void updateVendorStatus(Vendor vendor) {
         Session session = sessionFactory.getCurrentSession();
         //vendor.setStatus("active");
-        Query query = session.createSQLQuery("update vendor set status = ? where venderId = ?");
+        Query query = session.createSQLQuery("update Vendor set status = ? where venderId = ?");
         query.setParameter(0, "Active");
         query.setParameter(1, vendor.getVendorId());
+        query.executeUpdate();
 
         session.update(vendor);
         //session.saveOrUpdate(vendor);
