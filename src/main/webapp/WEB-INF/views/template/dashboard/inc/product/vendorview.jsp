@@ -68,10 +68,6 @@
                             </td>
                             <td>
                               <span class="badge badge-dot mr-4">
-                                <i class="bg-warning"></i> pending
-                              </span>
-
-                              <span class="badge badge-dot mr-4">
                                 <i class="bg-success"></i> ${product.flag}
                               </span>
                             </td>

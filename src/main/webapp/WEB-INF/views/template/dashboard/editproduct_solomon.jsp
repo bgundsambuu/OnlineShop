@@ -21,18 +21,13 @@
                 </div>
 
                 <div class="col-md-5">
-                    product Name: <h3>${product.productName}</h3>
-                    <p>${product.productDescription}</p>
                     <p>
-                       <strong>Manufacturer</strong> : ${product.productManufacturer}
+                        <form:input cssClass="form-control" path="productName"/>
+                    </p>
+                    <p>
+                        <form:input cssClass="form-control" path="productDescription"/>
                     </p>
 
-                    <p>
-                        <strong>Condition</strong> : ${product.productCondition}
-                    </p>
-                    <h4>${product.productPrice} USD</h4>
-
-                    <br>
 
                     <c:set var="role" scope="page" value="${param.role}" />
                     <c:set var="url" scope="page" value="/product/productList" />
