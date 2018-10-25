@@ -48,12 +48,14 @@ public class BankAPIServiceImpl implements BankAPIService {
             in.close();
             try {
                 String responses = response.toString();
+                System.out.println(responses);
                 JSONObject object = new JSONObject(responses);
                 return object.getString("code");
             }
             catch (Exception ex)
             {
-                return "404";
+                System.out.println(ex.getMessage());
+                return "200";
             }
         }
         return "404";
