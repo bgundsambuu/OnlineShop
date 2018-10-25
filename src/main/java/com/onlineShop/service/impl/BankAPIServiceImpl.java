@@ -7,6 +7,7 @@ package com.onlineShop.service.impl;
 */
 
 import com.onlineShop.service.BankAPIService;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -45,7 +46,15 @@ public class BankAPIServiceImpl implements BankAPIService {
                 response.append(inputLine);
             }
             in.close();
-            return response.toString();
+            try {
+                String responses = response.toString();
+                JSONObject object = new JSONObject(responses);
+                return object.getString("code");
+            }
+            catch (Exception ex)
+            {
+                return "404";
+            }
         }
         return "404";
     }
