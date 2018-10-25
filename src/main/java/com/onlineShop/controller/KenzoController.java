@@ -210,4 +210,16 @@ public class KenzoController {
         model.addAttribute("categories", categoryService.findAllCategories());
         return "template/shop/paymentpage";
     }
+
+    @RequestMapping("/cardpage")
+    public String cardDetail(Model model, String redirect)
+    {
+        List<CardDetail> carDetailList = cardService.getCardList(1);
+        model.addAttribute("cards", carDetailList);
+        CardDetail cardDetail = new CardDetail();
+        model.addAttribute("cardDetail", cardDetail);
+        model.addAttribute("redirect",redirect);
+        model.addAttribute("categories",categoryService.findAllCategories());
+        return "template/shop/cardDetailpage";
+    }
 }
