@@ -5,7 +5,9 @@ package com.onlineShop.controller;
         Developer: Bayarjargal
         Date: 10/16/2018 /October/
 */
+import com.onlineShop.SessionUtil;
 import com.onlineShop.model.CardDetail;
+import com.onlineShop.model.User;
 import com.onlineShop.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,12 +33,19 @@ public class CardController {
     @RequestMapping("/card")
     public String cardDetail(Model model, String redirect)
     {
-        List<CardDetail> carDetailList = cardService.getCardList(1);
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
+        List<CardDetail> carDetailList = cardService.getCardList(customerId);
         model.addAttribute("cards", carDetailList);
         CardDetail cardDetail = new CardDetail();
         model.addAttribute("cardDetail", cardDetail);
         model.addAttribute("redirect",redirect);
-        return "template/shop/cardDetail";
+        return "template/shop/cardDetailpage";
     }
 
     @RequestMapping(value = "/addCardDetail", method = RequestMethod.POST)
@@ -44,38 +53,45 @@ public class CardController {
                                 BindingResult result, HttpServletRequest request,
                                 Locale locale, Model model,
                                 RedirectAttributes redirectAttributes) {
-        List<CardDetail> carDetailList = cardService.getCardList(1);
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
+        List<CardDetail> carDetailList = cardService.getCardList(customerId);
         model.addAttribute("cards", carDetailList);
 
         if (result.hasErrors()) {
-            return "template/shop/profilecard";
+            return "template/shop/cardDetailpage";
         }
 
         if(cardDetail.getCardType().equals("VISA")) {
             if (!cardDetail.getCardNumber().startsWith("4"))
             {
                 model.addAttribute("ERROR_MESSAGE","Visa card number must starts with 4.");
-                return "template/shop/profilecard";
+                return "template/shop/cardDetailpage";
             }
         }
         else{
             if (!cardDetail.getCardNumber().startsWith("5"))
             {
                 model.addAttribute("ERROR_MESSAGE","Master card number must starts with 5.");
-                return "template/shop/profilecard";
+                return "template/shop/cardDetailpage";
             }
         }
 
-        Date date = new Date(cardDetail.getExpYear(),cardDetail.getExpMonth(),1);
-        cardDetail.setCardExp(date);
+        LocalDate localDate = LocalDate.of(cardDetail.getExpYear(),cardDetail.getExpMonth(),1);
+        cardDetail.setCardExp(java.sql.Date.valueOf(localDate));
 
         boolean b = cardService.addCardDetail(cardDetail);
         if(b) {
             redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE","Successfully added new card.");
-            return "redirect:/card";
+            return "redirect:/cardpage";
         }
         model.addAttribute("ERROR_MESSAGE", "Error occurred when add new card.");
-        return "template/shop/profilecard";
+        return "template/shop/cardDetailpage";
     }
 }
 

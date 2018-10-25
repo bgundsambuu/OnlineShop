@@ -8,8 +8,8 @@
             <div class="col-lg-6">
                 <div class="footer_nav_container d-flex flex-sm-row flex-column align-items-center justify-content-lg-start justify-content-center text-center">
                     <ul class="footer_nav">
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">FAQs</a></li>
+                        <li><a href="/vendorlogin">Vendor login</a></li>
+                        <li><a href="/vendorregister">Vendor register</a></li>
                         <li><a href="#">Contact us</a></li>
                     </ul>
                 </div>
@@ -37,6 +37,16 @@
 </footer>
 
 </div><!-- /.super_container -->
+
+<div class="modal fade bd-example-modal-lg" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="/searchSimilarProduct" method="get">
+                <input type="text" name="Product" class="form-control search-control" placeholder="Search..."/>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script src="<c:url value="/resources/css/bootstrap4/popper.js" />"></script>

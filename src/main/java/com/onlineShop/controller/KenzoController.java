@@ -1,13 +1,14 @@
 package com.onlineShop.controller;
 
-import com.onlineShop.model.Category;
-import com.onlineShop.model.Product;
-import com.onlineShop.service.CategoryService;
-import com.onlineShop.service.ProductService;
+import com.onlineShop.SessionUtil;
+import com.onlineShop.model.*;
+import com.onlineShop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by Le on 1/24/2016.
@@ -19,6 +20,15 @@ public class KenzoController {
     ProductService productService;
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    private CardService cardService;
+
+    @Autowired
+    private PaymentService paymentService;
+
+    @Autowired
+    private SubscriptionService subscriptionService;
 
     @RequestMapping("/product/view")
     public String productview() {
@@ -87,11 +97,6 @@ public class KenzoController {
         return "template/shop/profilepage";
     }
 
-    @RequestMapping("/paymentpage")
-    public String paymentpage() {
-        return "template/shop/paymentpage";
-    }
-
     @RequestMapping("/admin")
     public String admin() {
         return "template/dashboard/home";
@@ -156,5 +161,81 @@ public class KenzoController {
     @RequestMapping("/vendor/profile")
     public String vendorprofile() {
         return "template/dashboard/vendorprofile";
+    }
+
+    @RequestMapping("/paymentpage")
+    public String payment(Model model)
+    {
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
+        Subscription subscription = subscriptionService.getSubscription();
+        if(subscription==null)
+        {
+            model.addAttribute("ERROR_MESSAGE", "Please configure subscription.");
+            return "template/shop/payment";
+        }
+        List<CardDetail> cardDetailList = cardService.getCardList(customerId);
+        if(cardDetailList==null||cardDetailList.size()==0)
+        {
+            model.addAttribute("ERROR_MESSAGE", "Please add card.");
+        }
+        model.addAttribute("cards", cardDetailList);
+
+        OrderPayment orderPayment = paymentService.getOrderPayment(customerId);
+        model.addAttribute("orderPayment", orderPayment);
+        if(orderPayment==null)
+        {
+            model.addAttribute("ERROR_MESSAGE", "No pending cart is registered.");
+            return "template/shop/payment";
+        }
+        if(orderPayment.getOrderDetailList().isEmpty())
+        {
+            model.addAttribute("ERROR_MESSAGE", "No pending available cart details.");
+            return "template/shop/payment";
+        }
+
+        double total = 0;
+        for(int i=0;i<orderPayment.getOrderDetailList().size();i++)
+        {
+            OrderDetail orderDetail = orderPayment.getOrderDetailList().get(i);
+            total = total + orderDetail.getProduct().getProductPrice() * orderDetail.getQuantity();
+        }
+        double taxAmount = total*subscription.getTaxPercentage()/100;
+        orderPayment.setTotal(total);
+        orderPayment.setTaxAmount(taxAmount);
+        orderPayment.setTotalAmount(orderPayment.getTotal()+taxAmount);
+
+        model.addAttribute("total", total);
+        model.addAttribute("taxAmount", taxAmount);
+        model.addAttribute("totalAmount", orderPayment.getTotal()+taxAmount);
+
+        model.addAttribute("orderPayment", orderPayment);
+        model.addAttribute("categories", categoryService.findAllCategories());
+        return "template/shop/paymentpage";
+    }
+
+    @RequestMapping("/cardpage")
+    public String cardDetail(Model model, String redirect)
+    {
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+                return "redirect:/loginpage";
+        }
+
+        int customerId = user.getCustomer().getCustomerId();
+        List<CardDetail> carDetailList = cardService.getCardList(customerId);
+        model.addAttribute("cards", carDetailList);
+        CardDetail cardDetail = new CardDetail();
+        model.addAttribute("cardDetail", cardDetail);
+        model.addAttribute("redirect",redirect);
+        model.addAttribute("categories",categoryService.findAllCategories());
+        return "template/shop/cardDetailpage";
     }
 }

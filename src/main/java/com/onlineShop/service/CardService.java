@@ -14,7 +14,8 @@ import java.util.List;
 
 public interface CardService {
 
-    Customer getCustomer(int userId);
-    List<CardDetail> getCardList(int userId);
+    Customer getCustomer(int customerId);
+    List<CardDetail> getCardList(int customerId);
     boolean addCardDetail(CardDetail cardDetail);
+    CardDetail getCardById(int cardId);
 }

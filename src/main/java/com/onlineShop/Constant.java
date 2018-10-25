@@ -22,6 +22,7 @@ public class Constant {
         public static final String SUCCESS = "Success.";
         public static final String FAILURE = "Failure.";
         public static final String USER_UPDATE_SUCCESS = "User info update success!";
+        public static final String ADDRESS_UPDATE_SUCCESS = "Address update success!";
         public static final String USER_NOT_EXIST = "User doesn't exist.";
         public static final String SYSTEM_EXCEPTION = "Server is busy now, please try again later.";
     }

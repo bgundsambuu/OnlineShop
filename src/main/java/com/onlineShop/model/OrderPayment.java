@@ -7,6 +7,7 @@ package com.onlineShop.model;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +37,8 @@ public class OrderPayment {
     private double totalAmount;
     private double taxAmount;
     @Transient
-    private int zipCode;
+    @Pattern(regexp="\\d{5}", message="Zip code must be 5 digits.")
+    private String zipCode;
     public OrderPayment() {
 
     }
@@ -129,11 +131,11 @@ public class OrderPayment {
         this.customer = customer;
     }
 
-    public int getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 }

@@ -23,14 +23,15 @@
                         <div class="text-center text-muted mb-4">
                             Password reset
                         </div>
-                        <form role="form">
+                        <form:form action="${pageContext.request.contextPath}/changepassword" method="post"
+                                   commandName="user">
                             <div class="form-group mb-3">
-                                <label for="email">Enter your email address and we'll send you a link to reset your password.</label>
+                                <label for="email">Enter your email address and we'll send you information to access your account.</label>
                                 <input id="email" class="form-control is-invalid" placeholder="Email" type="email">
                                 <div class="invalid-feedback d-block">Can't be blank!</div>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary my-4">Submit</button>
+                                <button type="submit" class="btn btn-primary my-4">Submit</button>
                             </div>
                         </form>
                     </div>

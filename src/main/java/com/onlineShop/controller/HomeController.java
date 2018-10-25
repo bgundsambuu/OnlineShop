@@ -1,5 +1,6 @@
 package com.onlineShop.controller;
 
+import com.onlineShop.SessionUtil;
 import com.onlineShop.model.*;
 import com.onlineShop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,15 +67,20 @@ public class HomeController {
         }
 
         HashMap<Long, Integer> cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+        int total = 0;
         for (Long productId : cartItems.keySet()) {
             Product p = productService.findById(productId.intValue());
+            total+=p.getProductPrice()*cartItems.get(productId);
             products.add(p);
         }
 
-        System.out.println(cartItems.get(Long.valueOf(1)) + "=================");
+        System.out.println(products.get(0) + "=================");
 
         model.addAttribute("products", products);
         model.addAttribute("cartItems", cartItems);
+        model.addAttribute("total", total);
+
+
 
         return "template/shop/shoppingcart";
     }
@@ -215,12 +221,16 @@ public class HomeController {
 
     @RequestMapping(value = "/purchase", method = RequestMethod.POST)
     public String purchase(HttpSession session) {
-        test();
-        session.setAttribute("user", 1);
-        Integer userId = (Integer) session.getAttribute("user");
-        if (userId == null) {
+//        test();
+//        User user = (User)session.getAttribute("user");
+//        System.out.println(user.getCustomer().getCustomerId()+"-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        User user = SessionUtil.getUser();
+//        session.setAttribute("user", 1);
+
+        if (user == null) {
             return "redirect:/loginpage";
         }
+        Integer userId = user.getCustomer().getCustomerId();
 
         if (session.getAttribute("shoppingCart") == null) {
             return "redirect:/viewProd";
@@ -250,16 +260,16 @@ public class HomeController {
             orderDetailList.add(orderDetail);
         }
 
-        Integer userID = (Integer) session.getAttribute("user");
-        System.out.println(userID + "--------------------------------------------------++++++++++++++++++++++++++");
-        Customer customer = customerService.getCustomerById(userID);
+//        Integer userID = (Integer) session.getAttribute("user");
+        System.out.println(userId + "--------------------------------------------------++++++++++++++++++++++++++");
+        Customer customer = customerService.getCustomerById(userId);
         System.out.println(customer.getFirstName() + "   = llllllllllllllllllllllllllllllllllllllllllllllllllllllllll");
         OrderPayment orderPayment = new OrderPayment();
         orderPayment.setCustomer(customer);
         orderPayment.setOrderDetailList(orderDetailList);
         orderPayment.setOrderStatus("PENDING");
         shoppingCartService.add(orderPayment);
-        return "redirect:/payment";
+        return "redirect:/paymentpage";
     }
 
     @RequestMapping(value = "/searchCategory", method = RequestMethod.GET)
@@ -287,9 +297,12 @@ public class HomeController {
 
     @RequestMapping(value = "/searchSimilarProduct", method = RequestMethod.GET)
     public String searchSimilarProduct(HttpServletRequest request, Model model) {
-        String productName = (String) request.getAttribute("Product");
-        Double downPrice = (Double) request.getAttribute("downPrice");
-        Double upPrice = (Double) request.getAttribute("upPrice");
+        String productName = (String) request.getParameter("Product");
+        String downPrice = request.getParameter("downPrice");
+        String upPrice = request.getParameter("upPrice");
+
+        System.out.println(productName + "99999999999999999999999999999999999");
+
         List<Product> products;
         if(productName == null){
             return "redirect:/";
@@ -297,11 +310,12 @@ public class HomeController {
         if(downPrice == null || upPrice == null){
             products = productService.findSimilarProd(productName);
         }else {
-            products = productService.findSimilarProdWithRange(productName, downPrice, upPrice);
+            products = productService.findSimilarProdWithRange(productName, Double.valueOf(downPrice), Double.valueOf(upPrice));
         }
         products.forEach(product -> System.out.println(product.getProductName()));
         model.addAttribute("products", products);
-        return "redirect:/";
+        model.addAttribute("categories", categoryService.findAllCategories());
+        return "/template/shop/productlist";
     }
     public String test(){
         System.out.println("Start Testing @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");

@@ -4,10 +4,7 @@ import com.onlineShop.dao.ProductDao;
 import com.onlineShop.dao.impl.ProductDaoImpl;
 import com.onlineShop.model.*;
 import com.onlineShop.model.model_DTO.Product_Dao;
-import com.onlineShop.service.AddressService;
-import com.onlineShop.service.CategoryService;
-import com.onlineShop.service.ProductService;
-import com.onlineShop.service.VendorService;
+import com.onlineShop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -195,4 +192,88 @@ public class VendorController {
             directory.mkdir();
         }
     }
+
+    //By Krishna
+
+//    @Autowired
+//    private SubscriptionService subscriptionService;
+
+    @RequestMapping(value = "/myadmin/addVendor", method = RequestMethod.GET)
+    public String registerVendor(Model model){
+        Vendor vendor = new Vendor();
+        model.addAttribute("vendor", vendor);
+
+        return "/template/shop/adminview/vendor-form";
+    }
+
+    @RequestMapping(value = "/myadmin/addVendor", method = RequestMethod.POST)
+    public String saveVendor(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result, Model model){
+
+        if (result.hasErrors()) {
+            return "/template/shop/adminview/vendor-form";
+        }
+//
+//        List<Vendor> vendorList = vendorService.getAllVendor();
+//        for(int i = 0; i< vendorList.size(); i++){
+//            if (vendor.getUser().getUserName().equals(vendorList.get(i).getUser().getUserName())){
+//                model.addAttribute("emailMsg", "Email Already Exist");
+//
+//                return "/template/shop/adminview/vendor-form";
+//            }
+//        }
+
+        vendorService.addVendor(vendor);
+
+        String url = "/template/shop/adminview/vendor-payment";
+
+//        return "/template/shop/adminview/vendor-registration-success";
+        return url;
+//
+    }
+
+    @RequestMapping(value = "/myadmin/getAllPendingVendors", method = RequestMethod.GET)
+    public String getAllPendingVendors(Model model){
+
+        List<Vendor> vendorList = vendorService.getAllPendingVendor();
+        model.addAttribute("vendor", vendorList);
+        return "/template/shop/adminview/new-vendor-list";
+    }
+
+    //Pulling pending vendor by Id to display in detail page
+
+    @RequestMapping(value = "/myadmin/getPendingVendorById/{vendorId}", method = RequestMethod.GET)
+    public String getPendingVendorById(@PathVariable int vendorId, Model model){
+        Vendor vendor = vendorService.getPendingVendorById(vendorId);
+        System.out.println(vendorId+"==================");
+        System.out.println(vendor.getFirstName()+"==================");
+        model.addAttribute("vendor", vendor);
+
+        return "/template/shop/adminview/new-vendor-detail";
+    }
+
+    @RequestMapping(value = "/myadmin/vendorApprove", method = RequestMethod.GET)
+    public String vendorApprovGet(Model model){
+        Vendor vendor = new Vendor();
+        model.addAttribute("vendor", vendor);
+
+        return "/template/shop/adminview/new-vendor-detail";
+    }
+
+
+    @RequestMapping(value = "/myadmin/vendorApprove", method = RequestMethod.POST)
+    public String vendorApprovePost(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result, Model model){
+        vendor.setStatus("approved");
+        vendorService.updateVendorStatus(vendor);
+        return "/template/shop/adminview/new-vendor-approval-success";
+    }
+/*
+    @RequestMapping(value = "/vendorPayment", method = RequestMethod.GET)
+    public String vendorPayment(Model model){
+
+        subscriptionService.getSubscription().getAmount();
+
+        return "/template/shop/adminview/vendor-registration-success";
+
+    }*/
+
 }

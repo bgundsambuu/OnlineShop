@@ -22,12 +22,12 @@ public class CardServiceImpl implements CardService {
     private CardDao cardDao;
 
     @Override
-    public Customer getCustomer(int userId) {
-        return cardDao.getCustomer(userId);
+    public Customer getCustomer(int customerId) {
+        return cardDao.getCustomer(customerId);
     }
 
-    public List<CardDetail> getCardList (int custId) {
-        return cardDao.getCardList(custId);
+    public List<CardDetail> getCardList (int customerId) {
+        return cardDao.getCardList(customerId);
     }
 
     @Override
@@ -40,5 +40,10 @@ public class CardServiceImpl implements CardService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public CardDetail getCardById(int cardId) {
+        return cardDao.getCardById(cardId);
     }
 }

@@ -27,7 +27,7 @@
             </c:if>
             <br/>
 
-            <form:form role="form" method="post" action="addCardDetail"
+            <form:form role="form" method="post" action="pay"
                        modelAttribute="orderPayment">
                 <fieldset>
                     <div>
@@ -37,12 +37,13 @@
                     <c:if test="${not empty cards}">
                         <c:forEach items="${cards}" var="card">
                             <label>
-                                <input type="radio" id="cards" value="${card.cardNumber}" >
+                                <input type="radio" id="cards" value="${card.cardId}" name="selCard">
                                     ${card.cardType} - XXXXXXXXXXXX${card.cardNumber.substring(11,15)} - <fmt:formatDate pattern="MM/yyyy"
                                                                                                                          value="${card.cardExp}"/>
                             </label>
                             <br/>
                         </c:forEach>
+                    <c:if test="${orderPayment!=null}">
                         <div class="form-group">
                             <label for="zipCode">Billing zip code:
                             </label>
@@ -53,6 +54,7 @@
                                 <form:errors path="zipCode"/>
                             </div>
                         </div>
+                    </c:if>
                     </c:if>
                     <a href="/card?redirect=payment">Add new card</a>
                     <c:if test="${orderPayment!=null}">
@@ -118,6 +120,10 @@
                         <div>
                             <hr/>
                             <h3>Shipping detail</h3>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="newaddr" name="newaddress"/>
+                            <label for="newaddr">New Address?</label>
                         </div>
                         <div>
                             <label for="address.state">State: </label>

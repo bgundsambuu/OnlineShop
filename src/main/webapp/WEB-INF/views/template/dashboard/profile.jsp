@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form:form action="edit" method="post" modelAttribute="user">
+                    <form:form action="/user/edit" method="post" modelAttribute="user">
                         <form:input path="userId" value="${user.userId}" type="hidden"/>
                         <form:input path="role" value="${user.role}" type="hidden"/>
                         <form:input path="isActive" value="${user.isActive}" type="hidden"/>

@@ -9,6 +9,6 @@ import com.onlineShop.model.OrderPayment;
 import com.onlineShop.model.Result;
 
 public interface PaymentService {
-    OrderPayment getOrderPayment(int userId);
-    Result doPayment(OrderPayment orderPayment);
+    OrderPayment getOrderPayment(int customerId);
+    Result doPayment(OrderPayment orderPayment, boolean newAddress);
 }

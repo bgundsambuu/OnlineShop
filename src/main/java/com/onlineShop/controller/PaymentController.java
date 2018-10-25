@@ -1,10 +1,9 @@
 package com.onlineShop.controller;
 
+import com.onlineShop.SessionUtil;
 import com.onlineShop.model.*;
-import com.onlineShop.service.BankAPIService;
-import com.onlineShop.service.CardService;
-import com.onlineShop.service.PaymentService;
-import com.onlineShop.service.SubscriptionService;
+import com.onlineShop.service.*;
+import com.onlineShop.service.impl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -35,30 +34,37 @@ public class PaymentController {
     @RequestMapping("/payment")
     public String payment(Model model)
     {
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
         Subscription subscription = subscriptionService.getSubscription();
         if(subscription==null)
         {
             model.addAttribute("ERROR_MESSAGE", "Please configure subscription.");
-            return "template/shop/payment";
+            return "template/shop/paymentpage";
         }
-        List<CardDetail> cardDetailList = cardService.getCardList(1);
+        List<CardDetail> cardDetailList = cardService.getCardList(customerId);
         if(cardDetailList==null||cardDetailList.size()==0)
         {
             model.addAttribute("ERROR_MESSAGE", "Please add card.");
         }
         model.addAttribute("cards", cardDetailList);
 
-        OrderPayment orderPayment = paymentService.getOrderPayment(1);
+        OrderPayment orderPayment = paymentService.getOrderPayment(customerId);
         model.addAttribute("orderPayment", orderPayment);
         if(orderPayment==null)
         {
             model.addAttribute("ERROR_MESSAGE", "No pending cart is registered.");
-            return "template/shop/payment";
+            return "template/shop/paymentpage";
         }
         if(orderPayment.getOrderDetailList().isEmpty())
         {
             model.addAttribute("ERROR_MESSAGE", "No pending available cart details.");
-            return "template/shop/payment";
+            return "template/shop/paymentpage";
         }
 
         double total = 0;
@@ -72,50 +78,56 @@ public class PaymentController {
         orderPayment.setTaxAmount(taxAmount);
         orderPayment.setTotalAmount(orderPayment.getTotal()+taxAmount);
         model.addAttribute("orderPayment", orderPayment);
-        return "template/shop/payment";
+        return "template/shop/paymentpage";
     }
 
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
-    public String addCardDetail(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
-                                BindingResult result, HttpServletRequest request,
-                                Locale locale, Model model,
-                                RedirectAttributes redirectAttributes) {
+    public String doPayment(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
+                                BindingResult result, Model model, String selCard, boolean newaddress) {
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
+        model.addAttribute("orderPayment", orderPayment);
+        List<CardDetail> cardDetailList = cardService.getCardList(customerId);
+        if(cardDetailList==null||cardDetailList.size()==0)
+        {
+            model.addAttribute("ERROR_MESSAGE", "Please add card.");
+        }
+        model.addAttribute("cards", cardDetailList);
+
         if (result.hasErrors()) {
-            return "template/shop/payment";
-        }
-        //validation
-        //  check address is new
-        //  check cardid is selected?
-
-        Result result1 = paymentService.doPayment(orderPayment);
-
-        /*
-        if(cardDetail.getCardType().equals("VISA")) {
-            if (!cardDetail.getCardNumber().startsWith("4"))
-            {
-                model.addAttribute("ERROR_MESSAGE","Visa card number must starts with 4.");
-                return "template/shop/profilecard";
-            }
-        }
-        else{
-            if (!cardDetail.getCardNumber().startsWith("5"))
-            {
-                model.addAttribute("ERROR_MESSAGE","Master card number must starts with 5.");
-                return "template/shop/profilecard";
-            }
+            return "template/shop/paymentpage";
         }
 
-        Date date = new Date(cardDetail.getExpYear(),cardDetail.getExpMonth(),1);
-        cardDetail.setCardExp(date);
-
-        boolean b = cardService.addCardDetail(cardDetail);
-        if(b) {
-            redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE","Successfully added new card.");
-            return "redirect:/card";
+        if(selCard==null||selCard.isEmpty())
+        {
+            model.addAttribute("ERROR_MESSAGE","Please select a card.");
+            return "template/shop/paymentpage";
         }
-        */
-        model.addAttribute("ERROR_MESSAGE", "Error occurred when add new card.");
-        return "template/shop/payment";
+
+        CardDetail cardDetail = cardService.getCardById(Integer.parseInt(selCard));
+        orderPayment.setCard(cardDetail);
+        orderPayment.setCustomer(cardDetail.getCustomer());
+        if(!cardDetail.getZipCode().equals(orderPayment.getZipCode()))
+        {
+            model.addAttribute("ERROR_MESSAGE","Wrong zip code.");
+            return "template/shop/paymentpage";
+        }
+        Result result1 = paymentService.doPayment(orderPayment, newaddress);
+        if(result1.getId()==0)
+        {
+            model.addAttribute("SUCCESS_MESSAGE",result1.getMessage());
+        }
+        else
+        {
+            model.addAttribute("ERROR_MESSAGE",result1.getMessage());
+        }
+
+        return "template/shop/paymentpage";
     }
 }
 

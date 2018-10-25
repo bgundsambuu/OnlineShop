@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 986250
@@ -7,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- Sidenav -->
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
@@ -61,7 +61,7 @@
                         <span>Support</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#!" class="dropdown-item">
+                    <a href="<c:url value="/j_spring_security_logout" />" class="dropdown-item">
                         <i class="ni ni-user-run"></i>
                         <span>Logout</span>
                     </a>
@@ -100,23 +100,29 @@
             <!-- Navigation -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/myadmin/admin-view">
                         <i class="ni ni-tv-2 text-primary"></i> Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/product">
-                        <i class="ni ni-planet text-blue"></i> Products
+                    <a class="nav-link" href="/myadmin/addAdmin">
+                        <i class="ni ni-planet text-blue"></i> Add Admin
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/vendor">
-                        <i class="ni ni-pin-3 text-orange"></i> Vendors
+                    <a class="nav-link" href="/myadmin/addCustomer">
+                        <i class="ni ni-pin-3 text-orange"></i> Add Customer
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/category">
-                        <i class="ni ni-single-02 text-yellow"></i> Categories
+                    <a class="nav-link" href="/myadmin/addVendor">
+                        <i class="ni ni-single-02 text-yellow"></i> Add Vendor
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/myadmin/getAllPendingVendors">
+                        <i class="ni ni-single-02 text-yellow"></i> Pending Vendors
                     </a>
                 </li>
             </ul>
@@ -125,12 +131,12 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/user">
                         <i class="ni ni-spaceship"></i> Profile
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="<c:url value="/j_spring_security_logout" />">
                         <i class="ni ni-palette"></i> Logout
                     </a>
                 </li>

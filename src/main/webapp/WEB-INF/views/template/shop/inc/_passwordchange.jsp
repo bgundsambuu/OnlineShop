@@ -47,6 +47,7 @@
                             </div>
                             <div class="text-center">
                                 <button type="button" class="btn btn-primary my-4">Change Password</button>
+                                <a href="/"><button type="button" class="btn btn-primary my-4">Cancel</button></a>
                             </div>
                         </form>
                     </div>

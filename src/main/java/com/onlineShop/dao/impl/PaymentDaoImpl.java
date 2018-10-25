@@ -28,16 +28,26 @@ public class PaymentDaoImpl implements PaymentDao {
 
 
     @Override
-    public OrderPayment getOrderPayment(int userId) {
+    public OrderPayment getOrderPayment(int customerId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from OrderPayment where customerId = ? and orderStatus='PENDING'");
-        query.setInteger(0, userId);
+        query.setInteger(0, customerId);
         OrderPayment orderPayment = (OrderPayment)query.uniqueResult();
-        query = session.createQuery("from OrderDetail where orderPaymentId = ? ");
-        query.setInteger(0, orderPayment.getOrderPaymentId());
-        List<OrderDetail> orderDetailList = query.list();
-        orderPayment.setOrderDetailList(orderDetailList);
+        if(orderPayment==null)
+            return null;
+        Customer customer = (Customer) session.get(Customer.class, customerId);
+        orderPayment.setCustomer(customer);
+        orderPayment.setAddress(customer.getAddress());
         return orderPayment;
+    }
+
+    @Override
+    public List<OrderDetail> getOrderDetail(int orderPaymentId) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from OrderDetail where orderPaymentId = ? ");
+        query.setInteger(0, orderPaymentId);
+        List<OrderDetail> orderDetailList = query.list();
+        return orderDetailList;
     }
 
     @Override
@@ -68,9 +78,10 @@ public class PaymentDaoImpl implements PaymentDao {
     @Override
     public boolean checkOut(OrderPayment orderPayment) {
         Session session = sessionFactory.getCurrentSession();
-        orderPayment.setPaidDate(new Date());
-        orderPayment.setOrderStatus("PAYED");
-        session.saveOrUpdate(orderPayment);
+        OrderPayment orderPaymentTmp = (OrderPayment) session.get(OrderPayment.class, orderPayment.getOrderPaymentId());
+        orderPaymentTmp.setPaidDate(new Date());
+        orderPaymentTmp.setOrderStatus("PAYED");
+        session.saveOrUpdate(orderPaymentTmp);
         session.flush();
         return true;
     }
@@ -89,20 +100,19 @@ public class PaymentDaoImpl implements PaymentDao {
             CompanyFinTxn companyFinTxn = new CompanyFinTxn();
             companyFinTxn.setPaidDate(new Date());
             companyFinTxn.setAmount((orderDetail.getQuantity() * orderDetail.getProduct().getProductPrice()) * subscription.getCompPercentage() / 100);
-            //companyFinTxn.setProductId(orderDetail.getProduct().getProductId());
+            companyFinTxn.setProductId(orderDetail.getProduct().getProductId());
             companyFinTxn.setStatus("Payed");
-            //companyFinTxn.setVendorId(orderDetail.getProduct().get);
 
             VendorFinTxn vendorFinTxn = new VendorFinTxn();
             vendorFinTxn.setPaidDate(new Date());
             vendorFinTxn.setAmount(orderDetail.getQuantity() * orderDetail.getProduct().getProductPrice() * subscription.getVendorPercentage() / 100);
-            //vendorFinTxn.setProductId(orderDetail.getProduct().getProductId());
+            vendorFinTxn.setProductId(orderDetail.getProduct().getProductId());
             vendorFinTxn.setStatus("Payed");
 
             TaxFinTxn taxFinTxn = new TaxFinTxn();
             taxFinTxn.setPaidDate(new Date());
             taxFinTxn.setAmount(orderDetail.getQuantity() * orderDetail.getProduct().getProductPrice() * subscription.getTaxPercentage() / 100);
-            //taxFinTxn.setProductId(orderDetail.getProduct().getProductId());
+            taxFinTxn.setProductId(orderDetail.getProduct().getProductId());
             taxFinTxn.setStatus("Payed");
 
             session.saveOrUpdate(companyFinTxn);

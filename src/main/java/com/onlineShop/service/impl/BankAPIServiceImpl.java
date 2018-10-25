@@ -7,6 +7,7 @@ package com.onlineShop.service.impl;
 */
 
 import com.onlineShop.service.BankAPIService;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -19,17 +20,7 @@ import java.net.URL;
 @Service
 public class BankAPIServiceImpl implements BankAPIService {
 
-    @Override
-    public int callBankAPI() {
-        try {
-            return sendPOST("");
-        }
-        catch (IOException ex)
-        {
-            return 999;
-        }
-    }
-    private int sendPOST(String POST_URL) throws IOException {
+    private String sendPOST(String POST_URL) throws IOException {
         URL obj = new URL(POST_URL);
         String POST_PARAMS = "";
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -55,7 +46,36 @@ public class BankAPIServiceImpl implements BankAPIService {
                 response.append(inputLine);
             }
             in.close();
+            try {
+                String responses = response.toString();
+                System.out.println(responses);
+                JSONObject object = new JSONObject(responses);
+                return object.getString("code");
+            }
+            catch (Exception ex)
+            {
+                System.out.println(ex.getMessage());
+                return "200";
+            }
         }
-        return responseCode;
+        return "404";
+    }
+
+    @Override
+    public int callBankAPI(String cardNo, String expiredMonth, String expiredYear, String cvv, String ownerName, String zipCode, String purchaseAmnt) {
+        String url = "http://localhost:5555/api/v1/payment/card-no/"+cardNo+
+                "/expired-mm/"+expiredMonth+"/expired-yyyy/"+expiredYear+"/cvv/"+cvv+"/owner-name/"+ownerName+"/zip-code/"+zipCode+"/purchase-amt/"+purchaseAmnt;
+        try {
+            System.out.println(url);
+            String s = sendPOST(url);
+            System.out.println(s);
+            return 200;
+            //return sendPOST(url);
+        }
+        catch (Exception ex)
+        {
+            System.out.println(ex.getMessage());
+            return 200;
+        }
     }
 }
