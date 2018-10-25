@@ -35,7 +35,7 @@
                         </c:forEach>
                     </ul>
                     <ul class="navbar_user">
-                        <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                         <%!
                             String checku() {
                                 User user = SessionUtil.getUser();
