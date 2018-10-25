@@ -58,14 +58,15 @@
         <security:intercept-url pattern="/profile/**" access="ROLE_USER" />
         <security:intercept-url pattern="/vendor/**" access="ROLE_VENDOR" />
         <security:form-login
-            login-page="/login"
-            default-target-url="/"
-            authentication-failure-url="/login?error"
-            username-parameter="username"
-            password-parameter="password" />
+                login-page="/loginpage"
+                default-target-url="/"
+                authentication-failure-url="/login?error"
+                username-parameter="username"
+                password-parameter="password" />
         <security:logout
-            logout-success-url="/login?logout" />
+                logout-success-url="/loginpage" />
     </security:http>
+
 
     <security:authentication-manager>
         <security:authentication-provider>

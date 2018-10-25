@@ -24,10 +24,9 @@
                             Sign in:
                         </div>
                         <form name="loginForm" action="<c:url value="/j_spring_security_check"/>" method="post">
-                            <c:if test="${not empty error}" >
-                                <div class="error" style=""> ${error}</div>
+                            <c:if test="${not empty error}">
+                                <div class="error" style="">${error}</div>
                             </c:if>
-
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-alternative">
                                     <input class="form-control is-invalid" placeholder="Email" type="email" name="username">
@@ -45,7 +44,6 @@
                             <%--</div>--%>
                             <div class="text-center">
                                 <input type="submit" value="SignIn" class="btn btn-primary my-4">
-                                <%--<button type="button" class="btn btn-primary my-4">Sign in</button>--%>
                                 <a href="/"><button type="button" class="btn btn-primary my-4">Cancel</button></a>
                             </div>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
