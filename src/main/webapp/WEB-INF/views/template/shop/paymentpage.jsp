@@ -59,7 +59,7 @@
                             </c:if>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="/card?redirect=payment" class="btn btn-primary mt-3 mb-3">Add new card</a>
+                                    <a href="/cardpage?redirect=paymentpage" class="btn btn-primary mt-3 mb-3">Add new card</a>
                                 </div>
                             </div>
                         </div>
@@ -69,6 +69,12 @@
                     <div class="row mt-3">
                         <div class="col-md-12 form-group">
                             <h3>Shipping Details</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 form-group p_star">
+                            <input type="checkbox" id="newaddr" name="newaddress"/>
+                            <label for="newaddr">New Address?</label>
                         </div>
                     </div>
                     <div class="row mt-3">

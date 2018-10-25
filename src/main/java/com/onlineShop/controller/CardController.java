@@ -36,7 +36,7 @@ public class CardController {
         CardDetail cardDetail = new CardDetail();
         model.addAttribute("cardDetail", cardDetail);
         model.addAttribute("redirect",redirect);
-        return "template/shop/cardDetail";
+        return "template/shop/cardDetailpage";
     }
 
     @RequestMapping(value = "/addCardDetail", method = RequestMethod.POST)
@@ -48,21 +48,21 @@ public class CardController {
         model.addAttribute("cards", carDetailList);
 
         if (result.hasErrors()) {
-            return "template/shop/cardDetail";
+            return "template/shop/cardDetailpage";
         }
 
         if(cardDetail.getCardType().equals("VISA")) {
             if (!cardDetail.getCardNumber().startsWith("4"))
             {
                 model.addAttribute("ERROR_MESSAGE","Visa card number must starts with 4.");
-                return "template/shop/cardDetail";
+                return "template/shop/cardDetailpage";
             }
         }
         else{
             if (!cardDetail.getCardNumber().startsWith("5"))
             {
                 model.addAttribute("ERROR_MESSAGE","Master card number must starts with 5.");
-                return "template/shop/cardDetail";
+                return "template/shop/cardDetailpage";
             }
         }
 
@@ -72,10 +72,10 @@ public class CardController {
         boolean b = cardService.addCardDetail(cardDetail);
         if(b) {
             redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE","Successfully added new card.");
-            return "redirect:/card";
+            return "redirect:/cardpage";
         }
         model.addAttribute("ERROR_MESSAGE", "Error occurred when add new card.");
-        return "template/shop/cardDetail";
+        return "template/shop/cardDetailpage";
     }
 }
 

@@ -264,7 +264,7 @@ public class HomeController {
         orderPayment.setOrderDetailList(orderDetailList);
         orderPayment.setOrderStatus("PENDING");
         shoppingCartService.add(orderPayment);
-        return "redirect:/payment";
+        return "redirect:/paymentpage";
     }
 
     @RequestMapping(value = "/searchCategory", method = RequestMethod.GET)

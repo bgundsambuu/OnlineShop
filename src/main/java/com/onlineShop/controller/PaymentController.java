@@ -37,7 +37,7 @@ public class PaymentController {
         if(subscription==null)
         {
             model.addAttribute("ERROR_MESSAGE", "Please configure subscription.");
-            return "template/shop/payment";
+            return "template/shop/paymentpage";
         }
         List<CardDetail> cardDetailList = cardService.getCardList(1);
         if(cardDetailList==null||cardDetailList.size()==0)
@@ -51,12 +51,12 @@ public class PaymentController {
         if(orderPayment==null)
         {
             model.addAttribute("ERROR_MESSAGE", "No pending cart is registered.");
-            return "template/shop/payment";
+            return "template/shop/paymentpage";
         }
         if(orderPayment.getOrderDetailList().isEmpty())
         {
             model.addAttribute("ERROR_MESSAGE", "No pending available cart details.");
-            return "template/shop/payment";
+            return "template/shop/paymentpage";
         }
 
         double total = 0;
@@ -70,7 +70,7 @@ public class PaymentController {
         orderPayment.setTaxAmount(taxAmount);
         orderPayment.setTotalAmount(orderPayment.getTotal()+taxAmount);
         model.addAttribute("orderPayment", orderPayment);
-        return "template/shop/payment";
+        return "template/shop/paymentpage";
     }
 
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
@@ -85,13 +85,13 @@ public class PaymentController {
         model.addAttribute("cards", cardDetailList);
 
         if (result.hasErrors()) {
-            return "template/shop/payment";
+            return "template/shop/paymentpage";
         }
 
         if(selCard==null||selCard.isEmpty())
         {
             model.addAttribute("ERROR_MESSAGE","Please select a card.");
-            return "template/shop/payment";
+            return "template/shop/paymentpage";
         }
 
         CardDetail cardDetail = cardService.getCardById(Integer.parseInt(selCard));
@@ -100,7 +100,7 @@ public class PaymentController {
         if(!cardDetail.getZipCode().equals(orderPayment.getZipCode()))
         {
             model.addAttribute("ERROR_MESSAGE","Wrong zip code.");
-            return "template/shop/payment";
+            return "template/shop/paymentpage";
         }
         Result result1 = paymentService.doPayment(orderPayment, newaddress);
         if(result1.getId()==0)
@@ -112,7 +112,7 @@ public class PaymentController {
             model.addAttribute("ERROR_MESSAGE",result1.getMessage());
         }
 
-        return "template/shop/payment";
+        return "template/shop/paymentpage";
     }
 }
 

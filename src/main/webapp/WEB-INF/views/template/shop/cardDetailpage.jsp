@@ -165,7 +165,7 @@
                                 </div>
                         </form:form>
                         <c:if test="${redirect != null}">
-                            <a href="/payment">Return to payment</a>
+                            <a href="/paymentpage">Return to payment</a>
                         </c:if>
                     </div>
                 </div>
