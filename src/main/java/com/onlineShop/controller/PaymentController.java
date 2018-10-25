@@ -1,10 +1,8 @@
 package com.onlineShop.controller;
 
 import com.onlineShop.model.*;
-import com.onlineShop.service.BankAPIService;
-import com.onlineShop.service.CardService;
-import com.onlineShop.service.PaymentService;
-import com.onlineShop.service.SubscriptionService;
+import com.onlineShop.service.*;
+import com.onlineShop.service.impl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
@@ -77,47 +75,43 @@ public class PaymentController {
 
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public String addCardDetail(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
-                                BindingResult result,
-                                Locale locale, Model model, String card, boolean newaddress) {
+                                BindingResult result, Model model, String selCard, boolean newaddress) {
+        model.addAttribute("orderPayment", orderPayment);
+        List<CardDetail> cardDetailList = cardService.getCardList(1);
+        if(cardDetailList==null||cardDetailList.size()==0)
+        {
+            model.addAttribute("ERROR_MESSAGE", "Please add card.");
+        }
+        model.addAttribute("cards", cardDetailList);
+
         if (result.hasErrors()) {
             return "template/shop/payment";
         }
 
-        if(card.isEmpty()||card==null)
+        if(selCard==null||selCard.isEmpty())
         {
             model.addAttribute("ERROR_MESSAGE","Please select a card.");
             return "template/shop/payment";
         }
 
-        //if(newaddress)
-        Result result1 = paymentService.doPayment(orderPayment);
-
-        /*
-        if(cardDetail.getCardType().equals("VISA")) {
-            if (!cardDetail.getCardNumber().startsWith("4"))
-            {
-                model.addAttribute("ERROR_MESSAGE","Visa card number must starts with 4.");
-                return "template/shop/profilecard";
-            }
+        CardDetail cardDetail = cardService.getCardById(Integer.parseInt(selCard));
+        orderPayment.setCard(cardDetail);
+        orderPayment.setCustomer(cardDetail.getCustomer());
+        if(!cardDetail.getZipCode().equals(orderPayment.getZipCode()))
+        {
+            model.addAttribute("ERROR_MESSAGE","Wrong zip code.");
+            return "template/shop/payment";
         }
-        else{
-            if (!cardDetail.getCardNumber().startsWith("5"))
-            {
-                model.addAttribute("ERROR_MESSAGE","Master card number must starts with 5.");
-                return "template/shop/profilecard";
-            }
+        Result result1 = paymentService.doPayment(orderPayment, newaddress);
+        if(result1.getId()==0)
+        {
+            model.addAttribute("SUCCESS_MESSAGE",result1.getMessage());
+        }
+        else
+        {
+            model.addAttribute("ERROR_MESSAGE",result1.getMessage());
         }
 
-        Date date = new Date(cardDetail.getExpYear(),cardDetail.getExpMonth(),1);
-        cardDetail.setCardExp(date);
-
-        boolean b = cardService.addCardDetail(cardDetail);
-        if(b) {
-            redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE","Successfully added new card.");
-            return "redirect:/card";
-        }
-        */
-        model.addAttribute("ERROR_MESSAGE", "Error occurred when add new card.");
         return "template/shop/payment";
     }
 }

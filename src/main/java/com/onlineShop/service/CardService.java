@@ -17,4 +17,5 @@ public interface CardService {
     Customer getCustomer(int userId);
     List<CardDetail> getCardList(int userId);
     boolean addCardDetail(CardDetail cardDetail);
+    CardDetail getCardById(int cardId);
 }
