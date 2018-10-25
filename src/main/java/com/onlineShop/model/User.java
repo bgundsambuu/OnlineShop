@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue
     private int userId;
     @NotEmpty(message = "Username(Email) may not be empty.")
-    @Size(max = 100, message = "Maximum 100 characters limited.")
+    @Size(max = 500, message = "Maximum 500 characters limited.")
     @Pattern(regexp = "^([\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6})|$",
             message = "Invalid email address.")
     private String userName;

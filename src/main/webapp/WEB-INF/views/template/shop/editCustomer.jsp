@@ -94,7 +94,7 @@
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-alternative">
                                         <form:input path="customer.phoneNumber" value="${user.customer.phoneNumber}"
-                                                    maxlength="20"
+                                                    maxlength="100"
                                                     cssClass="form-control ${status.error ? 'is-invalid' : ''}"
                                                     placeholder="Phone Number" type="tel"/>
                                     </div>
@@ -104,7 +104,7 @@
                             <spring:bind path="userName">
                                 <div class="form-group">
                                     <div class="input-group input-group-alternative">
-                                        <form:input path="userName" value="${user.userName}" maxlength="20"
+                                        <form:input path="userName" value="${user.userName}" maxlength="100"
                                                     cssClass="form-control ${status.error ? 'is-invalid' : ''}"
                                                     placeholder="Username(Email)" type="text"/>
                                     </div>

@@ -6,6 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="login-wrapper">
     <div class="container mt--8 pb-5">
@@ -23,17 +27,20 @@
                         <div class="text-center text-muted mb-4">
                             Password reset
                         </div>
-                        <form:form action="${pageContext.request.contextPath}/changepassword" method="post"
-                                   commandName="user">
+                        <%--<form:form action="${pageContext.request.contextPath}/forgotpassword" method="post"--%>
+                        <%--<form:form action="${pageContext.request.contextPath}/forgotpassword" method="post"--%>
+                                   <%--commandName="user">--%>
+                            <form role="form" method="post" action="forgotpassword" >
                             <div class="form-group mb-3">
-                                <label for="email">Enter your email address and we'll send you information to access your account.</label>
-                                <input id="email" class="form-control is-invalid" placeholder="Email" type="email">
+                                <label for="email">AAAEnter your email address and we'll send you information to access your account.</label>
+                                <input id="email" class="form-control is-invalid" placeholder="Email" name="email" type="email">
                                 <div class="invalid-feedback d-block">Can't be blank!</div>
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary my-4">Submit</button>
+                                <a type="button" href="/" class="btn btn-primary my-4">Cancel</a>
                             </div>
-                        </form>
+                        </Form>
                     </div>
                 </div>
             </div>

@@ -49,19 +49,24 @@ public class PaymentServiceImpl implements PaymentService {
         }
         LocalDate localDate = orderPayment.getCard().getCardExp().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         BankAPIService bankAPIService = new BankAPIServiceImpl();
-        int bankResult = bankAPIService.callBankAPI(String.valueOf(orderPayment.getCard().getCardNumber()),
-                        String.valueOf(localDate.getMonthValue()),
-                        String.valueOf(localDate.getYear()),
-                        String.valueOf(orderPayment.getCard().getSecurityNumber()),
-                        String.valueOf(orderPayment.getCard().getCardHolderName()), String.valueOf(orderPayment.getCard().getZipCode()),
-                        String.valueOf(orderPayment.getTotalAmount()));
-        if(bankResult != 200)
+        try {
+            int bankResult = bankAPIService.callBankAPI(String.valueOf(orderPayment.getCard().getCardNumber()),
+                    String.valueOf(localDate.getMonthValue()),
+                    String.valueOf(localDate.getYear()),
+                    String.valueOf(orderPayment.getCard().getSecurityNumber()),
+                    String.valueOf(orderPayment.getCard().getCardHolderName()), String.valueOf(orderPayment.getCard().getZipCode()),
+                    String.valueOf(orderPayment.getTotalAmount()));
+            if (bankResult != 200) {
+                Messages messages = paymentDao.getMsg(bankResult);
+                if (messages == null)
+                    return new Result(43, "Unknown bank error: " + String.valueOf(messages.getMsgId()));
+                else
+                    return new Result(bankResult, messages.getMsgValue());
+            }
+        }
+        catch (Exception ex)
         {
-            Messages messages = paymentDao.getMsg(bankResult);
-            if(messages==null)
-                return new Result(43, "Unknown bank error: " + String.valueOf(messages.getMsgId()));
-            else
-                return new Result(bankResult, messages.getMsgValue());
+            System.out.println(ex);
         }
         if(!paymentDao.checkOut(orderPayment))
         {
@@ -79,9 +84,9 @@ public class PaymentServiceImpl implements PaymentService {
         {
             receipt+="\r\n"+"Product: "+orderDetail.getProduct().getProductName()+"\r\nPrice:"+orderDetail.getProduct().getProductPrice()+"$\r\nQuantity:"+orderDetail.getQuantity()+"\r\n";
         }
-        Result result = emailService.sendEmail(orderPayment.getCustomer().getUser().getUserName(),"Purchase receipt",receipt);
-        if(result.getId()!=0)
-            return result;
+        //Result result = emailService.sendEmail(orderPayment.getCustomer().getUser().getUserName(),"Purchase receipt",receipt);
+        // if(result.getId()!=0)
+        //    return result;
 
         return new Result(0,receipt);
     }
