@@ -165,20 +165,21 @@ public class KenzoController {
     @RequestMapping("/paymentpage")
     public String payment(Model model)
     {
+        int customerId = 1;
         Subscription subscription = subscriptionService.getSubscription();
         if(subscription==null)
         {
             model.addAttribute("ERROR_MESSAGE", "Please configure subscription.");
             return "template/shop/payment";
         }
-        List<CardDetail> cardDetailList = cardService.getCardList(1);
+        List<CardDetail> cardDetailList = cardService.getCardList(customerId);
         if(cardDetailList==null||cardDetailList.size()==0)
         {
             model.addAttribute("ERROR_MESSAGE", "Please add card.");
         }
         model.addAttribute("cards", cardDetailList);
 
-        OrderPayment orderPayment = paymentService.getOrderPayment(1);
+        OrderPayment orderPayment = paymentService.getOrderPayment(customerId);
         model.addAttribute("orderPayment", orderPayment);
         if(orderPayment==null)
         {
@@ -214,7 +215,8 @@ public class KenzoController {
     @RequestMapping("/cardpage")
     public String cardDetail(Model model, String redirect)
     {
-        List<CardDetail> carDetailList = cardService.getCardList(1);
+        int customerId = 1;
+        List<CardDetail> carDetailList = cardService.getCardList(customerId);
         model.addAttribute("cards", carDetailList);
         CardDetail cardDetail = new CardDetail();
         model.addAttribute("cardDetail", cardDetail);

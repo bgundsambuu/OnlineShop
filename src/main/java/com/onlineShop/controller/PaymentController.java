@@ -33,20 +33,21 @@ public class PaymentController {
     @RequestMapping("/payment")
     public String payment(Model model)
     {
+        int customerId=1;
         Subscription subscription = subscriptionService.getSubscription();
         if(subscription==null)
         {
             model.addAttribute("ERROR_MESSAGE", "Please configure subscription.");
             return "template/shop/paymentpage";
         }
-        List<CardDetail> cardDetailList = cardService.getCardList(1);
+        List<CardDetail> cardDetailList = cardService.getCardList(customerId);
         if(cardDetailList==null||cardDetailList.size()==0)
         {
             model.addAttribute("ERROR_MESSAGE", "Please add card.");
         }
         model.addAttribute("cards", cardDetailList);
 
-        OrderPayment orderPayment = paymentService.getOrderPayment(1);
+        OrderPayment orderPayment = paymentService.getOrderPayment(customerId);
         model.addAttribute("orderPayment", orderPayment);
         if(orderPayment==null)
         {
@@ -76,8 +77,9 @@ public class PaymentController {
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public String doPayment(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
                                 BindingResult result, Model model, String selCard, boolean newaddress) {
+        int customerId = 1;
         model.addAttribute("orderPayment", orderPayment);
-        List<CardDetail> cardDetailList = cardService.getCardList(1);
+        List<CardDetail> cardDetailList = cardService.getCardList(customerId);
         if(cardDetailList==null||cardDetailList.size()==0)
         {
             model.addAttribute("ERROR_MESSAGE", "Please add card.");

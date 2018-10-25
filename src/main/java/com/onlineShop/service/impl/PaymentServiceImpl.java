@@ -6,8 +6,6 @@ package com.onlineShop.service.impl;
         Date: 10/16/2018 /October/
 */
 
-import com.onlineShop.dao.CardDao;
-import com.onlineShop.dao.CustomerDao;
 import com.onlineShop.dao.PaymentDao;
 import com.onlineShop.model.*;
 import com.onlineShop.service.BankAPIService;
@@ -28,17 +26,11 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentDao paymentDao;
 
     @Autowired
-    private CardDao cardDao;
-
-    @Autowired
-    private CustomerDao customerDao;
-
-    @Autowired
     private SubscriptionService subscriptionService;
 
     @Override
-    public OrderPayment getOrderPayment(int userId) {
-        return paymentDao.getOrderPayment(userId);
+    public OrderPayment getOrderPayment(int customerId) {
+        return paymentDao.getOrderPayment(customerId);
     }
 
     @Override

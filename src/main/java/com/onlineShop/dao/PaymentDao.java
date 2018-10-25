@@ -11,7 +11,7 @@ import com.onlineShop.model.*;
 import java.util.List;
 
 public interface PaymentDao {
-        OrderPayment getOrderPayment(int userId);
+        OrderPayment getOrderPayment(int customerId);
         List<OrderDetail> getOrderDetail(int orderPaymentId);
         Subscription getSubscription();
         Product blockProduct(OrderPayment orderPaymentId);

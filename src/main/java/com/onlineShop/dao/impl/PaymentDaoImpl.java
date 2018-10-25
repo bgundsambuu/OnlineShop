@@ -28,14 +28,14 @@ public class PaymentDaoImpl implements PaymentDao {
 
 
     @Override
-    public OrderPayment getOrderPayment(int userId) {
+    public OrderPayment getOrderPayment(int customerId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from OrderPayment where customerId = ? and orderStatus='PENDING'");
-        query.setInteger(0, userId);
+        query.setInteger(0, customerId);
         OrderPayment orderPayment = (OrderPayment)query.uniqueResult();
         if(orderPayment==null)
             return null;
-        Customer customer = (Customer) session.get(Customer.class, userId);
+        Customer customer = (Customer) session.get(Customer.class, customerId);
         orderPayment.setCustomer(customer);
         orderPayment.setAddress(customer.getAddress());
         return orderPayment;
