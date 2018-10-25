@@ -68,12 +68,12 @@ public class VendorController {
     }
 
     @RequestMapping(value = "vendore/product/edit/{id}", method = RequestMethod.GET)
-    public String editget(@PathVariable int id, Model  model){
-        Product product = productService.getProductById(id);
+    public String editget(@ModelAttribute("product") Product product, @PathVariable int id, Model  model){
+         product = productService.getProductById(id);
 
             model.addAttribute("product",product);
 
-        return"vendore/product/edit";
+        return"template/shop/editProduct";
     }
 
     @RequestMapping(value = "vendore/product/edit",method = RequestMethod.POST)
@@ -89,7 +89,7 @@ public class VendorController {
     }
 
     @RequestMapping(value = "vendor/product/{ProductId}", method = RequestMethod.GET)
-    public String getProduct(@PathVariable long proid, Model model){
+    public String getProduct(@PathVariable int proid, Model model){
         Product product = productService.getProductById(proid);
         model.addAttribute("product",product);
         return "template/dashboard/viewproduct_solomon";

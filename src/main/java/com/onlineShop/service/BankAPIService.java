@@ -6,6 +6,8 @@ package com.onlineShop.service;
         Date: 10/16/2018 /October/
 */
 
+import java.io.UnsupportedEncodingException;
+
 public interface BankAPIService {
-    public int callBankAPI(String cardNo, String expiredMonth, String expiredYear, String cvv, String ownerName, String zipCode, String purchaseAmnt);
+    public int callBankAPI(String cardNo, String expiredMonth, String expiredYear, String cvv, String ownerName, String zipCode, String purchaseAmnt) throws UnsupportedEncodingException;
 }

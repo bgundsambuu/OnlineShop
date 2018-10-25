@@ -93,7 +93,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getProductById(long id) {
         Session session = sessionFactory.getCurrentSession();
-        Query query = session.createQuery("from Product where productId=? and flag = 2");
+        Query query = session.createQuery("from Product where productId=?");
         query.setLong(0,id);
         return (Product) query.uniqueResult();
     }

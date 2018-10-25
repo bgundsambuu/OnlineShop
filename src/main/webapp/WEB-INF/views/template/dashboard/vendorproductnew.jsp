@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="unitInStock">Unit in stock:</label>
+                                    <label class="form-control-label" for="unitInStock">Creation Date:</label>
                                     <form:input id="creationDate" path="creationDate" placeholder="MM/dd/yyyy" class="form:input-large"/>
                                     <form:errors path="creationDate" cssClass="color: #ff0000;"/>
                                 </div>
