@@ -37,7 +37,7 @@
                     <c:if test="${not empty cards}">
                         <c:forEach items="${cards}" var="card">
                             <label>
-                                <input type="radio" id="cards" value="${card.cardNumber}" name="card">
+                                <input type="radio" id="cards" value="${card.cardId}" name="selCard">
                                     ${card.cardType} - XXXXXXXXXXXX${card.cardNumber.substring(11,15)} - <fmt:formatDate pattern="MM/yyyy"
                                                                                                                          value="${card.cardExp}"/>
                             </label>

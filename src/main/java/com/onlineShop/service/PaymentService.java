@@ -10,5 +10,5 @@ import com.onlineShop.model.Result;
 
 public interface PaymentService {
     OrderPayment getOrderPayment(int userId);
-    Result doPayment(OrderPayment orderPayment);
+    Result doPayment(OrderPayment orderPayment, boolean newAddress);
 }

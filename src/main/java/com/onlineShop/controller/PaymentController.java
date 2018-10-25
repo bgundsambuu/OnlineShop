@@ -77,20 +77,32 @@ public class PaymentController {
 
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public String addCardDetail(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
-                                BindingResult result,
-                                Locale locale, Model model, String card, boolean newaddress) {
+                                BindingResult result, Model model, String selCard, boolean newaddress) {
+        model.addAttribute("orderPayment", orderPayment);
+        List<CardDetail> cardDetailList = cardService.getCardList(1);
+        if(cardDetailList==null||cardDetailList.size()==0)
+        {
+            model.addAttribute("ERROR_MESSAGE", "Please add card.");
+        }
+        model.addAttribute("cards", cardDetailList);
+
         if (result.hasErrors()) {
             return "template/shop/payment";
         }
 
-        if(card.isEmpty()||card==null)
+        if(selCard==null||selCard.isEmpty())
         {
             model.addAttribute("ERROR_MESSAGE","Please select a card.");
             return "template/shop/payment";
         }
 
-        //if(newaddress)
-        Result result1 = paymentService.doPayment(orderPayment);
+        CardDetail cardDetail = cardService.getCardById(Integer.parseInt(selCard));
+        if(!cardDetail.getZipCode().equals(orderPayment.getZipCode()))
+        {
+            model.addAttribute("ERROR_MESSAGE","Wrong zip code.");
+            return "template/shop/payment";
+        }
+        Result result1 = paymentService.doPayment(orderPayment, newaddress);
 
         /*
         if(cardDetail.getCardType().equals("VISA")) {

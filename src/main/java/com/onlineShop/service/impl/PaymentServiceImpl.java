@@ -36,17 +36,14 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Result doPayment(OrderPayment orderPayment) {
-        List<CardDetail> carDetailList = cardDao.getCardList(1);
-        if(carDetailList==null||carDetailList.isEmpty())
-        {
-            return new Result(40, "Please register card.");
-        }
+    public Result doPayment(OrderPayment orderPayment, boolean newAddress) {
         Subscription subscription = subscriptionService.getSubscription();
         if(subscription==null)
         {
             return new Result(41, "Please configure subscription.");
         }
+        List<OrderDetail> orderDetailList = paymentDao.getOrderDetail(orderPayment.getOrderPaymentId());
+        orderPayment.setOrderDetailList(orderDetailList);
         Product product = paymentDao.blockProduct(orderPayment);
         if(product!=null)
         {
