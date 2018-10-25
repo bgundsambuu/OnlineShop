@@ -1,3 +1,4 @@
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 986250
@@ -29,6 +30,7 @@
     <div class="row">
         <div class="col">
             <div class="card shadow">
+<h1>${vendor.name}</h1>
                 <div class="card-header border-0">
                     <h3 class="mb-0">Products</h3>
                 </div>
@@ -41,11 +43,11 @@
                             <th scope="col">Price</th>
                             <th scope="col">Status</th>
                             <th scope="col">Quantity</th>
-                            <th scope="col">Sold</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
                         <tbody>
+                        <C:forEach items="${product}" var="product">
                         <tr>
                             <th scope="row">
                                 <div class="media align-items-center">
@@ -54,15 +56,15 @@
                                              alt="Product image"/>
                                     </a>
                                     <div class="media-body">
-                                        <span class="mb-0 text-sm">Product name here</span>
+                                        <span class="mb-0 text-sm">${product.productName} - product</span>
                                     </div>
                                 </div>
                             </th>
                             <td>
-                                Men's
+                                ${product.category.categoryName}
                             </td>
                             <td>
-                                $250 USD
+                                ${product.productName}
                             </td>
                             <td>
                               <span class="badge badge-dot mr-4">
@@ -70,15 +72,13 @@
                               </span>
 
                               <span class="badge badge-dot mr-4">
-                                <i class="bg-success"></i> active
+                                <i class="bg-success"></i> ${product.flag}
                               </span>
                             </td>
                             <td>
-                                20
+                                ${product.unitInStock}
                             </td>
-                            <td>
-                                10
-                            </td>
+
                             <td class="text-right">
                                 <div class="dropdown">
                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
@@ -86,15 +86,20 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
-                                        <a class="dropdown-item" href="#">Approve</a>
-                                        <a class="dropdown-item" href="#">Decline</a>
+                                        <a class="dropdown-item" href="">Edit</a>
+                                        <form action="/vendor/product/edit/${product.productId}" method="get">
+                                            <button typ="submit"  class="dropdown-item" href="#">edit</button>
+                                        </form>
+                                        <form action="/vendor/product/delete/${product.productId}" method="post">
+                                            <button typ="submit"  class="dropdown-item" href="#">Delete</button>
+                                        </form>
+
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
+                        </C:forEach>
                     </table>
                 </div>
                 <div class="card-footer py-4">
