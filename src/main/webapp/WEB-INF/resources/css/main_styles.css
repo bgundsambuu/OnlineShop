@@ -178,10 +178,6 @@ h6::selection
 	font-weight: 500;
 	color: #777777 !important;
 }
-.form-control
-{
-	color: #db5246;
-}
 section
 {
 	display: block;
@@ -454,7 +450,13 @@ section
 /*********************************
 3.3 Account
 *********************************/
-
+.product-list-left{
+	display: inline-block;
+	max-width:40%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .account
 {
 	display: inline-block;
@@ -814,6 +816,39 @@ section
 	display: block;
 	height: 56px;
 	width: 110px;
+}
+
+.list {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+.list li{
+	margin: 0;
+	padding: 0;
+}
+.order_box .list li a {
+	font-size: 14px;
+	color: #777777;
+	font-weight: normal;
+	border-bottom: 1px solid #eeeeee;
+	display: block;
+	line-height: 42px;
+}
+.order_box .list li a span {
+	float: right;
+}
+.order_box h2 {
+	border-bottom: 1px solid #dddddd;
+	font-size: 18px;
+	font-weight: 500;
+	color: #222222;
+	padding-bottom: 15px;
+}
+.order_box .list_2 li a {
+	text-transform: uppercase;
+	color: #222222;
+	font-weight: 500;
 }
 
 /*********************************

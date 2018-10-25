@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@include file="/WEB-INF/views/template/shop/inc/header.jsp" %>
 
@@ -13,109 +16,91 @@
     <div class="billing_details">
         <div class="row">
             <div class="col-lg-8">
-                <h3>Billing Details</h3>
-                <div class="p-3 p-lg-5 border">
-                    <form class="row contact_form" action="#" method="post" novalidate="novalidate">
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="first" name="name">
-                            <span class="placeholder" data-placeholder="First name"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="last" name="name">
-                            <span class="placeholder" data-placeholder="Last name"></span>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="company" name="company"
-                                   placeholder="Company name">
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="number" name="number">
-                            <span class="placeholder" data-placeholder="Phone number"></span>
-                        </div>
-                        <div class="col-md-6 form-group p_star">
-                            <input type="text" class="form-control" id="email" name="compemailany">
-                            <span class="placeholder" data-placeholder="Email Address"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select" style="display: none;">
-                                <option value="1">Country</option>
-                                <option value="2">Country</option>
-                                <option value="4">Country</option>
-                            </select>
-                            <div class="nice-select country_select" tabindex="0"><span class="current">Country</span>
-                                <ul class="list">
-                                    <li data-value="1" class="option selected">Country</li>
-                                    <li data-value="2" class="option">Country</li>
-                                    <li data-value="4" class="option">Country</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add1" name="add1">
-                            <span class="placeholder" data-placeholder="Address line 01"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="add2" name="add2">
-                            <span class="placeholder" data-placeholder="Address line 02"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <input type="text" class="form-control" id="city" name="city">
-                            <span class="placeholder" data-placeholder="Town/City"></span>
-                        </div>
-                        <div class="col-md-12 form-group p_star">
-                            <select class="country_select" style="display: none;">
-                                <option value="1">District</option>
-                                <option value="2">District</option>
-                                <option value="4">District</option>
-                            </select>
-                            <div class="nice-select country_select" tabindex="0"><span class="current">District</span>
-                                <ul class="list">
-                                    <li data-value="1" class="option selected">District</li>
-                                    <li data-value="2" class="option">District</li>
-                                    <li data-value="4" class="option">District</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Create an account?</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form-group" style="width: auto; overflow: hidden;">
-                            <div class="creat_account">
-                                <h3>Shipping Details</h3>
-                                <input type="checkbox" id="f-option3" name="selector">
-                                <label for="f-option3">Ship to a different address?</label>
-                            </div>
-                            <grammarly-ghost spellcheck="false">
-                                <div data-id="a4d8f968-c513-b893-ec3d-20b287251c12"
-                                     data-gramm_id="a4d8f968-c513-b893-ec3d-20b287251c12" data-gramm="gramm"
-                                     data-gramm_editor="true" class="gr_ver_2" gramm="true" contenteditable="true"
-                                     style="position: absolute; color: transparent; overflow: hidden; white-space: pre-wrap; border-radius: 3px; box-sizing: border-box; height: 150px; width: 750px; margin: 109px 0px 0px 15px; padding: 6px 12px 6px 20px; z-index: 0; border-width: 1px; border-style: solid; background: none 0% 0% / auto repeat scroll padding-box padding-box rgb(255, 255, 255); top: 0px; left: 0px;">
-                                    <span style="display: inline-block; font: 400 13px/26px Roboto, sans-serif; color: transparent; overflow: hidden; text-align: left; float: initial; clear: none; box-sizing: border-box; vertical-align: baseline; white-space: pre-wrap; width: 100%; margin: 0px; padding: 0px; border: 0px; letter-spacing: normal; text-shadow: none; height: 148px;"></span><br>
+                <form:form role="form" method="post" action="pay" modelAttribute="orderPayment">
+
+                    <div class="row mt-3">
+                        <div class="mb-3 mt-3">
+                            <c:if test="${SUCCESS_MESSAGE != null}">
+                                <div class="alert alert-success" role="alert">
+                                        ${SUCCESS_MESSAGE}
                                 </div>
-                            </grammarly-ghost>
-                            <textarea class="form-control" name="message" id="message" rows="1"
-                                      placeholder="Order Notes" data-gramm="true"
-                                      data-txt_gramm_id="a4d8f968-c513-b893-ec3d-20b287251c12"
-                                      data-gramm_id="a4d8f968-c513-b893-ec3d-20b287251c12" spellcheck="false"
-                                      data-gramm_editor="true"
-                                      style="z-index: auto; position: relative; line-height: 26px; font-size: 13px; transition: none 0s ease 0s; background: transparent !important;"></textarea>
-                            <grammarly-btn>
-                                <div class="_1BN1N Kzi1t MoE_1 _2DJZN"
-                                     style="z-index: 2; transform: translate(734px, 228px);">
-                                    <div class="_1HjH7">
-                                        <div title="Protected by Grammarly" class="_3qe6h">&nbsp;</div>
+                            </c:if>
+                            <c:if test="${ERROR_MESSAGE != null}">
+                                <div class="alert alert-danger" role="alert">
+                                        ${ERROR_MESSAGE}
+                                </div>
+                            </c:if>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <h3>Card Details</h3>
+                            <c:if test="${not empty cards}">
+                                <c:forEach items="${cards}" var="card">
+                                    <label>
+                                        <input type="radio" id="cards" value="${card.cardId}" name="selCard">
+                                            ${card.cardType} - XXXXXXXXXXXX${card.cardNumber.substring(11,15)} -
+                                        <fmt:formatDate pattern="MM/yyyy"
+                                                        value="${card.cardExp}"/>
+                                    </label>
+                                    <br/>
+                                </c:forEach>
+                                <c:if test="${orderPayment!=null}">
+                                    <div class="form-group">
+                                        <label for="zipCode">Billing zip code:
+                                        </label>
+                                        <div>
+                                            <form:input type="text"
+                                                        path="zipCode" maxlength="5"/>
+
+                                            <form:errors path="zipCode"/>
+                                        </div>
                                     </div>
+                                </c:if>
+                            </c:if>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="/card?redirect=payment" class="btn btn-primary mt-3 mb-3">Add new card</a>
                                 </div>
-                            </grammarly-btn>
+                            </div>
                         </div>
-                    </form>
-                </div>
+
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12 form-group">
+                            <h3>Shipping Details</h3>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 form-group p_star">
+                            <form:input type="text" cssClass="form-control" placeholder="State" path="address.state"/>
+                            <form:errors path="address.state"/>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                            <form:input type="text" cssClass="form-control" placeholder="City" path="address.city"/>
+                            <form:errors path="address.city"/>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12 form-group">
+                            <form:input type="text" cssClass="form-control" placeholder="Street" path="address.street"/>
+                            <form:errors path="address.street"/>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 form-group p_star">
+                            <form:input type="text" path="address.zipCode" cssClass="form-control" placeholder="Zip Code" maxlength="5"/>
+                            <form:errors path="address.zipCode"/>
+                        </div>
+                        <div class="col-md-6 form-group p_star">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12 form-group p_star">
+                            <button class="btn btn-primary btn-lg mt-3" type="submit">Place order</button>
+                        </div>
+                    </div>
+                </form:form>
             </div>
             <div class="col-lg-4">
                 <div class="order_box">
@@ -123,76 +108,41 @@
                     <div class="p-3 p-lg-5 border">
                         <ul class="list">
                             <li>
-                                <a href="#">Product
-                                    <span>Total</span>
+                                <a href="#"><strong>Product</strong>
+                                    <span><strong>Total</strong></span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">Fresh Blackberry
-                                    <span class="middle">x 02</span>
-                                    <span class="last">$720.00</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">Fresh Tomatoes
-                                    <span class="middle">x 02</span>
-                                    <span class="last">$720.00</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">Fresh Brocoli
-                                    <span class="middle">x 02</span>
-                                    <span class="last">$720.00</span>
-                                </a>
-                            </li>
+                            <c:forEach items="${orderPayment.orderDetailList}" var="odetail">
+                                <li>
+                                    <a href="#">
+                                        <em class="product-list-left">${odetail.product.productName}</em>
+                                        <span class="middle"> x ${odetail.quantity}</span>
+                                        <span class="last">$${odetail.product.productPrice}</span>
+                                    </a>
+                                </li>
+                            </c:forEach>
                         </ul>
                         <ul class="list list_2">
                             <li>
                                 <a href="#">Subtotal
-                                    <span>$2160.00</span>
+                                    <span>$${total}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">Shipping
-                                    <span>Flat rate: $50.00</span>
+                                <a href="#">Tax amount
+                                    <span>$${taxAmount}</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">Total
-                                    <span>$2210.00</span>
+                                    <span>$${totalAmount}</span>
                                 </a>
                             </li>
                         </ul>
-                        <div class="payment_item">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option5" name="selector">
-                                <label for="f-option5">Check payments</label>
-                                <div class="check"></div>
-                            </div>
-                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store
-                                Postcode.</p>
-                        </div>
-                        <div class="payment_item active">
-                            <div class="radion_btn">
-                                <input type="radio" id="f-option6" name="selector">
-                                <label for="f-option6">Paypal </label>
-                                <img src="img/product/single-product/card.jpg" alt="">
-                                <div class="check"></div>
-                            </div>
-                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store
-                                Postcode.</p>
-                        </div>
-                        <div class="creat_account">
-                            <input type="checkbox" id="f-option4" name="selector">
-                            <label for="f-option4">I’ve read and accept the </label>
-                            <a href="#">terms &amp; conditions*</a>
-                        </div>
-                        <a class="main_btn" href="#">Proceed to Paypal</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<%@include file="/WEB-INF/views/template/shop/inc/footer.jsp" %>
+    <%@include file="/WEB-INF/views/template/shop/inc/footer.jsp" %>
