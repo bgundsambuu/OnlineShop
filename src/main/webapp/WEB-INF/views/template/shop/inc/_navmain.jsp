@@ -94,7 +94,7 @@
                                 <a href="#" class="acc-profile"><i class="fa fa-user" aria-hidden="true"></i></a>
                                 <ul class="account_selection">
                                     <%  myFunc(out); %>
-                                    <li><a href="/profilepage"><i class="fa fa-cog" aria-hidden="true"></i> Profile</a></li>
+                                    <li><a href="/user"><i class="fa fa-cog" aria-hidden="true"></i> Profile</a></li>
                                     <li><a href="<c:url value="/j_spring_security_logout" />"><i class="fa fa-sign-out" aria-hidden="true"></i>Sign out</a></li>
                                 </ul>
                             </li>
