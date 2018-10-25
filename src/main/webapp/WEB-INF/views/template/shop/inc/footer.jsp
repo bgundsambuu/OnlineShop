@@ -38,6 +38,16 @@
 
 </div><!-- /.super_container -->
 
+<div class="modal fade bd-example-modal-lg" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form action="/searchSimilarProduct" method="get">
+                <input type="text" name="Product" class="form-control search-control" placeholder="Search..."/>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="<c:url value="/resources/js/jquery-3.2.1.min.js" />"></script>
 <script src="<c:url value="/resources/css/bootstrap4/popper.js" />"></script>
 <script src="<c:url value="/resources/css/bootstrap4/bootstrap.min.js" />"></script>

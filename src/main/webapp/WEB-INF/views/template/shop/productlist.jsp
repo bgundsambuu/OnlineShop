@@ -27,5 +27,5 @@
         </div>
     </div>
 
-    
+
     <%@include file="/WEB-INF/views/template/shop/inc/footer.jsp" %>

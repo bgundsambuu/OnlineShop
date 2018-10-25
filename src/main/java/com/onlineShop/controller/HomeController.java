@@ -66,15 +66,20 @@ public class HomeController {
         }
 
         HashMap<Long, Integer> cartItems = (HashMap<Long, Integer>) session.getAttribute("shoppingCart");
+        int total = 0;
         for (Long productId : cartItems.keySet()) {
             Product p = productService.findById(productId.intValue());
+            total+=p.getProductPrice()*cartItems.get(productId);
             products.add(p);
         }
 
-        System.out.println(cartItems.get(Long.valueOf(1)) + "=================");
+        System.out.println(products.get(0) + "=================");
 
         model.addAttribute("products", products);
         model.addAttribute("cartItems", cartItems);
+        model.addAttribute("total", total);
+
+
 
         return "template/shop/shoppingcart";
     }
@@ -287,9 +292,12 @@ public class HomeController {
 
     @RequestMapping(value = "/searchSimilarProduct", method = RequestMethod.GET)
     public String searchSimilarProduct(HttpServletRequest request, Model model) {
-        String productName = (String) request.getAttribute("Product");
-        Double downPrice = (Double) request.getAttribute("downPrice");
-        Double upPrice = (Double) request.getAttribute("upPrice");
+        String productName = (String) request.getParameter("Product");
+        String downPrice = request.getParameter("downPrice");
+        String upPrice = request.getParameter("upPrice");
+
+        System.out.println(productName + "99999999999999999999999999999999999");
+
         List<Product> products;
         if(productName == null){
             return "redirect:/";
@@ -297,11 +305,12 @@ public class HomeController {
         if(downPrice == null || upPrice == null){
             products = productService.findSimilarProd(productName);
         }else {
-            products = productService.findSimilarProdWithRange(productName, downPrice, upPrice);
+            products = productService.findSimilarProdWithRange(productName, Double.valueOf(downPrice), Double.valueOf(upPrice));
         }
         products.forEach(product -> System.out.println(product.getProductName()));
         model.addAttribute("products", products);
-        return "redirect:/";
+        model.addAttribute("categories", categoryService.findAllCategories());
+        return "/template/shop/productlist";
     }
     public String test(){
         System.out.println("Start Testing @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");

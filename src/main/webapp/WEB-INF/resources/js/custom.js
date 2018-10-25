@@ -83,6 +83,9 @@ jQuery(document).ready(function ($) {
 
     $(document).on("click", "a[data-deletecartitem]", function (e) {
         var id = $(this).data('deletecartitem');
+        var price = parseInt($(this).data('deleteprice'));
+        var total = $('#cart-total');
+        var totalPrice = parseInt(total.text());
         var tr_id = "product-"+id;
 
         var data = {
@@ -102,7 +105,11 @@ jQuery(document).ready(function ($) {
                     $('#'+tr_id).remove();
                 });
 
+                total.text(totalPrice - price);
+
                 prepareShoppingCart();
+
+
             }
         });
 

@@ -44,7 +44,7 @@
                     <c:forEach items="${products}" var="product">
                         <tr id="product-${product.productId}">
                             <td class="product-thumbnail">
-                                <img src="<c:url value="/resources/images/product_1.png"/>" alt="">
+                                <img width="200" src="<c:url value="/resources/images/watchs/prod_${product.productId}/img_1.jpg"/>" alt="">
                             </td>
                             <td class="product-name">
                                 <h2 class="h5 text-black">${product.productName}</h2>
@@ -63,7 +63,7 @@
 
                             </td>
                             <td>$${cartItems.get(Long.valueOf(product.productId))*product.productPrice}</td>
-                            <td><a href="#" data-deletecartitem="${product.productId}" class="btn btn-primary btn-sm">X</a></td>
+                            <td><a href="#" data-deletecartitem="${product.productId}" data-deleteprice="${cartItems.get(Long.valueOf(product.productId))*product.productPrice}" class="btn btn-primary btn-sm">X</a></td>
                         </tr>
                     </c:forEach>
 
@@ -87,20 +87,12 @@
                                     <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <span class="text-black">Subtotal</span>
-                                </div>
-                                <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
-                                </div>
-                            </div>
                             <div class="row mb-5">
                                 <div class="col-md-6">
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong class="text-black">$<span id="cart-total">${total}</span></strong>
                                 </div>
                             </div>
 

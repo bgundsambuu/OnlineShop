@@ -19,6 +19,59 @@ INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `prod
 INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`) VALUES ('8', '2', 'Fujifilm X100T 16 MP Digital Camera (Silver)', 'Fujifilm X100T 16 MP Digital Camera (Silver)', '59', '2000', '1');
 INSERT INTO `onshop`.`product` (`productId`, `flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`) VALUES ('9', '2', 'DYMO LabelWriter 450 Turbo Thermal Label Printer', 'DYMO LabelWriter 450 Turbo Thermal Label Printer', '29', '20', '2');
 
+
+INSERT INTO `onshop`.`product` (`flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`)
+VALUES ('2', 'Armand Nicolet, M02, Men''s Watch, Stainless Steel Case, Leather Alligator Strap, Swiss Mechanical Automatic ', 'Armand Nicolet, M02, Men''s Watch', '699', '20', '1');
+INSERT INTO `onshop`.`product` (`flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`)
+VALUES ('2', 'Glashutte, Senator Automatic, Men''s Watch', 'Glashutte, Senator Automatic, Men''s Watch', '6900', '10', '1');
+INSERT INTO `onshop`.`product` (`flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`)
+VALUES ('2', 'Villeret Single Pusher Chronograph, Men''s Watch', 'Villeret Single Pusher Chronograph, Men''s Watch', '26480', '5', '1');
+INSERT INTO `onshop`.`product` (`flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`)
+VALUES ('2', 'Breguet, Marine, Women''s Watch', 'Breguet, Marine, Women''s Watch', '7657', '6', '2');
+INSERT INTO `onshop`.`product` (`flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`)
+VALUES ('2', 'Tiffany & Co., Cocktail 5th Avenue, Women''s Watch', 'Tiffany & Co., Cocktail 5th Avenue, Women''s Watch', '8795', '100', '2');
+INSERT INTO `onshop`.`product` (`flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`)
+VALUES ('2', 'Zenith, Star 33mm, Women''s Watch', 'Zenith, Star 33mm, Women''s Watch', '8795', '3', '2');
+INSERT INTO `onshop`.`product` (`flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`)
+VALUES ('2', 'Child Phone Smart Watch', 'Child Phone Smart Watch', '15', '6', '3');
+INSERT INTO `onshop`.`product` (`flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`)
+VALUES ('2', 'Classic Kids Minifigure Interchangeable Links Watch', 'Classic Kids Minifigure Interchangeable Links Watch', '20', '2000', '3');
+INSERT INTO `onshop`.`product` (`flag`, `productDescription`, `productName`, `productPrice`, `unitInStock`, `categoryId`)
+VALUES ('2', 'Kid''s Timex Digital Watch', 'Kid''s Timex Digital Watch', '29', '20', '3');
+
+
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/men/prod_1/img_1.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/men/prod_1/img_2.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/men/prod_1/img_3.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/men/prod_2/img_1.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/men/prod_2/img_2.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/men/prod_2/img_3.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/men/prod_3/img_1.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/men/prod_3/img_2.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/men/prod_3/img_3.jpg');
+
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/women/prod_1/img_1.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/women/prod_1/img_2.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/women/prod_1/img_3.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/women/prod_2/img_1.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/women/prod_2/img_2.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/women/prod_2/img_3.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/women/prod_3/img_1.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/women/prod_3/img_2.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/women/prod_3/img_3.jpg');
+
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/kid/prod_1/img_1.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/kid/prod_1/img_2.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/kid/prod_1/img_3.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/kid/prod_2/img_1.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/kid/prod_2/img_2.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/kid/prod_2/img_3.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/kid/prod_3/img_1.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/kid/prod_3/img_2.jpg');
+INSERT INTO `onshop`.`productimage` (`url`) VALUES ('/resources/images/watchs/kid/prod_3/img_3.jpg');
+
+
+
 INSERT INTO `onshop`.`subscription` (`amount`, `compPercentage`, `dateCreated`, `status`, `taxPercentage`, `vendorPercentage`) VALUES ('10000', '20', '2018/10/24', 'A', '10', '80');
 
 INSERT INTO `onshop`.`messages` (`msgId`, `msgValue`) VALUES ('404', 'No card found./Not match.');

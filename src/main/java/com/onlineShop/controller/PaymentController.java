@@ -83,7 +83,7 @@ public class PaymentController {
             return "template/shop/payment";
         }
 
-        if(card.isEmpty()||card==null)
+        if(card==null||card.isEmpty())
         {
             model.addAttribute("ERROR_MESSAGE","Please select a card.");
             return "template/shop/payment";

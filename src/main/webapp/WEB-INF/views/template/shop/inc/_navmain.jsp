@@ -33,7 +33,7 @@
                         </c:forEach>
                     </ul>
                     <ul class="navbar_user">
-                        <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                        <li><a href="#!" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search" aria-hidden="true"></i></a></li>
                         <li class="account">
                             <a href="#"><i class="fa fa-user" aria-hidden="true"></i></a>
                             <ul class="account_selection">

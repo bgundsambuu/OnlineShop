@@ -14,7 +14,9 @@
             <div class="product-item category${product.category.categoryID}">
                 <div class="product discount product_filter">
                     <div class="product_image">
-                        <img src="<c:url value="/resources/images/product_1.png"/>" alt="">
+                        <a href="/product/${product.productId}">
+                            <img src="<c:url value="/resources/images/watchs/prod_${product.productId}/img_1.jpg"/>" alt="">
+                        </a>
                     </div>
                     <div class="product_info">
                         <h6 class="product_name"><a
