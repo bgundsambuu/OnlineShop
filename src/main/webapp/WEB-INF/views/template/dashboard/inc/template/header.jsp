@@ -33,6 +33,7 @@
                          <img alt="Image placeholder" src="<c:url value="/resources/_admin/img/theme/team-4-800x800.jpg" />">
                         </span>
                             <div class="media-body ml-2 d-none d-lg-block">
+
                                 <c:if test="${pageContext.request.userPrincipal.name != null}">
                                     <span class="mb-0 text-sm  font-weight-bold"><a>Hi: ${pageContext.request.userPrincipal.name}</a></span>
                                 </c:if>

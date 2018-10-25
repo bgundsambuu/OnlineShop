@@ -34,7 +34,15 @@ public class UserValidator {
      * @param truePassword
      * @return
      */
-    public User validatePasswords(BindingResult res, User user, String truePassword){
+    public User validate(BindingResult res, User user, String truePassword){
+        // duplicated username(email) check
+        String oldUserName = userService.getUserByUserId(user.getUserId()).getUserName();
+        String newUserName = user.getUserName();
+        if(!StringUtils.isEmpty(newUserName) && !newUserName.equals(oldUserName)){
+            User userForCheck = userService.getUserByEmail(newUserName);
+            if(userForCheck!=null) res.rejectValue("userName", U,"This username(email) has been registered.");
+        }
+        // password check
         String o,n,r;
         o = user.getOldPassword();
         n = user.getNewPassword();

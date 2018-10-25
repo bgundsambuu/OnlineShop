@@ -58,6 +58,9 @@
                                     <div>
                                         <div>
                                             <form:input type="hidden" path="orderPaymentId"/>
+                                            <form:input type="hidden" path="total"/>
+                                            <form:input type="hidden" path="taxAmount"/>
+                                            <form:input type="hidden" path="totalAmount"/>
                                                 <%--<form:errors path="orderPaymentId"/>--%>
                                             <br>
                                         </div>
