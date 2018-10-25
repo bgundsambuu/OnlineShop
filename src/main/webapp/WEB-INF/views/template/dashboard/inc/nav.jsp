@@ -61,7 +61,7 @@
                         <span>Support</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#!" class="dropdown-item">
+                    <a href="<c:url value="/j_spring_security_logout" />" class="dropdown-item">
                         <i class="ni ni-user-run"></i>
                         <span>Logout</span>
                     </a>
@@ -130,7 +130,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="<c:url value="/j_spring_security_logout" />">
                         <i class="ni ni-palette"></i> Logout
                     </a>
                 </li>

@@ -89,14 +89,11 @@
                             </li>
                         </c:if>
                         <c:if test="${pageContext.request.userPrincipal.name != null}">
-                            <li><a>Welcome: ${pageContext.request.userPrincipal.name}</a></li>
+                            <li><a>Hi: ${pageContext.request.userPrincipal.name}</a></li>
                             <li class="account">
-                                <a href="#" class="acc-profile">You <i class="fa fa-user" aria-hidden="true"></i></a>
+                                <a href="#" class="acc-profile"><i class="fa fa-user" aria-hidden="true"></i></a>
                                 <ul class="account_selection">
-                                    <li class="account_selection_text"><span><%=checkr()%></span></li>
-                                    <%
-                                        myFunc(out);
-                                    %>
+                                    <%  myFunc(out); %>
                                     <li><a href="/profilepage"><i class="fa fa-cog" aria-hidden="true"></i> Profile</a></li>
                                     <li><a href="<c:url value="/j_spring_security_logout" />"><i class="fa fa-sign-out" aria-hidden="true"></i>Sign out</a></li>
                                 </ul>
