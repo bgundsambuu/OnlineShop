@@ -49,19 +49,24 @@ public class PaymentServiceImpl implements PaymentService {
         }
         LocalDate localDate = orderPayment.getCard().getCardExp().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         BankAPIService bankAPIService = new BankAPIServiceImpl();
-        int bankResult = bankAPIService.callBankAPI(String.valueOf(orderPayment.getCard().getCardNumber()),
-                        String.valueOf(localDate.getMonthValue()),
-                        String.valueOf(localDate.getYear()),
-                        String.valueOf(orderPayment.getCard().getSecurityNumber()),
-                        String.valueOf(orderPayment.getCard().getCardHolderName()), String.valueOf(orderPayment.getCard().getZipCode()),
-                        String.valueOf(orderPayment.getTotalAmount()));
-        if(bankResult != 200)
+        try {
+            int bankResult = bankAPIService.callBankAPI(String.valueOf(orderPayment.getCard().getCardNumber()),
+                    String.valueOf(localDate.getMonthValue()),
+                    String.valueOf(localDate.getYear()),
+                    String.valueOf(orderPayment.getCard().getSecurityNumber()),
+                    String.valueOf(orderPayment.getCard().getCardHolderName()), String.valueOf(orderPayment.getCard().getZipCode()),
+                    String.valueOf(orderPayment.getTotalAmount()));
+            if (bankResult != 200) {
+                Messages messages = paymentDao.getMsg(bankResult);
+                if (messages == null)
+                    return new Result(43, "Unknown bank error: " + String.valueOf(messages.getMsgId()));
+                else
+                    return new Result(bankResult, messages.getMsgValue());
+            }
+        }
+        catch (Exception ex)
         {
-            Messages messages = paymentDao.getMsg(bankResult);
-            if(messages==null)
-                return new Result(43, "Unknown bank error: " + String.valueOf(messages.getMsgId()));
-            else
-                return new Result(bankResult, messages.getMsgValue());
+            System.out.println(ex);
         }
         if(!paymentDao.checkOut(orderPayment))
         {
