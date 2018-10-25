@@ -5,7 +5,9 @@ package com.onlineShop.controller;
         Developer: Bayarjargal
         Date: 10/16/2018 /October/
 */
+import com.onlineShop.SessionUtil;
 import com.onlineShop.model.CardDetail;
+import com.onlineShop.model.User;
 import com.onlineShop.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +33,14 @@ public class CardController {
     @RequestMapping("/card")
     public String cardDetail(Model model, String redirect)
     {
-        List<CardDetail> carDetailList = cardService.getCardList(1);
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
+        List<CardDetail> carDetailList = cardService.getCardList(customerId);
         model.addAttribute("cards", carDetailList);
         CardDetail cardDetail = new CardDetail();
         model.addAttribute("cardDetail", cardDetail);
@@ -44,7 +53,14 @@ public class CardController {
                                 BindingResult result, HttpServletRequest request,
                                 Locale locale, Model model,
                                 RedirectAttributes redirectAttributes) {
-        List<CardDetail> carDetailList = cardService.getCardList(1);
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
+        List<CardDetail> carDetailList = cardService.getCardList(customerId);
         model.addAttribute("cards", carDetailList);
 
         if (result.hasErrors()) {

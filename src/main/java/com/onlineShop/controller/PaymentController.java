@@ -1,5 +1,6 @@
 package com.onlineShop.controller;
 
+import com.onlineShop.SessionUtil;
 import com.onlineShop.model.*;
 import com.onlineShop.service.*;
 import com.onlineShop.service.impl.EmailServiceImpl;
@@ -33,7 +34,13 @@ public class PaymentController {
     @RequestMapping("/payment")
     public String payment(Model model)
     {
-        int customerId=1;
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
         Subscription subscription = subscriptionService.getSubscription();
         if(subscription==null)
         {
@@ -77,7 +84,13 @@ public class PaymentController {
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public String doPayment(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
                                 BindingResult result, Model model, String selCard, boolean newaddress) {
-        int customerId = 1;
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
         model.addAttribute("orderPayment", orderPayment);
         List<CardDetail> cardDetailList = cardService.getCardList(customerId);
         if(cardDetailList==null||cardDetailList.size()==0)

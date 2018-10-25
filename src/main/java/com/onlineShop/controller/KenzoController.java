@@ -1,5 +1,6 @@
 package com.onlineShop.controller;
 
+import com.onlineShop.SessionUtil;
 import com.onlineShop.model.*;
 import com.onlineShop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,7 +166,13 @@ public class KenzoController {
     @RequestMapping("/paymentpage")
     public String payment(Model model)
     {
-        int customerId = 1;
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+            return "redirect:/loginpage";
+        }
+        int customerId = user.getCustomer().getCustomerId();
         Subscription subscription = subscriptionService.getSubscription();
         if(subscription==null)
         {
@@ -215,7 +222,14 @@ public class KenzoController {
     @RequestMapping("/cardpage")
     public String cardDetail(Model model, String redirect)
     {
-        int customerId = 1;
+        //int customerId = 1;
+        User user = SessionUtil.getUser();
+        if(user==null)
+        {
+                return "redirect:/loginpage";
+        }
+
+        int customerId = user.getCustomer().getCustomerId();
         List<CardDetail> carDetailList = cardService.getCardList(customerId);
         model.addAttribute("cards", carDetailList);
         CardDetail cardDetail = new CardDetail();
