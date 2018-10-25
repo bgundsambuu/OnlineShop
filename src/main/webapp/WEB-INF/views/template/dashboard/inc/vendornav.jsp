@@ -115,8 +115,13 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="/vendor/profile">
+                    <a class="nav-link" href="/user">
                         <i class="ni ni-spaceship"></i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/address">
+                        <i class="ni ni-square-pin"></i> Address
                     </a>
                 </li>
                 <li class="nav-item">

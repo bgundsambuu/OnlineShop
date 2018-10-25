@@ -27,6 +27,16 @@ public class AdministratorDaoImpl implements AdministratorDao {
         session.flush();
     }
 
+    /**
+     *
+     * Get Admin By UserId
+     * @Note please don't change this method.
+     * please create your own method.
+     * @author Mingwei
+     * @date 10/12/2018
+     * @param userId
+     * @return
+     */
     public Administrator getAdminByUserId(int userId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Administrator where userId = ?");

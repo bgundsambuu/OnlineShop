@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * Created by Mingwei on 10/23/2018
+ */
 @Component
 public class SessionUtil {
     private static UserService us;

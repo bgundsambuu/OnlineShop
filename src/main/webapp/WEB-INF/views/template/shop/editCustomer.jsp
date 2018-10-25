@@ -11,12 +11,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.onlineShop.Constant" %>
 <jsp:include page="inc/header.jsp"/>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap4/bootstrap.min.css" />">
 <style>::selection {
     text-shadow: none;
     color: unset;
     background: RGB(204, 223, 254);
-}</style>
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+</style>
 <script>window.onload = function () {
     var inputs = document.getElementsByTagName("input");
     for (var i in inputs) inputs[i].onkeydown = function () {
@@ -50,7 +63,7 @@
                         <div class="text-muted mb-4">
                             Profile settings
                         </div>
-                        <form:form action="edit" method="post" modelAttribute="user">
+                        <form:form action="/user/edit" method="post" modelAttribute="user">
                             <form:input path="userId" value="${user.userId}" type="hidden"/>
                             <form:input path="role" value="${user.role}" type="hidden"/>
                             <form:input path="isActive" value="${user.isActive}" type="hidden"/>

@@ -26,6 +26,15 @@ public class VendorDaoImpl implements VendorDao {
         session.flush();
     }
 
+    /**
+     * Get Vendor by user id
+     * @Note please don't change this method.
+     * please create your own method.
+     * @author Mingwei
+     * @date 10/12 2018
+     * @param userId
+     * @return
+     */
     public Vendor getVendorByUserId(int userId) {
         Session session = sessionFactory.getCurrentSession();
         Query query = session.createQuery("from Vendor where user_id = ?");

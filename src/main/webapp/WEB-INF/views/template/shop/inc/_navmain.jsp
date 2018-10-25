@@ -45,7 +45,7 @@
                             <a href="#" class="acc-profile">You <i class="fa fa-user" aria-hidden="true"></i></a>
                             <ul class="account_selection">
                                 <li class="account_selection_text"><span>Hello Kenzo!</span></li>
-                                <li><a href="/profilepage"><i class="fa fa-cog" aria-hidden="true"></i> Profile</a></li>
+                                <li><a href="/user"><i class="fa fa-cog" aria-hidden="true"></i> Profile</a></li>
                                 <li><a href="/signout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a></li>
                             </ul>
                         </li>

@@ -18,8 +18,7 @@ public class AddressServiceImpl implements AddressService {
         addressDao.editAddress(address);
     }
 
-    @Override
-    public Address getAddressByUserId(int userId) {
-        return addressDao.getAddressByUserId(userId);
+    public Address getAddressByAddressId(int addressId){
+        return addressDao.getAddressByAddressId(addressId);
     }
 }
