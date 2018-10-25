@@ -74,7 +74,7 @@ public class PaymentController {
     }
 
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
-    public String addCardDetail(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
+    public String doPayment(@ModelAttribute("orderPayment") @Valid OrderPayment orderPayment,
                                 BindingResult result, Model model, String selCard, boolean newaddress) {
         model.addAttribute("orderPayment", orderPayment);
         List<CardDetail> cardDetailList = cardService.getCardList(1);

@@ -55,6 +55,13 @@
                                             <form:errors path="zipCode"/>
                                         </div>
                                     </div>
+                                    <div>
+                                        <div>
+                                            <form:input type="hidden" path="orderPaymentId"/>
+                                                <%--<form:errors path="orderPaymentId"/>--%>
+                                            <br>
+                                        </div>
+                                    </div>
                                 </c:if>
                             </c:if>
                             <div class="row">
