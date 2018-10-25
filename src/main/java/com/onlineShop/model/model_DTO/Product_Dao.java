@@ -53,13 +53,7 @@ public class Product_Dao implements Serializable {
 
     private List<MultipartFile> inputImages;
 
-    public Category getCategory() {
-        return category;
-    }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
     public Vendor getVendor_id() {
         return vendor_id;
@@ -67,6 +61,14 @@ public class Product_Dao implements Serializable {
 
     public void setVendor_id(Vendor vendor_id) {
         this.vendor_id = vendor_id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public List<MultipartFile> getInputImages() {

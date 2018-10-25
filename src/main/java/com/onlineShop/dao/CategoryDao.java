@@ -5,8 +5,8 @@ package com.onlineShop.dao;
  *  Online Shopping
  * */
 import com.onlineShop.model.Category;
-
 import java.util.List;
+
 
 public interface CategoryDao {
 

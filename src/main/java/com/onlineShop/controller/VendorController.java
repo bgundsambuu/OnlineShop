@@ -1,5 +1,7 @@
 package com.onlineShop.controller;
 
+import com.onlineShop.dao.ProductDao;
+import com.onlineShop.dao.impl.ProductDaoImpl;
 import com.onlineShop.model.*;
 import com.onlineShop.model.model_DTO.Product_Dao;
 import com.onlineShop.service.AddressService;
@@ -18,9 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 /*
@@ -55,64 +55,103 @@ public class VendorController {
 //            Address address = addressService.getAddressByUserId(vendorId);
 //            vendor.setAddress(address);
 
-            System.out.println(vendor.getFirstName() + "===============================================");
+            System.out.println(vendor.getFirstName() + "=============================================== -1 ");
 
             List<Product> productList = vendor.getProductList();
-            System.out.println(vendor.getName() + "--------------------------------------------------------------------------");
+            System.out.println(vendor.getName() + "-------------------------------------------------------------------------- 0");
             model.addAttribute("vendor", vendor);
+            model.addAttribute("category",categoryService.findAllCategories());
             model.addAttribute("product", productList);
         } catch (Exception e) {
             System.out.println(e.getCause() + "" + e.getMessage());
         }
 
-        return "template/shop/productlist";
+        return "template/dashboard/vendorproduct";
+
     }
 
-    @RequestMapping(value = "/vendor/product/edit/{vendorId}")
-    public String EditVendor() {
+    @RequestMapping(value = "vendore/product/edit/{id}", method = RequestMethod.GET)
+    public String editget(@PathVariable int id, Model  model){
+        Product product = productService.getProductById(id);
 
-        return "";
+            model.addAttribute("product",product);
+
+        return"vendore/product/edit";
+    }
+
+    @RequestMapping(value = "vendore/product/edit",method = RequestMethod.POST)
+    public String editProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model model){
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("error",bindingResult.getAllErrors());
+            model.addAttribute("product",product);
+            return "vendore/product/edit";
+        }
+        productService.editProduct(product);
+        return "redirect:/vendor/product/"+product.getProductId();
+    }
+
+    @RequestMapping(value = "vendor/product/{ProductId}", method = RequestMethod.GET)
+    public String getProduct(@PathVariable long proid, Model model){
+        Product product = productService.getProductById(proid);
+        model.addAttribute("product",product);
+        return "template/dashboard/viewproduct_solomon";
+    }
+
+    @RequestMapping(value = "vendor/product/delete/{id}", method = RequestMethod.POST)
+    public String deleteProductById(@PathVariable long id){
+        productService.deletProductById(id);
+        int vendorId = productService.getProductById(id).getVendor_id().getVendorId();
+        return "redirect:/vendor/"+vendorId;
     }
 
     @RequestMapping(value = "/vendor/product/view", method = RequestMethod.GET)
     public String viewProduct(@ModelAttribute("product") Product product, Model model) {
-
         return "template/shop/productview";
     }
 
     @RequestMapping(value = "/vendor/product/new", method = RequestMethod.GET)
-    public String doAdd(@ModelAttribute("product") Product_Dao product, Model model) {
+    public String doAdd(Model model) {
         System.out.println("1111111111111111111111111111111111111111-----------------------1111111111111111111111111111111111");
+        List<Category> categoryList = categoryService.findAllCategories();
+        Product_Dao productDao= new Product_Dao();
+        model.addAttribute("product", productDao);
+        model.addAttribute("categories", categoryList);
         return "template/dashboard/vendorproductnew";
     }
-
 
     @RequestMapping(value = "/vendor/product/new", method = RequestMethod.POST)
     public String addproductbyVendor(@ModelAttribute("product") @Valid Product_Dao productToBeAdded,
                                      BindingResult result, RedirectAttributes redirectAttributes,
-                                     Model model,
+                                     Model model, String categoryId,
                                      HttpSession session) {
         /*
          *
          * vendorId_solo have to be changed after integration in to the sessionName
          * */
-        // Integer vendorId_solo = (Integer s)session.getAttribute("currentVendor");
-        List<Category> categories = categoryService.findAllCategories();
-        model.addAttribute("categories", categories);
-        session.setAttribute("currentuser", 1);
+        //Integer vendorId_ = (Integer)session.getAttribute("currentVendor");
+        //List<Category> categoryList = categoryService.findAllCategories();
+
+
+        //model.addAttribute("categories", categoryList);
+        //System.out.println("caaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaaaaaaaaaaaaaaaaaaaaaaa   ---    ");
+
+       session.setAttribute("currentuser", 1);
         if (result.hasErrors()) {
             System.out.println("0000000000000000000-------------------------------------000000000000000000000000000000000" + result.getFieldErrors());
             return "template/dashboard/vendorproductnew";
         }
+        Integer vendorId = (Integer) session.getAttribute("currentuser");
         Vendor loginuser = new Vendor();
-        if (session.getAttribute("currentuser") != null) {
-            Integer vendorId = (Integer) session.getAttribute("currentuser");
+        if (vendorId != null) {
+
+            System.out.println(vendorId+" -==-=-=-=-=-=-=-=-=-=");
             loginuser = vendorService.findVendorById(vendorId);
         }
         System.out.println(loginuser.getName() + " = 00000000000000000000000000000000000000000000000000000000000000000000000000");
         Product product = (Product) ProductFactory.getINSTANCE().createUserFromDto(productToBeAdded);
         product.setVendor_id(loginuser);
-
+        //product.setCategory(category);
         List<ProductImage> productImages = new ArrayList<ProductImage>();
         List<MultipartFile> multipartFiles = productToBeAdded.getInputImages();
         String imagename = null;
@@ -146,7 +185,7 @@ public class VendorController {
         }
 
         redirectAttributes.addFlashAttribute("product", product);
-        return "redirect:/vendor/product";
+        return "redirect:/vendor/"+vendorId;
     }
 
 

@@ -27,8 +27,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form:form action="/vendor/product/new" method="post"
-                               commandName="product" enctype="multipart/form-data">
+                    <form:form role="form" action="/vendor/product/new" method="post"
+                               modelAttribute="product" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
@@ -101,13 +101,13 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="category">Category</label>
-                                    <select name="category" class="custom-select" id="category">
-                                        <option selected>-</option>
+                                    <c:if test="${not empty categories}">
+                                        <form:select path="category.categoryID">
                                         <c:forEach items="${categories}" var="category">
-                                            <option value="${category.categoryID}">${category.categoryName}</option>
+                                                <form:option value="${category.categoryID}" label="${category.categoryName}" name="categoryId"/>
                                         </c:forEach>
-                                    </select>
+                                        </form:select>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>

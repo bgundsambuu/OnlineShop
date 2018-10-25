@@ -34,7 +34,11 @@
                   <img alt="Image placeholder" src="<c:url value="/resources/_admin/img/theme/team-4-800x800.jpg" />">
                 </span>
                             <div class="media-body ml-2 d-none d-lg-block">
-                                <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+
+<form id="id" method="get" action="/vendor/${vendor.Id}">
+    <span class="mb-0 text-sm  font-weight-bold">${vendor.name}</span>
+</form>
+
                             </div>
                         </div>
                     </a>
