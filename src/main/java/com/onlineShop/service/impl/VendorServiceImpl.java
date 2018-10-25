@@ -9,6 +9,8 @@ package com.onlineShop.service.impl;
 import com.onlineShop.dao.VendorDao;
 import com.onlineShop.model.Vendor;
 import com.onlineShop.service.VendorService;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,9 @@ public class VendorServiceImpl implements VendorService {
 
     //Created By Krishna
 
+    @Autowired
+    SessionFactory sessionFactory;
+
     @Override
     public List<Vendor> getAllVendor() {
         return vendorDao.getAllVendor();
@@ -48,11 +53,16 @@ public class VendorServiceImpl implements VendorService {
 
     @Override
     public Vendor getPendingVendorById(int vendorId) {
-        return vendorDao.getVendorByUserId(vendorId);
+        return vendorDao.getPendingVendorById(vendorId);
     }
 
     @Override
     public void updateVendorStatus(Vendor vendor) {
-        vendorDao.updateVendorStatus(vendor);
+        Session session = sessionFactory.getCurrentSession();
+        //vendor.setStatus("active");
+        session.update(vendor);
+        //session.saveOrUpdate(vendor);
+
+        session.flush();
     }
 }

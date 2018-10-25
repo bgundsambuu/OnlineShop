@@ -81,6 +81,8 @@ public class VendorDaoImpl implements VendorDao {
 //        newUser.setIsActive(true);
 
         vendor.setStatus("pending");
+        vendor.getUser().setIsActive(true);
+        //newUser.setIsActive(true);
 
 //        Address newAddress = new Address();
 //        newAddress.setCity(vendor.getAddress().getCity());
@@ -90,6 +92,7 @@ public class VendorDaoImpl implements VendorDao {
 //        newAddress.setStreet(vendor.getAddress().getStreet());
 
         session.saveOrUpdate(vendor);
+        //session.saveOrUpdate(newUser);
 //        session.saveOrUpdate(newUser);
 //        session.saveOrUpdate(newAddress);
 
@@ -138,6 +141,10 @@ public class VendorDaoImpl implements VendorDao {
     public void updateVendorStatus(Vendor vendor) {
         Session session = sessionFactory.getCurrentSession();
         //vendor.setStatus("active");
+        Query query = session.createSQLQuery("update vendor set status = ? where venderId = ?");
+        query.setParameter(0, "Active");
+        query.setParameter(1, vendor.getVendorId());
+
         session.update(vendor);
         //session.saveOrUpdate(vendor);
 

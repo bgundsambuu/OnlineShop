@@ -71,14 +71,14 @@ public class AdminController {
                 "purai naya mail testing",
                 "Testing only \n\n Hello Spring Email Sender");*/
 
-//        System.out.println(customer.getUser().getUserName().toString() + "=====================");
-//
-//        EmailService emailService = new EmailServiceImpl();
-//
-//        Result result1 = emailService.sendEmail(customer.getUser().getUserName(), "Registration Success", "You are successfully registered User Name : "+ customer.getUser().getUserName()+ "Password :" + customer.getUser().getPassword());
-//        if(result1.getId() ==0){
-//            System.out.println("Success=========================");
-//        }
+        System.out.println(customer.getUser().getUserName().toString() + "=====================");
+
+        EmailService emailService = new EmailServiceImpl();
+
+        Result result1 = emailService.sendEmail(customer.getUser().getUserName(), "Registration Success", "You are successfully registered User Name : ");
+        if(result1.getId() ==0){
+            System.out.println("Success=========================");
+        }
         return "/template/shop/adminview/customer-registration-success";
     }
 

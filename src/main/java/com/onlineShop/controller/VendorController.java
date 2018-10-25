@@ -223,7 +223,7 @@ public class VendorController {
 
     @RequestMapping(value = "/myadmin/vendorApprove", method = RequestMethod.POST)
     public String vendorApprovePost(@Valid @ModelAttribute("vendor") Vendor vendor, BindingResult result, Model model){
-        vendor.setStatus("approved");
+        //vendor.setStatus("approved");
         vendorService.updateVendorStatus(vendor);
         return "/template/shop/adminview/new-vendor-approval-success";
     }

@@ -21,7 +21,7 @@ public class Vendor {
     @Id
     @GeneratedValue
     private int vendorId;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
     private User user;
     @NotEmpty(message = "First name may not be empty.")
@@ -37,7 +37,7 @@ public class Vendor {
     @Pattern(regexp = "^(\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4}))|$", message = "Invalid phone number.")
     private String phoneNumber;
     private String status;
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     @JoinColumn(name = "address_Id")
     private Address address;
 //    @OneToMany

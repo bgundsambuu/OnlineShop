@@ -39,7 +39,7 @@
                                     <div class="row">
                                         <div class="col-md-5">
 
-                                            <h3>New Vendor id : ${vendor.user.userName}</h3>
+                                            <%--<h3>New Vendor id : ${vendor.u}</h3>--%>
 
                                             <div class="form-group">
                                                 <label for="vendorId">Vendor ID</label>
