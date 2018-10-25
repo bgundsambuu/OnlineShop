@@ -74,7 +74,7 @@ public class HomeController {
             products.add(p);
         }
 
-        System.out.println(products.get(0) + "=================");
+//        System.out.println(products.get(0) + "=================");
 
         model.addAttribute("products", products);
         model.addAttribute("cartItems", cartItems);
