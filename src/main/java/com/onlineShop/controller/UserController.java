@@ -3,10 +3,7 @@ package com.onlineShop.controller;
 import com.onlineShop.Constant;
 import com.onlineShop.SessionUtil;
 import com.onlineShop.controller.validation.UserValidator;
-import com.onlineShop.model.Administrator;
 import com.onlineShop.model.User;
-import com.onlineShop.model.Customer;
-import com.onlineShop.model.Vendor;
 import com.onlineShop.service.UserService;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,11 +74,15 @@ public class UserController {
                 model.addAttribute(Constant.MSG_DETAIL, Constant.Message.USER_NOT_EXIST);
                 return retPage;
             }
-            user = userValidator.validatePasswords(result, user, userInDb.getPassword());
+            // specific verification for duplicated username and password
+            user = userValidator.validate(result, user, userInDb.getPassword());
             if(result.hasErrors()) return retPage;
             if(!StringUtils.isEmpty(user.getNewPassword())) user.setPassword(user.getNewPassword());
             else user.setPassword(userInDb.getPassword());
             user = userService.editUser(user);
+            // Redirect to logout if username or password changing.
+            if(!user.getPassword().equals(userInDb.getPassword()) || !user.getUserName().equals(userInDb.getUserName()))
+                return "redirect:/j_spring_security_logout";
             model.addAttribute("user", user);
             model.addAttribute(Constant.MSG, Constant.Message.SUCCESS);
             model.addAttribute(Constant.MSG_DETAIL, Constant.Message.USER_UPDATE_SUCCESS);
