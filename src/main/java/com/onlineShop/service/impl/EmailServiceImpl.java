@@ -9,6 +9,7 @@ package com.onlineShop.service.impl;
 import com.onlineShop.model.Result;
 import com.onlineShop.service.BankAPIService;
 import com.onlineShop.service.EmailService;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -36,8 +37,13 @@ public class EmailServiceImpl implements EmailService {
             mailMessage.setFrom("andres.mendez.cor@gmail.com");
             mailMessage.setSubject(subject);
             mailMessage.setText(email);
-
-            mailSender.send(mailMessage);
+            try {
+                mailSender.send(mailMessage);
+            }
+            catch (MailException e)
+            {
+                System.out.println(e.getMessage());
+            }
         }
         catch (Exception ex)
         {

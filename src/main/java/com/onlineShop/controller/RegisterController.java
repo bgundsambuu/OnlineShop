@@ -1,9 +1,12 @@
 package com.onlineShop.controller;
 
 import com.onlineShop.model.Customer;
+import com.onlineShop.model.Result;
 import com.onlineShop.model.User;
+import com.onlineShop.service.EmailService;
 import com.onlineShop.service.EncryptionService;
 import com.onlineShop.service.UserService;
+import com.onlineShop.service.impl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -78,20 +82,16 @@ public class RegisterController {
 
     }
 
-    @RequestMapping(value = "/changepassword", method = RequestMethod.GET)
+    @RequestMapping(value = "/forgotpassword", method = RequestMethod.GET)
     public String ChangePassword(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        return "recoverPassword";
+        return "forgotpassword";
     }
 
-    @RequestMapping(value = "/changepassword", method = RequestMethod.POST)
-    public String ChangePassword(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
-        String email=user.getUserName();
+    @RequestMapping(value = "/forgotpassword", method = RequestMethod.POST)
+    public String ChangePassword(@RequestParam("email") String email) {
         User realuser =this.userService.getUserByEmail(email);
-        if (result.hasErrors()) {
-            return "recoverPassword";
-        }
         if  ( realuser != null )
         {
             List<User> userList=userService.getAllUsers();
@@ -102,29 +102,20 @@ public class RegisterController {
                 }
             }
             if(validuser) {
-                // SimpleMailMessage Msg = new SimpleMailMessage();
-                // Msg.setFrom("andres.mendez.cor@gmail.com");
-                //  Msg.setTo(email);
-                // Msg.setSubject("Online Shopping Password recovery");
 //                EncryptionService encryptionService = new EncryptionServiceImpl();
                 String encryptedText = realuser.getPassword();
 //                String DecryptedPass = encryptionService.DecryptPass(encryptedText);
-                //Msg.setText("Your password is: " + encryptedText + "   --- Please change your password on next login.");
-                // creates a simple e-mail object
-                SimpleMailMessage mailMessage = new SimpleMailMessage();
-                mailMessage.setTo(email);
-                mailMessage.setFrom("andres.mendez.cor@gmail.com");
-                mailMessage.setSubject("Online Shopping Password recovery");
-                mailMessage.setText("Your password is: " + encryptedText + "   --- Please change your password on next login.");
-
-                // sends the e-mail
-//                mailSender.send(mailMessage);
-                return "login";
+                EmailService emailService = new EmailServiceImpl();
+                String MesPass = ("Your password is: " + encryptedText + "   --- Please change your password on next login.");
+                Result newmail = emailService.sendEmail(email,"Password Recovery",MesPass);
+                return "/template/shop/loginpage";
             }else{
-                return "RecoverPasswordFail";
+               // model.addAttribute("error", "Invalid Email!!!");
+                return "/template/shop/home";
             }
         }
-        return "RecoverPasswordFail";
+        //model.addAttribute("error", "Invalid Email!!!");
+        return "/template/shop/home";
     }
 
 }
