@@ -35,6 +35,11 @@ public class KenzoController {
         return "template/shop/productview";
     }
 
+    @RequestMapping("/product/report")
+    public String productreport() {
+        return "template/dashboard/productreport";
+    }
+
     @RequestMapping("/product/list")
     public String viewProd(Model model) {
         model.addAttribute("categories", categoryService.findAllCategories());

@@ -29,4 +29,7 @@
 
     <!-- Argon CSS -->
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/_admin/css/argon.css?v=1.0.0" />">
+
+    <!-- Date Range CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
