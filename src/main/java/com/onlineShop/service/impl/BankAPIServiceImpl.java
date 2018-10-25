@@ -69,7 +69,7 @@ public class BankAPIServiceImpl implements BankAPIService {
 
 
         try {
-            ss = ss.replaceAll(" ", "%20");
+            ss = ss.replaceAll("\\s", "%20");
             System.out.println(url+ss);
             String s = sendPOST(url+ss);
             System.out.println(s);
