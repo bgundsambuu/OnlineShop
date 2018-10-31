@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,13 +45,13 @@ public class HomeController {
     }
 
     @RequestMapping("/login")
-    public String login(@RequestParam(value="error", required = false) String error, @RequestParam(value="logout",
+    public String login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout",
             required = false) String logout, Model model) {
-        if (error!=null) {
+        if (error != null) {
             model.addAttribute("error", "Invalid username and password!!!");
         }
 
-        if(logout!=null) {
+        if (logout != null) {
             model.addAttribute("msg", "You have been logged out correctly!!!!!!!!!!! test12");
         }
         return "template/shop/loginpage";
@@ -70,7 +71,7 @@ public class HomeController {
         int total = 0;
         for (Long productId : cartItems.keySet()) {
             Product p = productService.findById(productId.intValue());
-            total+=p.getProductPrice()*cartItems.get(productId);
+            total += p.getProductPrice() * cartItems.get(productId);
             products.add(p);
         }
 
@@ -79,7 +80,6 @@ public class HomeController {
         model.addAttribute("products", products);
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("total", total);
-
 
 
         return "template/shop/shoppingcart";
@@ -125,7 +125,7 @@ public class HomeController {
 
 
         Integer unitStock = productService.getProductById(shoppingCartItems.getProductId()).getUnitInStock();
-        if(unitStock < cartItemQuantity){
+        if (unitStock < cartItemQuantity) {
             return -1;
         }
 
@@ -279,6 +279,7 @@ public class HomeController {
         model.addAttribute("products", products);
         return "redirect:/";
     }
+
     @RequestMapping(value = "/searchPriceAndCategory", method = RequestMethod.GET)
     public String searchPriceAndCategory(HttpServletRequest request, Model model) {
 //        Integer categoryId = (Integer) request.getAttribute("category");
@@ -304,12 +305,12 @@ public class HomeController {
         System.out.println(productName + "99999999999999999999999999999999999");
 
         List<Product> products;
-        if(productName == null){
+        if (productName == null) {
             return "redirect:/";
         }
-        if(downPrice == null || upPrice == null){
+        if (downPrice == null || upPrice == null) {
             products = productService.findSimilarProd(productName);
-        }else {
+        } else {
             products = productService.findSimilarProdWithRange(productName, Double.valueOf(downPrice), Double.valueOf(upPrice));
         }
         products.forEach(product -> System.out.println(product.getProductName()));
@@ -317,18 +318,19 @@ public class HomeController {
         model.addAttribute("categories", categoryService.findAllCategories());
         return "/template/shop/productlist";
     }
-    public String test(){
+
+    public String test() {
         System.out.println("Start Testing @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         String productName = "rey";
         Double downPrice = 10d;
         Double upPrice = 500d;
         List<Product> products;
-        if(productName == null){
+        if (productName == null) {
             return "redirect:/";
         }
-        if(downPrice == null || upPrice == null){
+        if (downPrice == null || upPrice == null) {
             products = productService.findSimilarProd(productName);
-        }else {
+        } else {
             products = productService.findSimilarProdWithRange(productName, downPrice, upPrice);
         }
         System.out.println(products.size());

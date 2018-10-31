@@ -35,7 +35,9 @@
                         </c:forEach>
                     </ul>
                     <ul class="navbar_user">
-                        <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#searchModal"><i class="fa fa-search"
+                                                                                          aria-hidden="true"></i></a>
+                        </li>
                         <%!
                             String checku() {
                                 User user = SessionUtil.getUser();
@@ -46,7 +48,8 @@
                                     return "not login yet!";
                                 }
                             }
-                            String checkr(){
+
+                            String checkr() {
                                 User user = SessionUtil.getUser();
                                 String role = "";
                                 if (user != null) {
@@ -56,24 +59,32 @@
                                 }
 
                             }
-                            void myFunc(javax.servlet.jsp.JspWriter myOut)
-                            {
+
+                            void myFunc(javax.servlet.jsp.JspWriter myOut) {
                                 User user = SessionUtil.getUser();
                                 if (user != null) {
-                                    if (user.getRole() != null){
+                                    if (user.getRole() != null) {
                                         String role = user.getRole();
-                                        if (role.equals("ROLE_ADMIN")){
-                                            try{ myOut.println("<li><a href='/admin'><i class='fa fa-cog' aria-hidden='true'></i>Admin Panel</a></li>"); }
-                                            catch(Exception eek) { }
-                                        }else if(role.equals("ROLE_VENDOR")){
-                                            try{ myOut.println("<li><a href='/vendor'><i class='fa fa-cog' aria-hidden='true'></i>Vendor Panel</a></li>"); }
-                                            catch(Exception eek) { }
-                                        }else if(role.equals("ROLE_USER")){
-                                            try{ myOut.println("<li>Enjoy</li>"); }
-                                            catch(Exception eek) { }
-                                        }else{
-                                            try{ myOut.println("<li>Please verify your role</li>"); }
-                                            catch(Exception eek) { }
+                                        if (role.equals("ROLE_ADMIN")) {
+                                            try {
+                                                myOut.println("<li><a href='/admin'><i class='fa fa-cog' aria-hidden='true'></i>Admin Panel</a></li>");
+                                            } catch (Exception eek) {
+                                            }
+                                        } else if (role.equals("ROLE_VENDOR")) {
+                                            try {
+                                                myOut.println("<li><a href='/vendor'><i class='fa fa-cog' aria-hidden='true'></i>Vendor Panel</a></li>");
+                                            } catch (Exception eek) {
+                                            }
+                                        } else if (role.equals("ROLE_USER")) {
+                                            try {
+                                                myOut.println("<li>Enjoy</li>");
+                                            } catch (Exception eek) {
+                                            }
+                                        } else {
+                                            try {
+                                                myOut.println("<li>Please verify your role</li>");
+                                            } catch (Exception eek) {
+                                            }
                                         }
                                     }
                                 }
@@ -83,8 +94,10 @@
                             <li class="account">
                                 <a href="#"><i class="fa fa-user" aria-hidden="true"></i></a>
                                 <ul class="account_selection">
-                                    <li><a href="/loginpage"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign In</a></li>
-                                    <li><a href="/registerpage"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a></li>
+                                    <li><a href="/loginpage"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign
+                                        In</a></li>
+                                    <li><a href="/registerpage"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                                        Register</a></li>
                                 </ul>
                             </li>
                         </c:if>
@@ -93,9 +106,11 @@
                             <li class="account">
                                 <a href="#" class="acc-profile"><i class="fa fa-user" aria-hidden="true"></i></a>
                                 <ul class="account_selection">
-                                    <%  myFunc(out); %>
+                                    <% myFunc(out); %>
                                     <li><a href="/user"><i class="fa fa-cog" aria-hidden="true"></i> Profile</a></li>
-                                    <li><a href="<c:url value="/j_spring_security_logout" />"><i class="fa fa-sign-out" aria-hidden="true"></i>Sign out</a></li>
+                                    <li><a href="<c:url value="/j_spring_security_logout" />"><i class="fa fa-sign-out"
+                                                                                                 aria-hidden="true"></i>Sign
+                                        out</a></li>
                                 </ul>
                             </li>
                         </c:if>
